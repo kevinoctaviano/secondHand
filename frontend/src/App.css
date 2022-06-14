@@ -14,6 +14,7 @@ html,
 body {
   height: 100%;
   width: 100%;
+  font-size: 14px;
 }
 
 /* Overriding styles */
@@ -54,15 +55,91 @@ button {
   text-decoration: none;
 }
 
-.form-user {
-  position: absolute;
-  width: 452px;
-  height: 348px;
-  left: 900px;
-  top: 301px;
-}
-
 .font-custom {
   font-weight: 700;
   font-size: 24px;
+}
+
+.side-picture {
+  background-image: url(./components/assets/svg/side-picture.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 720px;
+  height: 950px;
+}
+
+/* X-Small devices (portrait phones, less than 576px)
+No media query for `xs` since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  html {
+    height: 100%;
+    margin-top: auto !important;
+  }
+  .side-picture {
+    display: none !important;
+  }
+  .margin-custom {
+    margin-top: 40vh !important;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+/* @media (max-width: 768px) {
+  .side-picture {
+    display: none !important;
+  }
+} */
+
+/* Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { ... } */
+
+/* X-Large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) { ... } */
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1920px) {
+  html {
+    height: 100%;
+    font-size: 22px;
+  }
+  .font-custom {
+    font-weight: 700;
+    font-size: 34px;
+  }
+  .side-picture {
+    background-image: url(./components/assets/svg/side-picture.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 820px;
+    height: 1080px;
+  }
+
+  /* Overriding styles */
+  ::-webkit-input-placeholder {
+    font-size: 18px !important;
+  }
+
+  :-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 18px !important;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 18px !important;
+  }
+
+  .rounded-16px {
+    border-radius: 20px !important;
+  }
+
+  .label-14px {
+    font-size: 18px;
+  }
+
+  input,
+  button {
+    height: 52px;
+  }
 }
