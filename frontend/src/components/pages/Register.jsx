@@ -1,5 +1,6 @@
 import React from 'react';
 import SidePicture from './components/SidePicture';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
   return (
@@ -25,7 +26,7 @@ export default function Register() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label label-14px">
+                  <label htmlFor="email" className="form-label label-14px">
                     Email
                   </label>
                   <input
@@ -36,7 +37,7 @@ export default function Register() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="password" className="form-label label-14px">
+                  <label htmlFor="password" className="form-label label-14px">
                     Password
                   </label>
                   <input
@@ -53,7 +54,9 @@ export default function Register() {
                   <label className="text-center">
                     Sudah punya akun?{' '}
                     <span>
-                      <a className="a-ungu">Masuk di sini</a>
+                      <Link className="a-ungu" to={'/login'}>
+                        Masuk di sini
+                      </Link>
                     </span>
                   </label>
                 </div>
