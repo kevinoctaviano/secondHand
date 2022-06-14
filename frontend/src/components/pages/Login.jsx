@@ -1,5 +1,6 @@
 import React from 'react';
 import SidePicture from './components/SidePicture';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -14,7 +15,7 @@ export default function Login() {
               <h1 className="font-custom">Masuk</h1>
               <form>
                 <div className="mb-3">
-                  <label for="email" className="form-label label-14px">
+                  <label htmlFor="email" className="form-label label-14px">
                     Email
                   </label>
                   <input
@@ -25,7 +26,7 @@ export default function Login() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="password" className="form-label label-14px">
+                  <label htmlFor="password" className="form-label label-14px">
                     Password
                   </label>
                   <input
@@ -42,7 +43,9 @@ export default function Login() {
                   <label className="text-center">
                     Belum punya akun?{' '}
                     <span>
-                      <a className="a-ungu">Daftar di sini</a>
+                      <Link className="a-ungu" to={'/register'}>
+                        Daftar di sini
+                      </Link>
                     </span>
                   </label>
                 </div>
