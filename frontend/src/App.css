@@ -115,8 +115,27 @@ select {
   height: 950px;
 }
 
+.margin-right-custom {
+  margin-right: 30vw !important;
+}
+
 .alamat {
   height: 80px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 4px;
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 87%;
+  transform: translateY(-50%);
 }
 
 /* X-Small devices (portrait phones, less than 576px)
