@@ -60,6 +60,52 @@ button {
   font-size: 24px;
 }
 
+.navbar.navbar-8 .navbar-toggler-icon {
+  background-image: url('https://mdbootstrap.com/img/svg/hamburger4.svg?color=1729B0');
+}
+
+.custom-logo-navbar {
+  width: 100px;
+  height: 34px;
+  background-color: var(--primary);
+}
+
+.custom-bg-photo-profile {
+  background-color: #E2D4F0;
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+}
+
+.custom-border-auth {
+  border-radius: 16px;
+}
+
+.custom-button-auth {
+  background-color: var(--primary);
+}
+
+.custom-font-auth {
+  color: var(--primary);
+}
+
+.custom-font-1 {
+  font-size: 14px;
+}
+
+.custom-font-2 {
+  font-size: 12px;
+}
+
+.custom-font-3 {
+  font-size: 25px;
+}
+
+.custom-font-4 {
+  font-size: 35px;
+  color: var(--primary);
+}
+
 .side-picture {
   background-image: url(./components/assets/svg/side-picture.svg);
   background-size: contain;
