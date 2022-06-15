@@ -5,6 +5,7 @@ Final Project Binar Academy SecondHand App
 1. Buat 2 folder untuk backend dan frontend
 2. Branch mengikuti kebutuhan
 3. Jangan lupa isi trello
+4. Jangan lupa untuk selalu git pull request sebelum commit
 
 ## Kumpulan Link 👾
 1. Link Trello: https://trello.com/b/FZSfTQXK/secondhand
