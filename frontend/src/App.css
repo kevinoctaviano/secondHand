@@ -32,7 +32,8 @@ body {
 }
 
 input,
-button {
+button,
+select {
   height: 48px;
 }
 
@@ -71,7 +72,7 @@ button {
 }
 
 .custom-bg-photo-profile {
-  background-color: #E2D4F0;
+  background-color: #e2d4f0;
   width: 96px;
   height: 96px;
   border-radius: 12px;
@@ -112,6 +113,10 @@ button {
   background-repeat: no-repeat;
   width: 720px;
   height: 950px;
+}
+
+.alamat {
+  height: 80px;
 }
 
 /* X-Small devices (portrait phones, less than 576px)
