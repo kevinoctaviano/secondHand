@@ -5,16 +5,21 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import LayoutInfoProfile from './components/layouts/LayoutInfoProfile';
 import LayoutInfoProductAdd from './components/layouts/LayoutInfoProductAdd';
-
+import LayoutHome from './components/layouts/LayoutHome';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path={['/', '/login']} component={Login} />
+        <Route exact path={'/'} component={LayoutHome} />
+        <Route exact path={'/login'} component={Login} />
         <Route exact path={'/register'} component={Register} />
         <Route exact path={'/info-profile'} component={LayoutInfoProfile} />
-        <Route exact path={'/info-product-add'} component={LayoutInfoProductAdd} />
+        <Route
+          exact
+          path={'/info-product-add'}
+          component={LayoutInfoProductAdd}
+        />
       </Switch>
     </Router>
   );

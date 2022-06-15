@@ -1,11 +1,11 @@
-import React from "react";
-import NavbarInfoProfile from "../pages/components/NavbarInfoProfile";
-import InfoProfile from "../pages/InfoProfile";
+import React from 'react';
+import NavbarTemplate from '../pages/components/NavbarTemplate';
+import InfoProfile from '../pages/InfoProfile';
 
 export default function LayoutInfoProfile() {
   return (
     <>
-      <NavbarInfoProfile />
+      <NavbarTemplate name="Lengkapi Info Akun" />
       <InfoProfile />
     </>
   );
