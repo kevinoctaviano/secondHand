@@ -6,6 +6,7 @@ import Register from './components/pages/Register';
 import LayoutInfoProfile from './components/layouts/LayoutInfoProfile';
 import LayoutInfoProductAdd from './components/layouts/LayoutInfoProductAdd';
 import LayoutHome from './components/layouts/LayoutHome';
+import LayoutProductBuyer from './components/layouts/LayoutProductBuyer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path={'/login'} component={Login} />
         <Route exact path={'/register'} component={Register} />
         <Route exact path={'/info-profile'} component={LayoutInfoProfile} />
+        <Route exact path={'/product-buyer'} component={LayoutProductBuyer} />
         <Route
           exact
           path={'/info-product-add'}
