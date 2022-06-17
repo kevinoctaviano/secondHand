@@ -8,6 +8,7 @@ import LayoutInfoProductAdd from './components/layouts/LayoutInfoProductAdd';
 import LayoutHome from './components/layouts/LayoutHome';
 import LayoutProductBuyer from './components/layouts/LayoutProductBuyer';
 import LayoutProductSeller from './components/layouts/LayoutProductSeller';
+import LayoutDashboardDaftarJual from './components/layouts/LayoutDashboardDaftarJual';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path={'/info-profile'} component={LayoutInfoProfile} />
         <Route exact path={'/product-buyer'} component={LayoutProductBuyer} />
         <Route exact path={'/product-seller'} component={LayoutProductSeller} />
+        <Route exact path={'/dashboard-daftar-jual'} component={LayoutDashboardDaftarJual} />
         <Route
           exact
           path={'/info-product-add'}
