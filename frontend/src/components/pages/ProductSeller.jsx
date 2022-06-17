@@ -2,15 +2,13 @@ import { Button, Modal } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
-import React, { useState } from 'react';
+import React from 'react';
 import jam from '../assets/svg/jam.svg';
 import userPhoto from '../assets/svg/user-photo.svg';
+import { Link } from 'react-router-dom';
 
-export default function ProductBuyer() {
-  const [show, setShow] = useState(false);
+export default function ProductSeller() {
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <>
       <div className="container mt-4">
@@ -68,7 +66,7 @@ export default function ProductBuyer() {
           <div className="col-lg-4">
             <div
               className="card rounded-16px shadow-sm"
-              style={{ width: '336px', height: '204px' }}
+              style={{ width: '336px', height: '266px' }}
             >
               <div className="card-body ps-4 pt-4">
                 <h5 className="card-title mb-3">Jam Tangan Casio</h5>
@@ -77,14 +75,20 @@ export default function ProductBuyer() {
                 <div className="d-grid">
                   <Button
                     className="btn-purple rounded-16px text-center"
-                    onClick={handleShow}
                   >
-                    Saya tertarik dan ingin nego
+                    Terbitkan
                   </Button>
+                  <Link className='' to={'/info-product-add'}>
+                  <Button
+                    className="btn-edit rounded-16px text-center mt-3 w-100"
+                  >
+                    Edit
+                  </Button>
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="card rounded-16px mt-3" style={{ width: '336px' }}>
+            <div className="card rounded-16px mt-5" style={{ width: '336px' }}>
               <div className="card-body ps-4">
                 <div className="row d-flex align-items-center">
                   <div className="col-lg-3">
@@ -100,53 +104,6 @@ export default function ProductBuyer() {
           </div>
         </div>
       </div>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body className="px-5">
-          <h5 className="fw-bold">Masukkan Harga Tawarmu</h5>
-          <p className="label-14px text-muted">
-            Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan
-            segera dihubungi penjual.
-          </p>
-          <div className="card rounded-16px mt-3" style={{ height: '80px' }}>
-            <div className="card-body">
-              <div className="row d-flex align-items-center">
-                <div className="col-lg-3">
-                  <img
-                    src={jam}
-                    alt="Buyer"
-                    style={{ height: '60px', width: '60px' }}
-                  />
-                </div>
-                <div className="col-lg-9">
-                  <h5 className="fw-bold">Jam Tangan Casio</h5>
-                  <h6 className="fw-bold">Rp 250.000</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mb-3 mt-3">
-            <label htmlFor="" className="form-label">
-              Harga Tawar
-            </label>
-            <input
-              type="email"
-              className="form-control rounded-16px"
-              placeholder="Rp 0,00"
-            />
-          </div>
-          <div className="d-grid gap-4">
-            <Button className="btn-purple rounded-16px" onClick={handleClose}>
-              Kirim
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
     </>
   );
 }
