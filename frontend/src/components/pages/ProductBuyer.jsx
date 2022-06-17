@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
 import React, { useState } from 'react';
 import jam from '../assets/svg/jam.svg';
+import jamKecil from '../assets/svg/jam-kecil.svg';
 import userPhoto from '../assets/svg/user-photo.svg';
 
 export default function ProductBuyer() {
@@ -117,11 +118,7 @@ export default function ProductBuyer() {
             <div className="card-body">
               <div className="row d-flex align-items-center">
                 <div className="col-lg-3">
-                  <img
-                    src={jam}
-                    alt="Buyer"
-                    style={{ height: '60px', width: '60px' }}
-                  />
+                  <img src={jamKecil} alt="Buyer" />
                 </div>
                 <div className="col-lg-9">
                   <h5 className="fw-bold">Jam Tangan Casio</h5>
