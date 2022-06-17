@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
-import tambahProduk from '../assets/svg/tambah-produk.svg';
+import kosong from '../assets/svg/kosong.svg';
 
-export default function DashboardDaftarJual() {
+export default function DaftarJualDiminati() {
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
@@ -43,41 +43,19 @@ export default function DashboardDaftarJual() {
               <h5 className="fw-bold mb-3">Kategori</h5>
 
               <Link
-                className="d-flex justify-content-between text-decoration-none custom-font-auth"
+                className="d-flex justify-content-between text-decoration-none"
                 to="/daftar-jual"
               >
                 <div className="row align-items-center">
                   <div className="col-md-12">
-                    <span className="mr-2">
+                    <span className="mr-2 text-muted">
                       <FontAwesomeIcon
                         icon={faBoxOpen}
                         fixedWidth
                         className="pe-3"
                       />
                     </span>
-                    <span className="fw-bold">Semua Produk</span>
-                  </div>
-                </div>
-                <span>
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </span>
-              </Link>
-              <hr className="custom-font-auth" />
-
-              <Link
-                className="d-flex justify-content-between text-decoration-none"
-                to="/diminati"
-              >
-                <div className="row align-items-center">
-                  <div className="col-md-12">
-                    <span className="mr-2 text-muted">
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        fixedWidth
-                        className="pe-3"
-                      />
-                    </span>
-                    <span className="text-muted">Diminati</span>
+                    <span className="text-muted">Semua Produk</span>
                   </div>
                 </div>
                 <span className="text-muted">
@@ -85,6 +63,28 @@ export default function DashboardDaftarJual() {
                 </span>
               </Link>
               <hr />
+
+              <Link
+                className="d-flex justify-content-between text-decoration-none custom-font-auth"
+                to="/diminati"
+              >
+                <div className="row align-items-center">
+                  <div className="col-md-12">
+                    <span className="mr-2">
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        fixedWidth
+                        className="pe-3"
+                      />
+                    </span>
+                    <span className="fw-bold">Diminati</span>
+                  </div>
+                </div>
+                <span>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </span>
+              </Link>
+              <hr className="custom-font-auth" />
 
               <Link className="d-flex justify-content-between text-decoration-none">
                 <div className="row align-items-center">
@@ -106,10 +106,10 @@ export default function DashboardDaftarJual() {
             </div>
           </div>
 
-          <div className="col-md-8">
+          <div className="col-md-8 d-flex justify-content-center">
             <div className="row">
               <div className="col-md-4">
-                <img src={tambahProduk} alt="Add" />
+                <img src={kosong} alt="Kosong" />
               </div>
             </div>
           </div>

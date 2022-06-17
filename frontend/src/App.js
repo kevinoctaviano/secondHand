@@ -9,6 +9,8 @@ import LayoutHome from './components/layouts/LayoutHome';
 import LayoutProductBuyer from './components/layouts/LayoutProductBuyer';
 import LayoutProductSeller from './components/layouts/LayoutProductSeller';
 import LayoutDashboardDaftarJual from './components/layouts/LayoutDashboardDaftarJual';
+import LayoutInfoPenawar from './components/layouts/LayoutInfoPenawar';
+import LayoutDaftarJualDiminati from './components/layouts/LayoutDaftarJualDiminati';
 
 function App() {
   return (
@@ -18,9 +20,15 @@ function App() {
         <Route exact path={'/login'} component={Login} />
         <Route exact path={'/register'} component={Register} />
         <Route exact path={'/info-profile'} component={LayoutInfoProfile} />
+        <Route exact path={'/info-penawar'} component={LayoutInfoPenawar} />
         <Route exact path={'/product-buyer'} component={LayoutProductBuyer} />
         <Route exact path={'/product-seller'} component={LayoutProductSeller} />
-        <Route exact path={'/dashboard-daftar-jual'} component={LayoutDashboardDaftarJual} />
+        <Route
+          exact
+          path={'/daftar-jual'}
+          component={LayoutDashboardDaftarJual}
+        />
+        <Route exact path={'/diminati'} component={LayoutDaftarJualDiminati} />
         <Route
           exact
           path={'/info-product-add'}
