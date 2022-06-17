@@ -54,7 +54,7 @@ select {
   background-color: transparent !important;
   color: rgb(0, 0, 0) !important;
   border-color: var(--primary) !important;
-  font-weight:500 !important;
+  font-weight: 500 !important;
 }
 
 .a-ungu {
@@ -144,6 +144,32 @@ select {
   top: 50%;
   left: 87%;
   transform: translateY(-50%);
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.dropdown-menu {
+  border-radius: 16px !important;
+  width: 376px;
+  height: 200px;
+}
+
+.modal-content {
+  border-radius: 16px !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.label-10px {
+  font-size: 10px;
+}
+
+.text-decoration-none {
+  text-decoration: none;
 }
 
 /* X-Small devices (portrait phones, less than 576px)
