@@ -50,6 +50,13 @@ select {
   color: #fff !important;
 }
 
+.btn-edit {
+  background-color: transparent !important;
+  color: rgb(0, 0, 0) !important;
+  border-color: var(--primary) !important;
+  font-weight:500 !important;
+}
+
 .a-ungu {
   color: var(--primary);
   font-weight: 700;
@@ -80,6 +87,7 @@ select {
 
 .custom-border-auth {
   border-radius: 16px;
+  border-color: var(--primary);
 }
 
 .custom-button-auth {
