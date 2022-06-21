@@ -176,6 +176,33 @@ select {
   width: 568px;
 }
 
+.center-custom {
+  display: flex;
+  justify-content: center;
+  margin-right: 22%;
+  margin-left: 10%;
+}
+
+.center-custom-h6 {
+  margin-left: 21%;
+}
+
+.custom-width-search {
+  width: 444px !important;
+}
+
+.swiper-button-next {
+  content: url(./components/assets/svg/btn-next-carousel.svg) !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.swiper-button-prev {
+  content: url(./components/assets/svg/btn-prev-carousel.svg) !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
@@ -190,6 +217,22 @@ No media query for `xs` since this is the default in Bootstrap */
   }
   .margin-custom {
     margin-top: 40vh !important;
+  }
+  .arrow-left {
+    display: none !important;
+  }
+  .center-custom {
+    display: flex;
+    justify-content: center;
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+  .center-custom-h6 {
+    margin-left: 0%;
+  }
+  .custom-width-search {
+    margin-top: 10px !important;
+    width: 360px !important;
   }
 }
 

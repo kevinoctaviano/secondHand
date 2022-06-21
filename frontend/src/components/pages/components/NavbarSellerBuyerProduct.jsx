@@ -20,9 +20,8 @@ export default function NavbarSellerBuyerProduct() {
             <Form.Control
               type="search"
               placeholder="Cari disini..."
-              className="me-2 rounded-16px"
+              className="rounded-16px custom-width-search"
               aria-label="Search"
-              style={{ width: '444px' }}
             />
             <FontAwesomeIcon
               className="icon text-muted"

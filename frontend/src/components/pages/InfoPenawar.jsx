@@ -12,19 +12,22 @@ export default function InfoPenawar() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <div className="container-fluid p-0 row m-0 mt-4">
+      <div className="container-fluid row m-0 mt-4">
         <div className="col-lg-2 d-flex justify-content-end">
-          <FontAwesomeIcon icon={faArrowLeft} className="custom-font-3" />
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className="custom-font-3 arrow-left"
+          />
         </div>
-        <div className="col-lg-8">
-          <div className="d-flex justify-content-center">
+        <div className="col-lg-10">
+          <div className="center-custom">
             <div className="card rounded-16px card-custom">
               <div className="card-body ps-4">
                 <div className="row d-flex align-items-center">
-                  <div className="col-lg-3">
-                    <img src={userPhoto} alt="Buyer" className="w-50" />
+                  <div className="col-sm-3">
+                    <img src={userPhoto} alt="Buyer" className="img-fluid" />
                   </div>
-                  <div className="col-lg-9">
+                  <div className="col-sm-9">
                     <h6>Nama Pembeli</h6>
                     <p className="text-muted">Kota</p>
                   </div>
@@ -32,17 +35,17 @@ export default function InfoPenawar() {
               </div>
             </div>
           </div>
-          <h6 className="fw-bold mt-3 text-center">
+          <h6 className="fw-bold mt-3 center-custom-h6">
             Daftar Produkmu yang Ditawar
           </h6>
-          <div className="d-flex justify-content-center">
+          <div className="center-custom">
             <div className="rounded-16px card-custom">
               <div className="card-body ps-4">
                 <div className="row">
-                  <div className="col-lg-2 d-flex align-items-center">
-                    <img src={jam} alt="Jam" className="w-100" />
+                  <div className="col-sm-2 d-flex align-items-center">
+                    <img src={jam} alt="Jam" className="img-fluid" />
                   </div>
-                  <div className="col-lg-7">
+                  <div className="col-sm-7">
                     <p className="text-muted m-0 label-10px">
                       Penawaran Produk
                     </p>
@@ -50,7 +53,7 @@ export default function InfoPenawar() {
                     <h6>Rp 250.000</h6>
                     <h6>Ditawar Rp 250.000</h6>
                   </div>
-                  <div className="col-lg-3 d-flex justify-content-end">
+                  <div className="col-sm-3 d-flex justify-content-end">
                     <p className="text-muted m-0 label-10px">20 Apr, 14:04</p>
                   </div>
                 </div>
@@ -93,12 +96,12 @@ export default function InfoPenawar() {
           <p className="label-14px text-muted">
             Segera hubungi pembeli melalui whatsapp untuk transaksi selanjutnya
           </p>
-          <div className="card rounded-16px mt-3" style={{ height: '200px' }}>
+          <div className="card rounded-16px mt-3">
             <div className="card-body">
               <h5 className="fw-bold text-center">Product Match</h5>
               <div className="row mb-3">
-                <div className="col-lg-3">
-                  <img src={userPhoto} alt="Buyer" className="w-75" />
+                <div className="col-lg-3 d-flex justify-content-center align-items-center">
+                  <img src={userPhoto} alt="Buyer" className="img-fluid" />
                 </div>
                 <div className="col-lg-9">
                   <h6>Nama Pembeli</h6>
@@ -106,8 +109,8 @@ export default function InfoPenawar() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-3">
-                  <img src={jam} alt="Jam" className="w-75" />
+                <div className="col-lg-3 d-flex justify-content-center align-items-center">
+                  <img src={jam} alt="Jam" className="img-fluid" />
                 </div>
                 <div className="col-lg-9">
                   <h6>Jam Tangan Casio</h6>

@@ -5,18 +5,21 @@ import Form from 'react-validation/build/form';
 
 export default function InfoProfile() {
   return (
-    <div className="container-fluid p-0 row m-0 mt-4">
+    <div className="container-fluid row m-0 mt-4">
       <div className="col-lg-2 d-flex justify-content-end">
-        <FontAwesomeIcon icon={faArrowLeft} className="custom-font-3" />
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          className="custom-font-3 arrow-left"
+        />
       </div>
-      <div className="col-lg-8">
-        <div className="d-flex justify-content-center">
+      <div className="col-lg-10 p-0">
+        <div className="center-custom">
           <div className="d-flex justify-content-center align-items-center custom-bg-photo-profile">
             <FontAwesomeIcon icon={faCamera} className="custom-font-4" />
           </div>
         </div>
-        <div className="d-flex justify-content-center">
-          <div className="w-50 mt-3">
+        <div className="center-custom">
+          <div className="w-75 mt-3">
             <Form>
               <div className="form-group mb-3">
                 <label htmlFor="nama" className="fw-bold custom-font-2">

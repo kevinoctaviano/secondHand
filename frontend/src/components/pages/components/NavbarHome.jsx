@@ -30,7 +30,7 @@ export default function NavbarHome() {
           </Form>
           <Nav className="ms-auto my-2 my-lg-0">
             <Nav.Link
-              href="#action1"
+              href="/login"
               className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
               style={{ width: '105px', height: '48px', fontSize: '15px' }}
             >
