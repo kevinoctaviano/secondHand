@@ -1,10 +1,10 @@
-import React from 'react';
-import { Navbar, Container, Nav, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { Navbar, Container, Nav, Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightToBracket,
   faMagnifyingGlass,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function NavbarHome() {
   return (
@@ -21,7 +21,7 @@ export default function NavbarHome() {
               placeholder="Cari disini..."
               className="me-2 rounded-16px"
               aria-label="Search"
-              style={{ width: '444px' }}
+              style={{ width: "444px" }}
             />
             <FontAwesomeIcon
               className="icon text-muted"
@@ -32,7 +32,7 @@ export default function NavbarHome() {
             <Nav.Link
               href="#action1"
               className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
-              style={{ width: '105px', height: '48px', fontSize: '15px' }}
+              style={{ width: "105px", height: "48px", fontSize: "15px" }}
             >
               <span>
                 <FontAwesomeIcon icon={faArrowRightToBracket} />
