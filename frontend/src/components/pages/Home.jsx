@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import { Button, Carousel, CarouselItem } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import img from '../assets/svg/img-banner.svg';
@@ -32,7 +32,7 @@ export default function Home() {
           <h4>Telusuri Kategori</h4>
         </div>
         <div className="container mt-4 m-0">
-          <div className="row g-10">
+          <div className="row">
             <Button
               className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
               style={{

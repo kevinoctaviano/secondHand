@@ -38,12 +38,10 @@ export default function DashboardDaftarJual() {
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-4">
             <div className="w-100 border px-4 py-4 custom-border-auth">
               <h5 className="fw-bold mb-3">Kategori</h5>
-
               <Link
                 className="d-flex justify-content-between text-decoration-none custom-font-auth"
                 to="/daftar-jual"
@@ -87,7 +85,6 @@ export default function DashboardDaftarJual() {
                 </span>
               </Link>
               <hr />
-
               <Link className="d-flex justify-content-between text-decoration-none">
                 <div className="row align-items-center">
                   <div className="col-md-12">
@@ -107,13 +104,14 @@ export default function DashboardDaftarJual() {
               </Link>
             </div>
           </div>
-
           <div className="col-md-8">
             <div className="row">
-              <div className="col-lg-4">
-                <img src={tambahProduk} alt="Add" />
+              <div className="col-lg-4 d-flex justify-content-center">
+                <Link to="#">
+                  <img src={tambahProduk} className="my-3" alt="Add" />
+                </Link>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={image} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -123,7 +121,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={picture} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -133,7 +131,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={image} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -143,7 +141,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={picture} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -153,7 +151,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={image} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -163,7 +161,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={picture} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -173,7 +171,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={image} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
@@ -183,7 +181,7 @@ export default function DashboardDaftarJual() {
                   <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                   <img src={picture} className="w-75 mx-auto" alt="" />
                   <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
