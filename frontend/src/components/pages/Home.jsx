@@ -3,12 +3,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 import kotakungu from '../assets/svg/kotak-ungu.svg';
 import kotakijo from '../assets/svg/kotak-ijo.svg';
 import picture from '../assets/svg/cardimage.svg';
 import image from '../assets/svg/cardimage1.svg';
+import btnJual from '../assets/svg/btn-jual.svg';
 
 export default function Home() {
   return (
@@ -241,10 +243,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Button className="btn-purple-jual rounded-16px position-jual fixed-bottom">
-          <FontAwesomeIcon icon={faPlus} />
-          Jual
-        </Button>
+        <Link className="position-jual fixed-bottom">
+          <img src={btnJual} alt="" />
+        </Link>
       </div>
     </>
   );

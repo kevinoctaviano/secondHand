@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
-import propic from '../assets/svg/fi_log-in.svg';
+import propic from '../assets/svg/product-picture.svg';
 
 export default function InfoProductAdd() {
   return (

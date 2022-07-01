@@ -81,6 +81,45 @@ export default function InfoProfile() {
                 Simpan
               </button>
             </Form>
+            <Form>
+              <h4 className="text-center my-3">Change Password</h4>
+              <div className="form-group mb-3">
+                <label htmlFor="oldpassword" className="fw-bold custom-font-2">
+                  Old password
+                </label>
+                <input
+                  type="password"
+                  className="form-control custom-font-1 rounded-16px"
+                  placeholder="Old password..."
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label htmlFor="newpassword" className="fw-bold custom-font-2">
+                  New password
+                </label>
+                <input
+                  type="password"
+                  className="form-control custom-font-1 rounded-16px"
+                  placeholder="New password..."
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label
+                  htmlFor="confirm-password"
+                  className="fw-bold custom-font-2"
+                >
+                  Confirm password
+                </label>
+                <input
+                  type="password"
+                  className="form-control custom-font-1 rounded-16px"
+                  placeholder="Confirm password..."
+                />
+              </div>
+              <button className="form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1">
+                Change password
+              </button>
+            </Form>
           </div>
         </div>
       </div>
