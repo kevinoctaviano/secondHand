@@ -15,6 +15,7 @@ body {
   height: 100%;
   width: 100%;
   font-size: 14px;
+  overflow-x: hidden;
 }
 
 /* Overriding styles */
@@ -48,6 +49,35 @@ select {
 .btn-purple {
   background-color: var(--primary) !important;
   color: #fff !important;
+}
+
+.btn-purple-jual {
+  width: 115px;
+  height: 52px;
+  font-size: 15px;
+  gap: 16px;
+  margin-left: 700px;
+  margin-top: 850px;
+  background: #7126b5 !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+}
+
+.position-jual {
+  margin-bottom: 40px;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 
 .btn-edit {
@@ -203,6 +233,27 @@ select {
   height: 30px !important;
 }
 
+.card-daftar-jual {
+  width: 206.67px;
+  height: 198px;
+}
+
+.btn-purple-kategori {
+  background-color: #e2d4f0 !important;
+}
+
+.bg-home {
+  display: none;
+}
+
+.gift {
+  display: none;
+}
+
+.margin-top-home {
+  margin-top: 30px;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
@@ -233,6 +284,32 @@ No media query for `xs` since this is the default in Bootstrap */
   .custom-width-search {
     margin-top: 10px !important;
     width: 360px !important;
+  }
+  .kotak-home {
+    display: none;
+  }
+  .bg-home {
+    display: block;
+  }
+  .margin-top-home {
+    margin-top: 0px;
+  }
+  .gift {
+    display: block;
+    z-index: 1;
+    position: absolute;
+    width: 127px;
+    height: 123px;
+    left: 109px;
+    top: 200px;
+  }
+  .horizontal-scrollable {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .scroll {
+    display: inline-block;
+    float: none;
   }
 }
 

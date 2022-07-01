@@ -1,15 +1,18 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import Form from "react-validation/build/form";
-import propic from "../assets/svg/fi_log-in.svg";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Form from 'react-validation/build/form';
+import propic from '../assets/svg/fi_log-in.svg';
 
 export default function InfoProductAdd() {
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-lg-2 d-flex justify-content-end">
-          <FontAwesomeIcon icon={faArrowLeft} className="custom-font-3" />
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className="custom-font-3 arrow-left"
+          />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
           <Form className="w-75">
