@@ -86,7 +86,10 @@ export default function DaftarJualDiminati() {
               </Link>
               <hr className="custom-font-auth" />
 
-              <Link className="d-flex justify-content-between text-decoration-none">
+              <Link
+                className="d-flex justify-content-between text-decoration-none"
+                to={'/terjual'}
+              >
                 <div className="row align-items-center">
                   <div className="col-md-12">
                     <span className="mr-2 text-muted">

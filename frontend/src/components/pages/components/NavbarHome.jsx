@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Container, Nav, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -28,14 +29,16 @@ export default function NavbarHome() {
             />
           </Form>
           <Nav className="ms-auto my-2 my-lg-0">
-            <Nav.Link
-              href="/login"
-              className="btn-purple rounded-16px d-flex justify-content-center align-items-center btn-login"
-            >
-              <span>
-                <FontAwesomeIcon icon={faArrowRightToBracket} />
-              </span>
-              Masuk
+            <Nav.Link>
+              <Link
+                to={'/login'}
+                className="btn-purple rounded-16px d-flex justify-content-center align-items-center btn-login"
+              >
+                <span>
+                  <FontAwesomeIcon icon={faArrowRightToBracket} />
+                </span>
+                Masuk
+              </Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

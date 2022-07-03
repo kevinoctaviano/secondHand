@@ -14,7 +14,7 @@ export default function Register() {
             <form className="w-75">
               <h1 className="font-custom">Daftar</h1>
               <div className="mb-3">
-                <label for="nama" className="form-label label-14px">
+                <label htmlFor="nama" className="form-label label-14px">
                   Nama
                 </label>
                 <input

@@ -2,12 +2,13 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper';
+import 'swiper/css/bundle';
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
-import kotakungu from '../assets/svg/kotak-ungu.svg';
-import kotakijo from '../assets/svg/kotak-ijo.svg';
 import picture from '../assets/svg/cardimage.svg';
 import image from '../assets/svg/cardimage1.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
@@ -17,17 +18,24 @@ export default function Home() {
     <>
       <div className="container-fluid p-0 margin-top-home">
         <img src={bgMobile} className="w-100 bg-home" alt="" />
-        <div className="row">
-          <div className="col-lg-2 d-flex align-items-center">
-            <img src={kotakijo} alt="" className="kotak-home" />
-          </div>
-          <div className="col-lg-8 d-flex justify-content-center">
-            <img src={img} alt="" className="kotak-home" />
-          </div>
-          <div className="col-lg-2 d-flex align-items-center justify-content-end">
-            <img src={kotakungu} alt="" className="kotak-home" />
-          </div>
-        </div>
+        <Swiper
+          id="main"
+          modules={[Navigation, Pagination, Autoplay]}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
+        >
+          <SwiperSlide className="d-flex justify-content-center">
+            <img src={img} alt="Product" className="w-75 rounded-16px" />
+          </SwiperSlide>
+          <SwiperSlide className="d-flex justify-content-center">
+            <img src={img} alt="Product" className="w-75 rounded-16px" />
+          </SwiperSlide>
+          <SwiperSlide className="d-flex justify-content-center">
+            <img src={img} alt="Product" className="w-75 rounded-16px" />
+          </SwiperSlide>
+        </Swiper>
       </div>
       <div className="container mt-4">
         <div className="col-lg-12 mt-5">
@@ -243,7 +251,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Link className="position-jual fixed-bottom">
+        <Link className="position-jual fixed-bottom" to={'/info-product-add'}>
           <img src={btnJual} alt="" />
         </Link>
       </div>

@@ -258,6 +258,12 @@ select {
   width: 105px;
   height: 48px;
   font-size: 15px;
+  text-decoration: none;
+}
+
+.icon-add-product-daftarjual {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 /* X-Small devices (portrait phones, less than 576px)
@@ -316,6 +322,10 @@ No media query for `xs` since this is the default in Bootstrap */
   .scroll {
     display: inline-block;
     float: none;
+  }
+  .icon-add-product-daftarjual {
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 

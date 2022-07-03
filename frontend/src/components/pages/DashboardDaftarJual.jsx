@@ -32,9 +32,12 @@ export default function DashboardDaftarJual() {
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
-              <button className="fw-bold w-50 mt-1 custom-border-auth custom-font-2">
+              <Link
+                to={'/info-profile'}
+                className="btn fw-bold w-50 mt-1 custom-border-auth custom-font-2"
+              >
                 Edit
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -85,7 +88,10 @@ export default function DashboardDaftarJual() {
                 </span>
               </Link>
               <hr />
-              <Link className="d-flex justify-content-between text-decoration-none">
+              <Link
+                className="d-flex justify-content-between text-decoration-none"
+                to={'/terjual'}
+              >
                 <div className="row align-items-center">
                   <div className="col-md-12">
                     <span className="mr-2 text-muted">
@@ -107,8 +113,12 @@ export default function DashboardDaftarJual() {
           <div className="col-md-8">
             <div className="row">
               <div className="col-lg-4 d-flex justify-content-center">
-                <Link to="#">
-                  <img src={tambahProduk} className="my-3" alt="Add" />
+                <Link to={'/info-product-add'}>
+                  <img
+                    src={tambahProduk}
+                    className="icon-add-product-daftarjual"
+                    alt="Add"
+                  />
                 </Link>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
