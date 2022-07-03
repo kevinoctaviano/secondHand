@@ -1,10 +1,11 @@
-import React from "react";
-import { Navbar, Container, Nav, Form } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav, Form } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightToBracket,
   faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function NavbarHome() {
   return (
@@ -19,9 +20,8 @@ export default function NavbarHome() {
             <Form.Control
               type="search"
               placeholder="Cari disini..."
-              className="me-2 rounded-16px"
+              className="rounded-16px custom-width-search"
               aria-label="Search"
-              style={{ width: "444px" }}
             />
             <FontAwesomeIcon
               className="icon text-muted"
@@ -29,15 +29,16 @@ export default function NavbarHome() {
             />
           </Form>
           <Nav className="ms-auto my-2 my-lg-0">
-            <Nav.Link
-              href="/login"
-              className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
-              style={{ width: "105px", height: "48px", fontSize: "15px" }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faArrowRightToBracket} />
-              </span>
-              Masuk
+            <Nav.Link>
+              <Link
+                to={'/login'}
+                className="btn-purple rounded-16px d-flex justify-content-center align-items-center btn-login"
+              >
+                <span>
+                  <FontAwesomeIcon icon={faArrowRightToBracket} />
+                </span>
+                Masuk
+              </Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

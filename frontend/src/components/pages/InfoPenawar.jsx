@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Button } from 'react-bootstrap';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import userPhoto from '../assets/svg/user-pembeli.svg';
 import jam from '../assets/svg/jam-kecil.svg';
 
@@ -124,7 +125,11 @@ export default function InfoPenawar() {
           </div>
           <div className="d-grid gap-4 mt-3">
             <Button className="btn-purple rounded-16px" onClick={handleClose}>
-              Hubungi via Whatsapp
+              Hubungi via Whatsapp{' '}
+              <FontAwesomeIcon
+                icon={faWhatsapp}
+                style={{ marginLeft: '14px', fontSize: '16px' }}
+              />
             </Button>
           </div>
         </Modal.Body>

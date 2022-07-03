@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
 import tambahProduk from '../assets/svg/tambah-produk.svg';
+import picture from '../assets/svg/cardimage.svg';
+import image from '../assets/svg/cardimage1.svg';
 
 export default function DashboardDaftarJual() {
   return (
@@ -30,18 +32,19 @@ export default function DashboardDaftarJual() {
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
-              <button className="fw-bold w-50 mt-1 custom-border-auth custom-font-2">
+              <Link
+                to={'/info-profile'}
+                className="btn fw-bold w-50 mt-1 custom-border-auth custom-font-2"
+              >
                 Edit
-              </button>
+              </Link>
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-4">
             <div className="w-100 border px-4 py-4 custom-border-auth">
               <h5 className="fw-bold mb-3">Kategori</h5>
-
               <Link
                 className="d-flex justify-content-between text-decoration-none custom-font-auth"
                 to="/daftar-jual"
@@ -85,8 +88,10 @@ export default function DashboardDaftarJual() {
                 </span>
               </Link>
               <hr />
-
-              <Link className="d-flex justify-content-between text-decoration-none">
+              <Link
+                className="d-flex justify-content-between text-decoration-none"
+                to={'/terjual'}
+              >
                 <div className="row align-items-center">
                   <div className="col-md-12">
                     <span className="mr-2 text-muted">
@@ -105,11 +110,96 @@ export default function DashboardDaftarJual() {
               </Link>
             </div>
           </div>
-
           <div className="col-md-8">
             <div className="row">
-              <div className="col-md-4">
-                <img src={tambahProduk} alt="Add" />
+              <div className="col-lg-4 d-flex justify-content-center">
+                <Link to={'/info-product-add'}>
+                  <img
+                    src={tambahProduk}
+                    className="icon-add-product-daftarjual"
+                    alt="Add"
+                  />
+                </Link>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={image} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={picture} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={image} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={picture} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={image} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={picture} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={image} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
+              </div>
+              <div className="col-lg-4 d-flex justify-content-center">
+                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                  <img src={picture} className="w-75 mx-auto" alt="" />
+                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    Aksesoris
+                  </h5>
+                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                </div>
               </div>
             </div>
           </div>
