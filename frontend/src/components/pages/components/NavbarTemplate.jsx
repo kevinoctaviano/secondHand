@@ -5,7 +5,7 @@ export default function NavbarTemplate({ name }) {
   return (
     <Navbar bg="light shadow-sm" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <div className="custom-logo-navbar"></div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -130,126 +130,150 @@ export default function Home() {
           </div>
         </div>
         <div className="container mt-4 row">
-          <div className="col-lg-2">
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={picture} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
-          <div className="col-lg-2">
+          </Link>
+          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
             <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
               <img src={image} />
-              <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">
+                Jam Tangan Casio
+              </h5>
               <h5 className="mt-1 text-10px font-normal text-muted">
                 Aksesoris
               </h5>
-              <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
             </div>
-          </div>
+          </Link>
         </div>
         <Link className="position-jual fixed-bottom" to={'/info-product-add'}>
           <img src={btnJual} alt="" />

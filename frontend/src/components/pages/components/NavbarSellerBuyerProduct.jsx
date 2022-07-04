@@ -11,7 +11,7 @@ export default function NavbarSellerBuyerProduct() {
   return (
     <Navbar bg="light shadow-sm" expand="lg">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <div className="custom-logo-navbar"></div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -37,7 +37,7 @@ export default function NavbarSellerBuyerProduct() {
               id="basic-nav-dropdown"
               align="end"
             >
-              <NavDropdown.Item href="#">
+              <NavDropdown.Item href="/info-penawar">
                 <div className="row">
                   <div className="col-lg-2">
                     <img

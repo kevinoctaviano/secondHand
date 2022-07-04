@@ -18,13 +18,13 @@ export default function DashboardDaftarJual() {
       <div className="w-75 mx-auto">
         <h4 className="text-dark fw-bold">Daftar Jual Saya</h4>
 
-        <div className="border my-3 px-3 pt-3 custom-border-auth">
+        <div className="border my-3 px-3 custom-border-auth">
           <div className="row">
-            <div className="col-md-1">
+            <div className="col-md-1 pt-3">
               <img src={userPhoto} alt="" className="w-100" />
             </div>
 
-            <div className="col-md-9">
+            <div className="col-md-9 pt-3">
               <p className="text-dark font-weight-bold custom-font-1">
                 Nama Penjual
               </p>
@@ -32,17 +32,14 @@ export default function DashboardDaftarJual() {
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
-              {/* <Link
-                to={'/info-profile'}
-                className="edit-daftar-jual btn fw-bold w-50 d-flex align-items-center"
-              >
-                Edit
-              </Link> */}
-              <form action="/info-profile">
-                <button className="edit-daftar-jual fw-bold w-50 d-flex align-items-center custom-border-auth w-100">
+              <div className="d-flex align-self-center">
+                <Link
+                  to={'/info-profile'}
+                  className="edit-daftar-jual btn btn-ungu fw-bold d-flex align-items-center"
+                >
                   Edit
-                </button>
-              </form>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

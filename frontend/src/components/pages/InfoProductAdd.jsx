@@ -1,17 +1,25 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import propic from '../assets/svg/product-picture.svg';
 
 export default function InfoProductAdd() {
+  const history = useHistory();
+  const handleGoBack = () => {
+    history.goBack();
+  };
   return (
     <div className="container mt-4">
       <div className="row">
-        <div className="col-lg-2 d-flex justify-content-end">
+        <div
+          onClick={handleGoBack}
+          className="col-lg-2 d-flex justify-content-end"
+        >
           <FontAwesomeIcon
             icon={faArrowLeft}
-            className="custom-font-3 arrow-left"
+            className="custom-font-3 arrow-left text-dark"
           />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
@@ -100,7 +108,10 @@ export default function InfoProductAdd() {
               <button className="mt-3 form-group font-weight-bold py-2 w-50 custom-border-auth custom-font-1">
                 Preview
               </button>
-              <button className="mt-3 form-group font-weight-bold text-white border-light py-2 w-50 custom-border-auth custom-button-auth custom-font-1">
+              <button
+                type="submit"
+                className="mt-3 form-group font-weight-bold text-white border-light py-2 w-50 custom-border-auth custom-button-auth custom-font-1"
+              >
                 Terbitkan
               </button>
             </div>
