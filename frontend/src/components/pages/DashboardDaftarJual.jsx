@@ -32,12 +32,17 @@ export default function DashboardDaftarJual() {
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
-              <Link
+              {/* <Link
                 to={'/info-profile'}
-                className="btn fw-bold w-50 mt-1 custom-border-auth custom-font-2"
+                className="edit-daftar-jual btn fw-bold w-50 d-flex align-items-center"
               >
                 Edit
-              </Link>
+              </Link> */}
+              <form action="/info-profile">
+                <button className="edit-daftar-jual fw-bold w-50 d-flex align-items-center custom-border-auth w-100">
+                  Edit
+                </button>
+              </form>
             </div>
           </div>
         </div>
