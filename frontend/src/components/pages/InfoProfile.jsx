@@ -1,12 +1,20 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCamera } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 
 export default function InfoProfile() {
+  const history = useHistory();
+  const handleGoBack = () => {
+    history.goBack();
+  };
   return (
     <div className="container-fluid row m-0 mt-4">
-      <div className="col-lg-2 d-flex justify-content-end">
+      <div
+        onClick={handleGoBack}
+        className="col-lg-2 d-flex justify-content-end"
+      >
         <FontAwesomeIcon
           icon={faArrowLeft}
           className="custom-font-3 arrow-left"

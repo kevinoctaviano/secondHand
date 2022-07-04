@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Button } from 'react-bootstrap';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -11,10 +12,17 @@ export default function InfoPenawar() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const history = useHistory();
+  const handleGoBack = () => {
+    history.goBack();
+  };
   return (
     <>
       <div className="container-fluid row m-0 mt-4">
-        <div className="col-lg-2 d-flex justify-content-end">
+        <div
+          onClick={handleGoBack}
+          className="col-lg-2 d-flex justify-content-end"
+        >
           <FontAwesomeIcon
             icon={faArrowLeft}
             className="custom-font-3 arrow-left"

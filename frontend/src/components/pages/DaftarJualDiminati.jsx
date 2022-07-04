@@ -16,13 +16,13 @@ export default function DaftarJualDiminati() {
       <div className="w-75 mx-auto">
         <h4 className="text-dark fw-bold">Daftar Jual Saya</h4>
 
-        <div className="border my-3 px-3 pt-3 custom-border-auth">
+        <div className="border my-3 px-3  custom-border-auth">
           <div className="row">
-            <div className="col-md-1">
+            <div className="col-md-1 pt-3">
               <img src={userPhoto} alt="" className="w-100" />
             </div>
 
-            <div className="col-md-9">
+            <div className="col-md-9 pt-3">
               <p className="text-dark font-weight-bold custom-font-1">
                 Nama Penjual
               </p>
@@ -30,9 +30,14 @@ export default function DaftarJualDiminati() {
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
-              <button className="fw-bold w-50 mt-1 custom-border-auth custom-font-2">
-                Edit
-              </button>
+              <div className="d-flex align-self-center">
+                <Link
+                  to={'/info-profile'}
+                  className="edit-daftar-jual btn btn-ungu fw-bold d-flex align-items-center"
+                >
+                  Edit
+                </Link>
+              </div>
             </div>
           </div>
         </div>

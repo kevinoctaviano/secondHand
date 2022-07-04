@@ -29,17 +29,15 @@ export default function NavbarHome() {
             />
           </Form>
           <Nav className="ms-auto my-2 my-lg-0">
-            <Nav.Link>
-              <Link
-                to={'/login'}
-                className="btn-purple rounded-16px d-flex justify-content-center align-items-center btn-login"
-              >
-                <span>
-                  <FontAwesomeIcon icon={faArrowRightToBracket} />
-                </span>
-                Masuk
-              </Link>
-            </Nav.Link>
+            <Link
+              to={'/login'}
+              className="btn-purple rounded-16px d-flex justify-content-center align-items-center btn-login"
+            >
+              <span>
+                <FontAwesomeIcon icon={faArrowRightToBracket} />
+              </span>
+              Masuk
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

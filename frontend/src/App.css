@@ -266,6 +266,17 @@ select {
   margin-bottom: 0px;
 }
 
+.card-home-product {
+  text-decoration: none !important;
+}
+
+.edit-daftar-jual {
+  width: 50px !important;
+  height: 35px !important;
+  border: 1px solid #7126b5 !important;
+  border-radius: 8px !important;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
