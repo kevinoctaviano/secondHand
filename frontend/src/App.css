@@ -277,6 +277,17 @@ select {
   border-radius: 8px !important;
 }
 
+#file[type='file'] {
+  display: none;
+}
+
+img.img-mini-preview {
+  border-radius: 5px;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
