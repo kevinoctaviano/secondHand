@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,35 @@ import Form from 'react-validation/build/form';
 import propic from '../assets/svg/product-picture.svg';
 
 export default function InfoProductAdd() {
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const handleImageChange = (e) => {
+    // console.log(e.target.files[])
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+
+      // console.log("filesArray: ", filesArray);
+
+      setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+      Array.from(e.target.files).map(
+        (file) => URL.revokeObjectURL(file) // avoid memory leak
+      );
+    }
+  };
+
+  const renderPhotos = (source) => {
+    console.log('source: ', source);
+    return source.map((photo) => {
+      return (
+        <div className="col-lg-2" key={photo}>
+          <img className="img-fluid img-mini-preview" src={photo} alt="" />
+        </div>
+      );
+    });
+  };
+
   const history = useHistory();
   const handleGoBack = () => {
     history.goBack();
@@ -99,8 +128,21 @@ export default function InfoProductAdd() {
               >
                 Foto Produk
               </label>
-              <div className="py-2 custom-bg-photo-product">
-                <img src={propic} alt="" />
+              <div className="py-2 custom-bg-photo-product row gap-3">
+                <div className="col-lg-2">
+                  <input
+                    type="file"
+                    id="file"
+                    multiple
+                    onChange={handleImageChange}
+                  />
+                  <div className="label-holder">
+                    <label htmlFor="file" className="label">
+                      <img src={propic} alt="gambar" />
+                    </label>
+                  </div>
+                </div>
+                {renderPhotos(selectedFiles)}
               </div>
             </div>
 

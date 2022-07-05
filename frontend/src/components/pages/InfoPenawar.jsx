@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import userPhoto from '../assets/svg/user-pembeli.svg';
@@ -12,6 +12,11 @@ export default function InfoPenawar() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleWhatsapp = () => {
+    window.open('https://wa.me/085156896874', '_blank');
+  };
+
   const history = useHistory();
   const handleGoBack = () => {
     history.goBack();
@@ -132,13 +137,16 @@ export default function InfoPenawar() {
             </div>
           </div>
           <div className="d-grid gap-4 mt-3">
-            <Button className="btn-purple rounded-16px" onClick={handleClose}>
+            <button
+              className="btn-purple rounded-16px"
+              onClick={handleWhatsapp}
+            >
               Hubungi via Whatsapp{' '}
               <FontAwesomeIcon
                 icon={faWhatsapp}
                 style={{ marginLeft: '14px', fontSize: '16px' }}
               />
-            </Button>
+            </button>
           </div>
         </Modal.Body>
       </Modal>
