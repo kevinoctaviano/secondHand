@@ -22,8 +22,13 @@ export default function InfoProfile() {
       </div>
       <div className="col-lg-10 p-0">
         <div className="center-custom">
-          <div className="d-flex justify-content-center align-items-center custom-bg-photo-profile">
-            <FontAwesomeIcon icon={faCamera} className="custom-font-4" />
+          <div>
+            <div className="d-flex justify-content-center align-items-center custom-bg-photo-profile">
+              <input type="file" name="profile-picture" id="profile-picture" />
+              <label htmlFor="profile-picture">
+                <FontAwesomeIcon icon={faCamera} className="custom-font-4" />
+              </label>
+            </div>
           </div>
         </div>
         <div className="center-custom">
