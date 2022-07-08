@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
@@ -19,7 +19,7 @@ import 'swiper/css/bundle';
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 // import picture from '../assets/svg/cardimage.svg';
-// import image from '../assets/svg/cardimage1.svg';
+import image from '../assets/svg/cardimage1.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
 import empty from '../assets/svg/empty.svg';
 
@@ -174,23 +174,28 @@ export default function Home() {
             </>
           ) : (
             allDataProduct.map((item, idx) => (
-              <Link
-                className="col-lg-2 card-home-product"
-                to={'/product-buyer'}
-              >
-                <div className="card mb-3 shadow-md px-2 pt-2 pb-4" key={idx}>
-                  <img src={item.image} />
-                  <h5 className="mt-2 text-sm text-dark font-normal">
-                    {item.name}
-                  </h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    {item.type}
-                  </h5>
-                  <h5 className="mt-2 text-sm text-dark font-normal">
-                    {item.price}
-                  </h5>
+              <div className="col-lg-2">
+                <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
+                  <Link className="card-home-product" to={'/product-buyer'}>
+                    <img src={image} />
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      Jam Tangan
+                    </h5>
+                    <h5 className="mt-1 text-10px font-normal text-muted">
+                      Aksesoris
+                    </h5>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      Rp 250.000
+                    </h5>
+                  </Link>
+                  <button className="btn-pink">
+                    Add to Wishlist{' '}
+                    <span>
+                      <FontAwesomeIcon icon={faHeart} />
+                    </span>
+                  </button>
                 </div>
-              </Link>
+              </div>
             ))
           )}
         </div>

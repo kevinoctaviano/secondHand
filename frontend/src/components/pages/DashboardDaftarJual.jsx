@@ -125,82 +125,82 @@ export default function DashboardDaftarJual() {
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={image} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={picture} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={image} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={picture} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={image} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={picture} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={image} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="w-75 mx-auto" alt="" />
-                  <h5 className="mt-2 text-sm font-normal">Jam Tangan Casio</h5>
+                  <img src={picture} className="img-fluid" alt="" />
+                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
                   <h5 className="mt-1 text-10px font-normal text-muted">
                     Aksesoris
                   </h5>
-                  <h5 className="mt-2 text-sm font-normal">Rp 250.000</h5>
+                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
                 </div>
               </div>
             </div>
