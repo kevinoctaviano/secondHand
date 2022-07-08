@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import NavbarSellerBuyerProduct from '../pages/components/NavbarSellerBuyerProduct';
+import NavbarHome from '../pages/components/NavbarHome';
 import DaftarJualDiminati from '../pages/DaftarJualDiminati';
 
 export default function LayoutdDaftarJualDiminati() {
   return (
     <Fragment>
-      <NavbarSellerBuyerProduct />
+      <NavbarHome />
       <DaftarJualDiminati />
     </Fragment>
   );

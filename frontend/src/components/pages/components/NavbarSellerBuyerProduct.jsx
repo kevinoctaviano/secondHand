@@ -6,13 +6,13 @@ import fi_bell from '../../assets/svg/fi_bell.svg';
 import fi_user from '../../assets/svg/fi_user.svg';
 import fi_list from '../../assets/svg/fi_list.svg';
 import jam from '../../assets/svg/jam.svg';
-
+import brand from '../../assets/svg/brand.svg';
 export default function NavbarSellerBuyerProduct() {
   return (
     <Navbar bg="light shadow-sm" expand="lg">
       <Container>
         <Navbar.Brand href="/">
-          <div className="custom-logo-navbar"></div>
+          <img src={brand} alt="brand" className="custom-logo-navbar" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

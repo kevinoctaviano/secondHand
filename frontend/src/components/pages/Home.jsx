@@ -1,30 +1,60 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
+import { useDispatch } from 'react-redux';
+
+import { getAllDataProduct } from '../../actions/user';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
 import 'swiper/css/bundle';
+
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
-import picture from '../assets/svg/cardimage.svg';
-import image from '../assets/svg/cardimage1.svg';
+// import picture from '../assets/svg/cardimage.svg';
+// import image from '../assets/svg/cardimage1.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
+import empty from '../assets/svg/empty.svg';
 
 export default function Home() {
+  const [allDataProduct, setAllDataProduct] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllDataProduct)
+      .then((response) => {
+        setAllDataProduct(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [dispatch]);
+
   return (
     <>
       <div className="container-fluid p-0 margin-top-home">
         <img src={bgMobile} className="w-100 bg-home" alt="" />
         <Swiper
-          id="main"
-          modules={[Navigation, Pagination, Autoplay]}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 3,
+            slideShadows: true,
+          }}
+          autoplay={{ delay: 4000 }}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
+          className="mySwiper"
         >
           <SwiperSlide className="d-flex justify-content-center">
             <img src={img} alt="Product" className="w-75 rounded-16px" />
@@ -130,150 +160,39 @@ export default function Home() {
           </div>
         </div>
         <div className="container mt-4 row">
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={picture} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
-          <Link className="col-lg-2 card-home-product" to={'/product-buyer'}>
-            <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-              <img src={image} />
-              <h5 className="mt-2 text-sm text-dark font-normal">
-                Jam Tangan Casio
-              </h5>
-              <h5 className="mt-1 text-10px font-normal text-muted">
-                Aksesoris
-              </h5>
-              <h5 className="mt-2 text-sm text-dark font-normal">Rp 250.000</h5>
-            </div>
-          </Link>
+          {allDataProduct.length === 0 ? (
+            <>
+              <h1 className="text-dark display-5 text-center">
+                Belum Ada Data
+              </h1>
+              <img
+                src={empty}
+                alt="kosong"
+                className="mt-4 mx-auto d-block"
+                style={{ width: '350px' }}
+              />
+            </>
+          ) : (
+            allDataProduct.map((item, idx) => (
+              <Link
+                className="col-lg-2 card-home-product"
+                to={'/product-buyer'}
+              >
+                <div className="card mb-3 shadow-md px-2 pt-2 pb-4" key={idx}>
+                  <img src={item.image} />
+                  <h5 className="mt-2 text-sm text-dark font-normal">
+                    {item.name}
+                  </h5>
+                  <h5 className="mt-1 text-10px font-normal text-muted">
+                    {item.type}
+                  </h5>
+                  <h5 className="mt-2 text-sm text-dark font-normal">
+                    {item.price}
+                  </h5>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
         <Link className="position-jual fixed-bottom" to={'/info-product-add'}>
           <img src={btnJual} alt="" />

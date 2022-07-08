@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import SidePicture from './components/SidePicture';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
@@ -23,6 +23,8 @@ const required = (value) => {
 export default function Login(props) {
   const form = useRef();
   const checkBtn = useRef();
+
+  const navigate = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -51,11 +53,12 @@ export default function Login(props) {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(login(email, password))
+      let formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+      dispatch(login(formData))
         .then(() => {
-          console.log('Berhasil login');
-          props.history.push('/');
-          window.location.reload();
+          navigate.push('/');
         })
         .catch((error) => {
           console.log(error);
