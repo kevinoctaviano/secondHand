@@ -320,6 +320,18 @@ img.img-mini-preview {
   object-fit: cover;
 }
 
+.font-normal {
+  font-size: 14px;
+}
+
+.btn-pink {
+  margin-top: 5px;
+  background-color: #ff7979;
+  border-radius: 10px;
+  color: white;
+  border: 0px;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
