@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import SidePicture from './components/SidePicture';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Form from 'react-validation/build/form';
@@ -53,6 +53,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [username, setUsername] = useState('');
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state) => state.message);
@@ -62,6 +63,11 @@ export default function Register() {
   const onChangeFullName = (e) => {
     const fullName = e.target.value;
     setFullName(fullName);
+  };
+
+  const onChangeUsername = (e) => {
+    const Username = e.target.value;
+    setUsername(Username);
   };
 
   const onChangeEmail = (e) => {
@@ -82,7 +88,7 @@ export default function Register() {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(fullName, email, password))
+      dispatch(register(fullName, username, email, password))
         .then(() => {
           setSuccessful(true);
         })
@@ -133,6 +139,19 @@ export default function Register() {
                       onChange={onChangeFullName}
                       validations={[required]}
                       placeholder="Nama Lengkap"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="username" className="form-label label-14px">
+                      Username
+                    </label>
+                    <Input
+                      type="text"
+                      className="form-control rounded-16px"
+                      name="username"
+                      onChange={onChangeUsername}
+                      validations={[required]}
+                      placeholder="Username"
                     />
                   </div>
                   <div className="mb-3">

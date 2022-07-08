@@ -333,7 +333,7 @@ No media query for `xs` since this is the default in Bootstrap */
     display: none !important;
   }
   .margin-custom {
-    margin-top: 40vh !important;
+    margin-top: 35vh !important;
   }
   .arrow-left {
     display: none !important;

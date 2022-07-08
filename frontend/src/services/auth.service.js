@@ -6,9 +6,10 @@ const API_URL = 'https://second-hand-backend.herokuapp.com/';
  * 6. Ini merupakan function untuk melakukan HTTP Request POST untuk menambahkan username, email, dan password
  *    user baru menuju API yang sudah dibuat.
  */
-const register = (fullName, email, password) => {
+const register = (fullName, username, email, password) => {
   return axios.post(API_URL + 'signup', {
     fullName: fullName,
+    username: username,
     email: email,
     password: password,
   });

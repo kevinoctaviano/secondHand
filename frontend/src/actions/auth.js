@@ -16,8 +16,8 @@ import AuthService from '../services/auth.service';
  *    nilai promise resolve.
  *    Payload SET_MESSAGE berisikan pesan sukses yang akan di tampilkan pada component Register.
  */
-export const register = (fullName, email, password) => (dispatch) => {
-  return AuthService.register(fullName, email, password).then(
+export const register = (fullName, username, email, password) => (dispatch) => {
+  return AuthService.register(fullName, username, email, password).then(
     (response) => {
       if (response.data.success === true) {
         dispatch({
