@@ -5,8 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
 import 'swiper/css/bundle';
+
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 import picture from '../assets/svg/cardimage.svg';
@@ -19,12 +25,20 @@ export default function Home() {
       <div className="container-fluid p-0 margin-top-home">
         <img src={bgMobile} className="w-100 bg-home" alt="" />
         <Swiper
-          id="main"
-          modules={[Navigation, Pagination, Autoplay]}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 3,
+            slideShadows: true,
+          }}
+          autoplay={{ delay: 4000 }}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
+          className="mySwiper"
         >
           <SwiperSlide className="d-flex justify-content-center">
             <img src={img} alt="Product" className="w-75 rounded-16px" />

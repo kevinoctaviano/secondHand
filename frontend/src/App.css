@@ -103,9 +103,8 @@ select {
 }
 
 .custom-logo-navbar {
-  width: 100px;
+  width: 125px;
   height: 34px;
-  background-color: var(--primary);
 }
 
 .custom-bg-photo-profile {
@@ -183,7 +182,7 @@ select {
 .dropdown-menu {
   border-radius: 16px !important;
   width: 376px;
-  height: 200px;
+  /* height: 200px; */
 }
 
 .modal-content {
@@ -221,6 +220,24 @@ select {
   width: 444px !important;
 }
 
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
 .swiper-button-next {
   content: url(./components/assets/svg/btn-next-carousel.svg) !important;
   width: 30px !important;
@@ -231,6 +248,15 @@ select {
   content: url(./components/assets/svg/btn-prev-carousel.svg) !important;
   width: 30px !important;
   height: 30px !important;
+}
+
+.swiper-slide-shadow-left {
+  background: #b6d4a8 !important;
+  border-radius: 20px;
+}
+.swiper-slide-shadow-right {
+  background: #e2d4f0 !important;
+  border-radius: 20px;
 }
 
 .card-daftar-jual {

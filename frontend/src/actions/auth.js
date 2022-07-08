@@ -16,19 +16,32 @@ import AuthService from '../services/auth.service';
  *    nilai promise resolve.
  *    Payload SET_MESSAGE berisikan pesan sukses yang akan di tampilkan pada component Register.
  */
-export const register = (fullname, email, password) => (dispatch) => {
-  return AuthService.register(fullname, email, password).then(
+export const register = (fullName, email, password) => (dispatch) => {
+  return AuthService.register(fullName, email, password).then(
     (response) => {
-      dispatch({
-        type: REGISTER_SUCCESS,
-      });
+      if (response.data.success === true) {
+        dispatch({
+          type: REGISTER_SUCCESS,
+        });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
+        dispatch({
+          type: SET_MESSAGE,
+          payload: response.data.message,
+        });
 
-      return Promise.resolve();
+        return Promise.resolve();
+      } else if (response.data.success === false) {
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+
+        dispatch({
+          type: SET_MESSAGE,
+          payload: response.data.message,
+        });
+
+        return Promise.reject();
+      }
     },
     /**
      * Apabila register gagal, maka akan diolah response errornya dan disimpan ke dalam variabel message. Variabel ini
@@ -57,8 +70,8 @@ export const register = (fullname, email, password) => (dispatch) => {
   );
 };
 
-export const login = (email, password) => (dispatch) => {
-  return AuthService.login(email, password).then(
+export const login = (formData) => (dispatch) => {
+  return AuthService.login(formData).then(
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import ProductSeller from '../pages/ProductSeller';
-import NavbarSellerBuyerProduct from '../pages/components/NavbarSellerBuyerProduct';
+import NavbarHome from '../pages/components/NavbarHome';
 
 export default function LayoutProductSeller() {
   return (
     <Fragment>
-      <NavbarSellerBuyerProduct />
+      <NavbarHome />
       <ProductSeller />
     </Fragment>
   );

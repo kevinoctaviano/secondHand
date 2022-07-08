@@ -1,32 +1,28 @@
 import axios from 'axios';
 
-const API_URL = 'https://challenge08-binar.herokuapp.com/api/auth/';
+const API_URL = 'https://second-hand-backend.herokuapp.com/';
 
 /**
  * 6. Ini merupakan function untuk melakukan HTTP Request POST untuk menambahkan username, email, dan password
  *    user baru menuju API yang sudah dibuat.
  */
-const register = (fullname, email, password) => {
+const register = (fullName, email, password) => {
   return axios.post(API_URL + 'signup', {
-    fullname,
-    email,
-    password,
+    fullName: fullName,
+    email: email,
+    password: password,
   });
 };
 
-const login = (email, password) => {
-  return axios
-    .post(API_URL + 'signin', {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
+const login = (formData) => {
+  return axios.post(API_URL + 'signin', formData).then((response) => {
+    console.log(response.data);
+    if (response.data.data.accessToken) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
 
-      return response.data;
-    });
+    return response.data;
+  });
 };
 
 const logout = () => {
