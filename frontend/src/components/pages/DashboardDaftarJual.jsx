@@ -14,6 +14,7 @@ import picture from '../assets/svg/cardimage.svg';
 import image from '../assets/svg/cardimage1.svg';
 
 export default function DashboardDaftarJual() {
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
@@ -27,7 +28,7 @@ export default function DashboardDaftarJual() {
 
             <div className="col-md-9 pt-3">
               <p className="text-dark font-weight-bold custom-font-1">
-                Nama Penjual
+                {user.data.username}
               </p>
               <p className="text-muted custom-font-5 custom-space-top">Kota</p>
             </div>

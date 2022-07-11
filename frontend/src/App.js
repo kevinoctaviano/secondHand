@@ -14,6 +14,7 @@ import LayoutDashboardDaftarJual from './components/layouts/LayoutDashboardDafta
 import LayoutInfoPenawar from './components/layouts/LayoutInfoPenawar';
 import LayoutDaftarJualDiminati from './components/layouts/LayoutDaftarJualDiminati';
 import LayoutKategori from './components/layouts/LayoutKategori';
+import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 
 import { history } from './helpers/history';
 
@@ -64,6 +65,11 @@ function App() {
                 component={LayoutInfoProductAdd}
               />
               <Route exact path={'/kategori'} component={LayoutKategori} />
+              <Route
+                exact
+                path={'/add-kategori'}
+                component={LayoutAddKategori}
+              />
             </>
           ) : (
             <Route path={'/'} component={ErrorPage} />

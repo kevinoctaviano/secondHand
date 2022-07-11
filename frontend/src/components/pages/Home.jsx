@@ -44,7 +44,6 @@ export default function Home() {
 
   return (
     <>
-      {console.log(allDataProduct)}
       <div className="container-fluid p-0 margin-top-home">
         <img src={bgMobile} className="w-100 bg-home" alt="" />
         <Swiper
@@ -182,12 +181,8 @@ export default function Home() {
           ) : (
             allDataProduct.map((item, idx) => (
               <div className="col-lg-2">
-                <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-                  <Link
-                    className="card-home-product"
-                    to={'/product-buyer'}
-                    key={idx}
-                  >
+                <div className="card mb-3 shadow-md px-2 pt-2 pb-4" key={idx}>
+                  <Link className="card-home-product" to={'/product-buyer'}>
                     <div className="d-flex justify-content-center">
                       <img
                         src={item.imageProduct[1].urlImage}
