@@ -13,6 +13,7 @@ import LayoutProductSeller from './components/layouts/LayoutProductSeller';
 import LayoutDashboardDaftarJual from './components/layouts/LayoutDashboardDaftarJual';
 import LayoutInfoPenawar from './components/layouts/LayoutInfoPenawar';
 import LayoutDaftarJualDiminati from './components/layouts/LayoutDaftarJualDiminati';
+import LayoutKategori from './components/layouts/LayoutKategori';
 
 import { history } from './helpers/history';
 
@@ -62,6 +63,7 @@ function App() {
                 path={'/info-product-add'}
                 component={LayoutInfoProductAdd}
               />
+              <Route exact path={'/kategori'} component={LayoutKategori} />
             </>
           ) : (
             <Route path={'/'} component={ErrorPage} />

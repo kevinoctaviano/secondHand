@@ -19,7 +19,7 @@ import 'swiper/css/bundle';
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 // import picture from '../assets/svg/cardimage.svg';
-import image from '../assets/svg/cardimage1.svg';
+// import image from '../assets/svg/cardimage1.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
 import empty from '../assets/svg/empty.svg';
 
@@ -36,8 +36,15 @@ export default function Home() {
       });
   }, [dispatch]);
 
+  // Mengubah format currency menjadi format rupiah
+  let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
+
   return (
     <>
+      {console.log(allDataProduct)}
       <div className="container-fluid p-0 margin-top-home">
         <img src={bgMobile} className="w-100 bg-home" alt="" />
         <Swiper
@@ -176,16 +183,25 @@ export default function Home() {
             allDataProduct.map((item, idx) => (
               <div className="col-lg-2">
                 <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
-                  <Link className="card-home-product" to={'/product-buyer'}>
-                    <img src={image} />
+                  <Link
+                    className="card-home-product"
+                    to={'/product-buyer'}
+                    key={idx}
+                  >
+                    <div className="d-flex justify-content-center">
+                      <img
+                        src={item.imageProduct[1].urlImage}
+                        className="card-home"
+                      />
+                    </div>
                     <h5 className="mt-2 text-sm text-dark font-normal">
-                      Jam Tangan
+                      {item.namaProduct}
                     </h5>
                     <h5 className="mt-1 text-10px font-normal text-muted">
-                      Aksesoris
+                      {item.kategori.namaKategori}
                     </h5>
                     <h5 className="mt-2 text-sm text-dark font-normal">
-                      Rp 250.000
+                      {formatter.format(item.hargaProduct)}
                     </h5>
                   </Link>
                   <button className="btn-pink">

@@ -3,6 +3,7 @@ import {
   faBoxOpen,
   faDollarSign,
   faHeart,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -68,7 +69,6 @@ export default function DashboardDaftarJual() {
                 </span>
               </Link>
               <hr className="custom-font-auth" />
-
               <Link
                 className="d-flex justify-content-between text-decoration-none"
                 to="/diminati"
@@ -89,7 +89,7 @@ export default function DashboardDaftarJual() {
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>
-              <hr />
+              <hr className="custom-font-auth" />
               <Link
                 className="d-flex justify-content-between text-decoration-none"
                 to={'/terjual'}
@@ -104,6 +104,27 @@ export default function DashboardDaftarJual() {
                       />
                     </span>
                     <span className="text-dark">Terjual</span>
+                  </div>
+                </div>
+                <span className="text-muted">
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </span>
+              </Link>
+              <hr className="custom-font-auth" />
+              <Link
+                className="d-flex justify-content-between text-decoration-none"
+                to={'/kategori'}
+              >
+                <div className="row align-items-center">
+                  <div className="col-md-12">
+                    <span className="mr-2 text-muted">
+                      <FontAwesomeIcon
+                        icon={faSearch}
+                        fixedWidth
+                        className="pe-3"
+                      />
+                    </span>
+                    <span className="text-dark">Daftar Kategori</span>
                   </div>
                 </div>
                 <span className="text-muted">
