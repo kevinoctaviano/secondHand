@@ -5,13 +5,47 @@ import {
   faHeart,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import DataTable from 'react-data-table-component';
 import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
-import kosong from '../assets/svg/kosong.svg';
+// import kosong from '../assets/svg/kosong.svg';
 
-export default function DaftarJualDiminati() {
+export default function DaftarKategori() {
+  let carRental = [];
+
+  for (let i = 1; i <= 50; i++) {
+    let obj = {};
+    obj['id'] = [i];
+    obj['name'] = 'Name';
+    obj['category'] = 'Category Name';
+
+    carRental.push(obj);
+  }
+
+  const listCar = [
+    {
+      name: 'No',
+      selector: (row) => row.id,
+    },
+    {
+      name: 'ID',
+      selector: (row) => row.name,
+    },
+    {
+      name: 'Category Name',
+      selector: (row) => row.category,
+      grow: 3,
+    },
+    {
+      name: 'Action',
+      selector: (row) => row.category,
+      grow: 3,
+    },
+  ];
+
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
@@ -70,22 +104,22 @@ export default function DaftarJualDiminati() {
               </Link>
               <hr className="custom-font-auth" />
               <Link
-                className="d-flex justify-content-between text-decoration-none custom-font-auth"
+                className="d-flex justify-content-between text-decoration-none"
                 to="/diminati"
               >
                 <div className="row align-items-center">
                   <div className="col-md-12">
-                    <span className="mr-2">
+                    <span className="mr-2 text-muted">
                       <FontAwesomeIcon
                         icon={faHeart}
                         fixedWidth
                         className="pe-3"
                       />
                     </span>
-                    <span className="fw-bold">Diminati</span>
+                    <span className="text-muted">Diminati</span>
                   </div>
                 </div>
-                <span>
+                <span className="text-muted">
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>
@@ -112,22 +146,22 @@ export default function DaftarJualDiminati() {
               </Link>
               <hr className="custom-font-auth" />
               <Link
-                className="d-flex justify-content-between text-decoration-none"
+                className="d-flex justify-content-between text-decoration-none custom-font-auth"
                 to={'/kategori'}
               >
                 <div className="row align-items-center">
                   <div className="col-md-12">
-                    <span className="mr-2 text-muted">
+                    <span className="mr-2">
                       <FontAwesomeIcon
                         icon={faSearch}
                         fixedWidth
                         className="pe-3"
                       />
                     </span>
-                    <span className="text-dark">Daftar Kategori</span>
+                    <span className="fw-bold">Daftar Kategori</span>
                   </div>
                 </div>
-                <span className="text-muted">
+                <span>
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>
@@ -135,9 +169,21 @@ export default function DaftarJualDiminati() {
           </div>
 
           <div className="col-md-8 d-flex justify-content-center">
-            <div className="row">
-              <div className="col-md-4">
-                <img src={kosong} alt="Kosong" />
+            <div className="card shadow mb-4 w-100">
+              <div className="card-header py-3">
+                <h6 className="m-0 fw-bold custom-font-auth">
+                  Daftar Kategori
+                </h6>
+              </div>
+              <div className="card-body">
+                <div className="table-responsive">
+                  <DataTable
+                    pagination
+                    highlightOnHover
+                    columns={listCar}
+                    data={carRental}
+                  />
+                </div>
               </div>
             </div>
           </div>

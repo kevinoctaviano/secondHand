@@ -332,6 +332,13 @@ img.img-mini-preview {
   border: 0px;
 }
 
+img.card-home {
+  width: 173px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
