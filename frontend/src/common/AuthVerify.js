@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import { history } from '../helpers/history';
 
 const parseJwt = (token) => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    return JSON.parse(atob(token.split('.')[1]));
   } catch (e) {
     return null;
   }
@@ -11,10 +11,10 @@ const parseJwt = (token) => {
 
 const AuthVerify = (props) => {
   history.listen(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user) {
-      const decodedJwt = parseJwt(user.accessToken);
+      const decodedJwt = parseJwt(user.data.accessToken);
 
       if (decodedJwt.exp * 1000 < Date.now()) {
         props.logOut();

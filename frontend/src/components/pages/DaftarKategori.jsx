@@ -8,35 +8,34 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import DataTable from 'react-data-table-component';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
+import { getAllKategori } from '../../actions/user';
 // import kosong from '../assets/svg/kosong.svg';
 
 export default function DaftarKategori() {
-  let carRental = [];
-
-  for (let i = 1; i <= 50; i++) {
-    let obj = {};
-    obj['id'] = [i];
-    obj['name'] = 'Name';
-    obj['category'] = 'Category Name';
-
-    carRental.push(obj);
-  }
+  const [allKategori, setAllKategori] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllKategori)
+      .then((response) => {
+        setAllKategori(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [dispatch]);
 
   const listCar = [
     {
-      name: 'No',
-      selector: (row) => row.id,
-    },
-    {
       name: 'ID',
-      selector: (row) => row.name,
+      cell: (row) => row.idKategori,
     },
     {
       name: 'Category Name',
-      selector: (row) => row.category,
+      cell: (row) => row.namaKategori,
       grow: 3,
     },
     {
@@ -45,6 +44,8 @@ export default function DaftarKategori() {
       grow: 3,
     },
   ];
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="container mt-4">
@@ -59,7 +60,7 @@ export default function DaftarKategori() {
 
             <div className="col-md-9 pt-3">
               <p className="text-dark font-weight-bold custom-font-1">
-                Nama Penjual
+                {user.data.username}
               </p>
               <p className="text-muted custom-font-5 custom-space-top">Kota</p>
             </div>
@@ -168,12 +169,22 @@ export default function DaftarKategori() {
             </div>
           </div>
 
-          <div className="col-md-8 d-flex justify-content-center">
+          <div className="col-md-8">
             <div className="card shadow mb-4 w-100">
-              <div className="card-header py-3">
-                <h6 className="m-0 fw-bold custom-font-auth">
-                  Daftar Kategori
-                </h6>
+              <div className="card-header py-3 row">
+                <div className="col-lg-6 d-flex align-self-center">
+                  <h6 className="m-0 fw-bold custom-font-auth ">
+                    Daftar Kategori
+                  </h6>
+                </div>
+                <div className="col-lg-6 d-flex justify-content-end">
+                  <Link
+                    className="btn-tambah-kategori btn btn-ungu fw-bold d-flex align-items-center"
+                    to={'/add-kategori'}
+                  >
+                    Tambah Kategori
+                  </Link>
+                </div>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
@@ -181,7 +192,7 @@ export default function DaftarKategori() {
                     pagination
                     highlightOnHover
                     columns={listCar}
-                    data={carRental}
+                    data={allKategori}
                   />
                 </div>
               </div>
