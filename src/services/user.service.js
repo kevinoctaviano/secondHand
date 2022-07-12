@@ -13,12 +13,20 @@ const getAllKategori = () => {
   return axios.get(API_URL + 'kategori', { headers: authHeader() });
 };
 
+const getKategoriByID = (id) => {
+  return axios.get(API_URL + `kategori/${id}`, { headers: authHeader() });
+};
+
 const getUserByID = (id) => {
   return axios.get(API_URL + `Users/${id}`, { headers: authHeader() });
 };
 
 const postKategori = (namaKategori) => {
   return axios.post(API_URL + 'kategori', { namaKategori }, header);
+};
+
+const updateKategori = (namaKategori, id) => {
+  return axios.put(API_URL + `kategori/${id}`, { namaKategori }, header);
 };
 
 // const getUserBoard = () => {
@@ -36,8 +44,10 @@ const postKategori = (namaKategori) => {
 export default {
   getAllDataProduct,
   getAllKategori,
+  getKategoriByID,
   postKategori,
   getUserByID,
+  updateKategori,
   // getUserBoard,
   // getModeratorBoard,
   // getAdminBoard,

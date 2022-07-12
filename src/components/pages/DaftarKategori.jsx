@@ -205,14 +205,20 @@ const DaftarKategori = (props) => {
                 </div>
               </div>
               <div className="card-body">
-                <div className="table-responsive">
-                  <DataTable
-                    pagination
-                    highlightOnHover
-                    columns={listCar}
-                    data={props.kategori}
-                  />
-                </div>
+                {props.isNull ? (
+                  <div className="d-flex justify-content-center">
+                    <span className="spinner-border spinner-border-lg"></span>
+                  </div>
+                ) : (
+                  <div className="table-responsive">
+                    <DataTable
+                      pagination
+                      highlightOnHover
+                      columns={listCar}
+                      data={props.kategori}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
