@@ -10,11 +10,11 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
 import DataTable from 'react-data-table-component';
-import React, { useEffect } from 'react';
+import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
-import { getAllKategori } from '../../actions/user';
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -26,11 +26,6 @@ const mapStateToProps = (state) => {
 };
 
 const DaftarKategori = (props) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllKategori);
-  }, [dispatch]);
-
   const listCar = [
     {
       name: 'ID',

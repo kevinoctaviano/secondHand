@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   faAngleRight,
   faBoxOpen,
@@ -6,14 +7,27 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
 import tambahProduk from '../assets/svg/tambah-produk.svg';
-import picture from '../assets/svg/cardimage.svg';
-import image from '../assets/svg/cardimage1.svg';
+import empty from '../assets/svg/empty.svg';
 
-export default function DashboardDaftarJual() {
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.barang.isNull,
+    barang: state.barang.barang,
+    message: state.barang.message,
+  };
+};
+
+const DashboardDaftarJual = (props) => {
+  // Mengubah format currency menjadi format rupiah
+  let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
   const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="container mt-4">
@@ -145,90 +159,49 @@ export default function DashboardDaftarJual() {
                   />
                 </Link>
               </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={image} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
-              <div className="col-lg-4 d-flex justify-content-center">
-                <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                  <img src={picture} className="img-fluid" alt="" />
-                  <h5 className="mt-1 text-sm font-normal">Jam Tangan Casio</h5>
-                  <h5 className="mt-1 text-10px font-normal text-muted">
-                    Aksesoris
-                  </h5>
-                  <h5 className="mt-1 text-sm font-normal">Rp 250.000</h5>
-                </div>
-              </div>
+              {!props.barang ? (
+                <>
+                  <h1 className="text-dark display-5 text-center">
+                    Belum Ada Data
+                  </h1>
+                  <img
+                    src={empty}
+                    alt="kosong"
+                    className="mt-4 mx-auto d-block"
+                    style={{ width: '350px' }}
+                  />
+                </>
+              ) : (
+                props.barang.map((item, index = 1) => (
+                  <div
+                    className="col-lg-4 d-flex justify-content-center"
+                    key={index}
+                  >
+                    <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                      <img
+                        src={item.imageProduct[0].urlImage}
+                        className="card-home"
+                        alt=""
+                      />
+                      <h5 className="mt-1 text-sm font-normal">
+                        {item.namaProduct}
+                      </h5>
+                      <h5 className="mt-1 text-10px font-normal text-muted">
+                        {item.kategori.namaKategori}
+                      </h5>
+                      <h5 className="mt-1 text-sm font-normal">
+                        {formatter.format(item.hargaProduct)}
+                      </h5>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(DashboardDaftarJual);

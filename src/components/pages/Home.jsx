@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
-import { useDispatch } from 'react-redux';
-
-import { getAllDataProduct } from '../../actions/user';
+import { connect } from 'react-redux';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -18,24 +16,18 @@ import 'swiper/css/bundle';
 
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
-// import picture from '../assets/svg/cardimage.svg';
-// import image from '../assets/svg/cardimage1.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
 import empty from '../assets/svg/empty.svg';
 
-export default function Home() {
-  const [allDataProduct, setAllDataProduct] = useState([]);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllDataProduct)
-      .then((response) => {
-        setAllDataProduct(response.data.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [dispatch]);
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.barang.isNull,
+    barang: state.barang.barang,
+    message: state.barang.message,
+  };
+};
 
+const Home = (props) => {
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -166,7 +158,7 @@ export default function Home() {
           </div>
         </div>
         <div className="container mt-4 row">
-          {allDataProduct.length === 0 ? (
+          {!props.barang ? (
             <>
               <h1 className="text-dark display-5 text-center">
                 Belum Ada Data
@@ -179,13 +171,13 @@ export default function Home() {
               />
             </>
           ) : (
-            allDataProduct.map((item, index = 1) => (
+            props.barang.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
                 <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
                   <Link className="card-home-product" to={'/product-buyer'}>
                     <div className="d-flex justify-content-center">
                       <img
-                        src={item.imageProduct[1].urlImage}
+                        src={item.imageProduct[0].urlImage}
                         className="card-home"
                       />
                     </div>
@@ -216,4 +208,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(Home);
