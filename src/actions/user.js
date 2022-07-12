@@ -1,14 +1,22 @@
 import {
   GET_ALL_KATEGORI,
   GET_KATEGORI_BY_ID,
-  GET_ALL_KATEGORI_FAILED,
   ADD_KATEGORI,
   UPDATE_KATEGORI,
+  GET_ALL_DATA,
 } from './types';
 import UserService from '../services/user.service';
 
-export const getAllDataProduct = () => {
-  return UserService.getAllDataProduct();
+export const getAllDataProduct = (dispatch) => {
+  return UserService.getAllDataProduct().then((response) => {
+    // console.log(response.data.data);
+    dispatch({
+      type: GET_ALL_DATA,
+      payload: {
+        data: response.data.data,
+      },
+    });
+  });
 };
 
 export const getAllKategori = (dispatch) => {

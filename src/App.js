@@ -1,7 +1,10 @@
+import React, { useEffect } from 'react';
 import './App.css';
 import { useSelector } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Login';
 import ErrorPage from './components/pages/ErrorPage/ErrorPage';
 import Register from './components/pages/Register';
@@ -18,9 +21,15 @@ import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 import LayoutEditKategori from './components/layouts/LayoutEditKategori';
 
 import { history } from './helpers/history';
+import { getAllDataProduct, getAllKategori } from './actions/user';
 
 function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllKategori);
+    dispatch(getAllDataProduct);
+  }, [dispatch]);
   return (
     <Router history={history}>
       <div>

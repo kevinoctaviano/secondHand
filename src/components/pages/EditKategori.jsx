@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ import CheckButton from 'react-validation/build/button';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { updateKategori, getKategoriByID } from '../../actions/user';
+import { updateKategori } from '../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
@@ -46,14 +46,10 @@ const EditKategori = (props) => {
     history.goBack();
   };
 
-  const editKategori = props.kategori.map((item) => item.idKategori);
-  const result = editKategori.filter((id) => id === parseInt(params.id));
-
-  console.log(result);
-
-  // useEffect(() => {
-  //   dispatch(getKategoriByID(params.id));
-  // }, [dispatch, params]);
+  // Ambil nama kategori
+  const editKategori = props.kategori.filter(
+    (item) => item.idKategori === parseInt(params.id)
+  );
 
   return (
     <div className="container mt-4">
@@ -89,7 +85,7 @@ const EditKategori = (props) => {
                 placeholder="Nama Kategori"
                 onChange={onChangeKategori}
                 name="kategori"
-                value={props.kategori.namaKategori}
+                value={editKategori[0].namaKategori}
               />
             </div>
             <div className="d-flex justify-content-center">
