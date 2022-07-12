@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,35 +7,37 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
-import { postKategori } from '../../actions/user';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-export default function EditKategori() {
+import { updateKategori, getKategoriByID } from '../../actions/user';
+
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.kategori.isNull,
+    kategori: state.kategori.kategori,
+    message: state.kategori.message,
+  };
+};
+
+const EditKategori = (props) => {
   const dispatch = useDispatch();
+  const params = useParams();
   const form = useRef();
   const checkBtn = useRef();
 
   const [kategori, setKategori] = useState('');
-  const [successful, setSuccessful] = useState(false);
 
   const onChangeKategori = (e) => {
     const kategori = e.target.value;
     setKategori(kategori);
   };
 
-  const handleKategori = (e) => {
+  const handleEditKategori = (e) => {
     e.preventDefault();
 
-    form.current.validateAll();
-
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(postKategori(kategori))
-        .then((response) => {
-          console.log(response);
-          setSuccessful(true);
-        })
-        .catch(() => {
-          setSuccessful(false);
-        });
+      dispatch(updateKategori(kategori, params.id));
     }
   };
 
@@ -44,8 +46,24 @@ export default function EditKategori() {
     history.goBack();
   };
 
+  const editKategori = props.kategori.map((item) => item.idKategori);
+  const result = editKategori.filter((id) => id === parseInt(params.id));
+
+  console.log(result);
+
+  // useEffect(() => {
+  //   dispatch(getKategoriByID(params.id));
+  // }, [dispatch, params]);
+
   return (
     <div className="container mt-4">
+      {props.message ? (
+        <div className="d-flex justify-content-center">
+          <div className="alert-custom">
+            <p className="p-alert">{props.message}</p>
+          </div>
+        </div>
+      ) : null}
       <div className="row">
         <div
           onClick={handleGoBack}
@@ -57,7 +75,7 @@ export default function EditKategori() {
           />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
-          <Form className="w-75" onSubmit={handleKategori} ref={form}>
+          <Form className="w-75" onSubmit={handleEditKategori} ref={form}>
             <div className="form-group mb-3">
               <label
                 htmlFor="namaproduk"
@@ -71,6 +89,7 @@ export default function EditKategori() {
                 placeholder="Nama Kategori"
                 onChange={onChangeKategori}
                 name="kategori"
+                value={props.kategori.namaKategori}
               />
             </div>
             <div className="d-flex justify-content-center">
@@ -87,4 +106,6 @@ export default function EditKategori() {
       </div>
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(EditKategori);
