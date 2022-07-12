@@ -7,24 +7,15 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
-import { connect } from 'react-redux';
-
 import { postKategori } from '../../actions/user';
 
-const mapStateToProps = (state) => {
-  return {
-    isNull: state.kategori.isNull,
-    kategori: state.kategori.kategori,
-    message: state.kategori.message,
-  };
-};
-
-const AddKategori = (props) => {
+export default function EditKategori() {
   const dispatch = useDispatch();
   const form = useRef();
   const checkBtn = useRef();
 
   const [kategori, setKategori] = useState('');
+  const [successful, setSuccessful] = useState(false);
 
   const onChangeKategori = (e) => {
     const kategori = e.target.value;
@@ -34,8 +25,17 @@ const AddKategori = (props) => {
   const handleKategori = (e) => {
     e.preventDefault();
 
+    form.current.validateAll();
+
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(postKategori(kategori));
+      dispatch(postKategori(kategori))
+        .then((response) => {
+          console.log(response);
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
     }
   };
 
@@ -46,13 +46,6 @@ const AddKategori = (props) => {
 
   return (
     <div className="container mt-4">
-      {props.message ? (
-        <div className="d-flex justify-content-center">
-          <div className="alert-custom">
-            <p className="p-alert">{props.message}</p>
-          </div>
-        </div>
-      ) : null}
       <div className="row">
         <div
           onClick={handleGoBack}
@@ -94,6 +87,4 @@ const AddKategori = (props) => {
       </div>
     </div>
   );
-};
-
-export default connect(mapStateToProps, null)(AddKategori);
+}

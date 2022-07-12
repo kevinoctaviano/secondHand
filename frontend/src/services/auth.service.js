@@ -17,7 +17,7 @@ const register = (fullName, username, email, password) => {
 
 const login = (formData) => {
   return axios.post(API_URL + 'signin', formData).then((response) => {
-    console.log(response.data);
+    // console.log(response.data);
     if (response.data.data.accessToken) {
       localStorage.setItem('user', JSON.stringify(response.data));
     }
