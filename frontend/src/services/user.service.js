@@ -1,6 +1,8 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
+const header = { headers: authHeader(), 'Content-type': 'application/json' };
+
 const API_URL = 'https://second-hand-backend.herokuapp.com/';
 
 const getAllDataProduct = () => {
@@ -15,12 +17,8 @@ const getUserByID = (id) => {
   return axios.get(API_URL + `Users/${id}`, { headers: authHeader() });
 };
 
-const postKategori = (kategori) => {
-  return axios.post(
-    API_URL + 'kategori',
-    { headers: authHeader(), 'Content-type': 'application/json' },
-    { namaKategori: kategori }
-  );
+const postKategori = (namaKategori) => {
+  return axios.post(API_URL + 'kategori', { namaKategori }, header);
 };
 
 // const getUserBoard = () => {

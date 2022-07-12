@@ -15,6 +15,7 @@ import LayoutInfoPenawar from './components/layouts/LayoutInfoPenawar';
 import LayoutDaftarJualDiminati from './components/layouts/LayoutDaftarJualDiminati';
 import LayoutKategori from './components/layouts/LayoutKategori';
 import LayoutAddKategori from './components/layouts/LayoutAddKategori';
+import LayoutEditKategori from './components/layouts/LayoutEditKategori';
 
 import { history } from './helpers/history';
 
@@ -69,6 +70,11 @@ function App() {
                 exact
                 path={'/add-kategori'}
                 component={LayoutAddKategori}
+              />
+              <Route
+                exact
+                path={'/edit-kategori/:id'}
+                component={LayoutEditKategori}
               />
             </>
           ) : (

@@ -4,28 +4,31 @@ import {
   faDollarSign,
   faHeart,
   faSearch,
+  faPencil,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DataTable from 'react-data-table-component';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
 import { getAllKategori } from '../../actions/user';
-// import kosong from '../assets/svg/kosong.svg';
+import { connect } from 'react-redux';
 
-export default function DaftarKategori() {
-  const [allKategori, setAllKategori] = useState([]);
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.kategori.isNull,
+    kategori: state.kategori.kategori,
+    message: state.kategori.message,
+  };
+};
+
+const DaftarKategori = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllKategori)
-      .then((response) => {
-        setAllKategori(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(getAllKategori);
   }, [dispatch]);
 
   const listCar = [
@@ -36,12 +39,27 @@ export default function DaftarKategori() {
     {
       name: 'Category Name',
       cell: (row) => row.namaKategori,
-      grow: 3,
     },
     {
       name: 'Action',
-      selector: (row) => row.category,
-      grow: 3,
+      selector: (row) => (
+        <div>
+          <Link
+            className="btn btn-outline-info me-3"
+            to={`/edit-kategori/${row.idKategori}`}
+          >
+            <FontAwesomeIcon icon={faPencil} fixedWidth className="pe-1" />
+            Edit
+          </Link>
+          <Link
+            className="btn btn-outline-danger"
+            to={`/delete-kategori/${row.idKategori}`}
+          >
+            <FontAwesomeIcon icon={faTrash} fixedWidth className="pe-1" />
+            Delete
+          </Link>
+        </div>
+      ),
     },
   ];
 
@@ -170,7 +188,7 @@ export default function DaftarKategori() {
           </div>
 
           <div className="col-md-8">
-            <div className="card shadow mb-4 w-100">
+            <div className="card shadow mb-4">
               <div className="card-header py-3 row">
                 <div className="col-lg-6 d-flex align-self-center">
                   <h6 className="m-0 fw-bold custom-font-auth ">
@@ -192,7 +210,7 @@ export default function DaftarKategori() {
                     pagination
                     highlightOnHover
                     columns={listCar}
-                    data={allKategori}
+                    data={props.kategori}
                   />
                 </div>
               </div>
@@ -202,4 +220,6 @@ export default function DaftarKategori() {
       </div>
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(DaftarKategori);

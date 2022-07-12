@@ -6,3 +6,8 @@ export const LOGOUT = 'LOGOUT';
 
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+
+export const GET_ALL_KATEGORI = 'GET_ALL_KATEGORI';
+export const GET_ALL_KATEGORI_FAILED = 'GET_ALL_KATEGORI_FAILED';
+
+export const ADD_KATEGORI = 'ADD_KATEGORI';

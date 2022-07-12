@@ -179,9 +179,9 @@ export default function Home() {
               />
             </>
           ) : (
-            allDataProduct.map((item, idx) => (
-              <div className="col-lg-2">
-                <div className="card mb-3 shadow-md px-2 pt-2 pb-4" key={idx}>
+            allDataProduct.map((item, index = 1) => (
+              <div className="col-lg-2" key={index}>
+                <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
                   <Link className="card-home-product" to={'/product-buyer'}>
                     <div className="d-flex justify-content-center">
                       <img

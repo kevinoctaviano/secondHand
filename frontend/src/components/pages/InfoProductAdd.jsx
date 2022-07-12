@@ -5,7 +5,17 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import propic from '../assets/svg/product-picture.svg';
 
-export default function InfoProductAdd() {
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.kategori.isNull,
+    kategori: state.kategori.kategori,
+    message: state.kategori.message,
+  };
+};
+
+const InfoProductAdd = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleImageChange = (e) => {
@@ -97,11 +107,11 @@ export default function InfoProductAdd() {
                     <option defaultValue={{ value: null }}>
                       Pilih Kategori
                     </option>
-                    <option value="Jember">Jam Tangan</option>
-                    <option value="Jakarta">Elektronik</option>
-                    <option value="Surabaya">Komputer &amp; Aksesoris</option>
-                    <option value="Malang">Hobi &amp; Koleksi</option>
-                    <option value="Bali">Perawatan &amp; Kecantikan</option>
+                    {props.kategori.map((item, index = 1) => (
+                      <option value={item.idKategori} key={index}>
+                        {item.namaKategori}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -162,4 +172,6 @@ export default function InfoProductAdd() {
       </div>
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(InfoProductAdd);
