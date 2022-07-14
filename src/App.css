@@ -64,20 +64,12 @@ select {
 }
 
 .position-jual {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 0;
   margin-bottom: 20px;
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+  width: fit-content;
 }
 
 .btn-edit {
@@ -348,16 +340,13 @@ img.img-mini-preview {
 }
 
 img.card-home {
-  width: 173px;
-  height: 100px;
+  max-width: 173px;
+  max-height: 100px;
   object-fit: contain;
   border-radius: 5px;
 }
 
 .alert-custom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 500px;
   height: 52px;
 

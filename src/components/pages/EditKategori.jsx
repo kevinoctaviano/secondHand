@@ -26,11 +26,16 @@ const EditKategori = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [kategori, setKategori] = useState('');
+  // Ambil nama kategori
+  const editKategori = props.kategori.filter(
+    (item) => item.idKategori === parseInt(params.id)
+  );
+
+  const [kategori, setKategori] = useState(editKategori[0].namaKategori);
 
   const onChangeKategori = (e) => {
-    const kategori = e.target.value;
-    setKategori(kategori);
+    const category = e.target.value;
+    setKategori(category);
   };
 
   const handleEditKategori = (e) => {
@@ -46,10 +51,7 @@ const EditKategori = (props) => {
     history.goBack();
   };
 
-  // Ambil nama kategori
-  const editKategori = props.kategori.filter(
-    (item) => item.idKategori === parseInt(params.id)
-  );
+  // console.log(typeof editKategori[0].namaKategori);
 
   return (
     <div className="container mt-4">
@@ -85,7 +87,7 @@ const EditKategori = (props) => {
                 placeholder="Nama Kategori"
                 onChange={onChangeKategori}
                 name="kategori"
-                value={editKategori[0].namaKategori}
+                value={kategori}
               />
             </div>
             <div className="d-flex justify-content-center">
