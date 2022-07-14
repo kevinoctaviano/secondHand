@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
+import 'animate.css';
 
 import { connect } from 'react-redux';
 
@@ -25,6 +26,9 @@ const AddKategori = (props) => {
   const checkBtn = useRef();
 
   const [kategori, setKategori] = useState('');
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
 
   const onChangeKategori = (e) => {
     const kategori = e.target.value;
@@ -35,7 +39,7 @@ const AddKategori = (props) => {
     e.preventDefault();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(postKategori(kategori));
+      dispatch(postKategori(kategori)).then(() => setShow(true));
     }
   };
 
@@ -46,10 +50,21 @@ const AddKategori = (props) => {
 
   return (
     <div className="container mt-4">
-      {props.message ? (
+      {props.message && show ? (
         <div className="d-flex justify-content-center">
-          <div className="alert-custom">
-            <p className="p-alert">{props.message}</p>
+          <div className="alert-custom d-flex align-items-center row animate__backInDown">
+            <div className="col-md-10 text-center">
+              <p className="p-alert">{props.message}</p>
+            </div>
+            <div className="col-md-2 text-center">
+              <button className="btn" onClick={handleClose}>
+                <FontAwesomeIcon
+                  className="text-white"
+                  icon={faTimes}
+                  fixedWidth
+                />
+              </button>
+            </div>
           </div>
         </div>
       ) : null}

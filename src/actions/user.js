@@ -4,6 +4,7 @@ import {
   ADD_KATEGORI,
   UPDATE_KATEGORI,
   GET_ALL_DATA,
+  DELETE_KATEGORI,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -49,6 +50,14 @@ export const postKategori = (kategori) => (dispatch) => {
   return UserService.postKategori(kategori).then(() => {
     dispatch({
       type: ADD_KATEGORI,
+    });
+  });
+};
+
+export const deleteKategori = (id) => (dispatch) => {
+  return UserService.deleteKategori(id).then(() => {
+    dispatch({
+      type: DELETE_KATEGORI,
     });
   });
 };

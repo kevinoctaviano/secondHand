@@ -3,6 +3,7 @@ import {
   GET_KATEGORI_BY_ID,
   UPDATE_KATEGORI,
   ADD_KATEGORI,
+  DELETE_KATEGORI,
 } from '../actions/types';
 const initialState = { isNull: true, kategori: [], message: null };
 
@@ -38,6 +39,13 @@ const kategori = (state = initialState, action) => {
         ...state,
         isNull: false,
         message: 'Berhasil Ubah Data Kategori',
+      };
+
+    case DELETE_KATEGORI:
+      return {
+        ...state,
+        isNull: false,
+        message: 'Berhasil Hapus Data Kategori',
       };
 
     default:

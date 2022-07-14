@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import DataTable from 'react-data-table-component';
+import userPhoto from '../assets/svg/user-photo.svg';
 import {
   faAngleRight,
   faBoxOpen,
@@ -7,15 +11,14 @@ import {
   faPencil,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import 'animate.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-
-import DataTable from 'react-data-table-component';
-import React from 'react';
-import userPhoto from '../assets/svg/user-photo.svg';
-
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+
+import { getAllKategori, deleteKategori } from '../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
@@ -26,6 +29,12 @@ const mapStateToProps = (state) => {
 };
 
 const DaftarKategori = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllKategori);
+  }, [dispatch]);
+
   const listCar = [
     {
       name: 'ID',
@@ -48,7 +57,8 @@ const DaftarKategori = (props) => {
           </Link>
           <Link
             className="btn btn-outline-danger"
-            to={`/delete-kategori/${row.idKategori}`}
+            to={'/kategori'}
+            onClick={handleDeleteButton(`${row.idKategori}`)}
           >
             <FontAwesomeIcon icon={faTrash} fixedWidth className="pe-1" />
             Delete
@@ -57,6 +67,32 @@ const DaftarKategori = (props) => {
       ),
     },
   ];
+
+  const handleDeleteButton = (idKategori) => (e) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: 'Apakah kamu yakin untuk menghapus data ini?',
+      text: 'Kamu tidak akan bisa memulihkan data ini lagi!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, hapus!',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteKategori(idKategori)).then(() => {
+          Swal.fire('Terhapus!', `${props.message}`, 'success');
+        });
+      }
+    });
+  };
 
   const user = JSON.parse(localStorage.getItem('user'));
 

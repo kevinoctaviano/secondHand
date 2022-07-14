@@ -202,7 +202,7 @@ const Home = (props) => {
             ))
           )}
         </div>
-        <Link className="position-jual fixed-bottom" to={'/info-product-add'}>
+        <Link className="position-jual" to={'/info-product-add'}>
           <img src={btnJual} alt="" />
         </Link>
       </div>

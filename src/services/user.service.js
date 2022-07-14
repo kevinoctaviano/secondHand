@@ -17,6 +17,10 @@ const getKategoriByID = (id) => {
   return axios.get(API_URL + `kategori/${id}`, { headers: authHeader() });
 };
 
+const deleteKategori = (id) => {
+  return axios.get(API_URL + `kategori/${id}`, { headers: authHeader() });
+};
+
 const getUserByID = (id) => {
   return axios.get(API_URL + `Users/${id}`, { headers: authHeader() });
 };
@@ -36,4 +40,5 @@ export default {
   postKategori,
   getUserByID,
   updateKategori,
+  deleteKategori,
 };
