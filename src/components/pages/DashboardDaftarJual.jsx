@@ -216,11 +216,14 @@ const DashboardDaftarJual = (props) => {
                     key={index}
                   >
                     <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
-                      <img
-                        src={item.imageProduct[0].urlImage}
-                        className="card-home"
-                        alt=""
-                      />
+                      <div className="d-flex justify-content-center">
+                        <img
+                          src={item.imageProduct[0]?.urlImage}
+                          className="card-home"
+                          style={{ height: '100px' }}
+                          alt={item.namaProduct}
+                        />
+                      </div>
                       <h5 className="mt-1 text-sm font-normal">
                         {item.namaProduct}
                       </h5>

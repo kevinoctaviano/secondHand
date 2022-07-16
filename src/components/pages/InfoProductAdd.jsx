@@ -1,33 +1,61 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
+import { useForm } from 'react-hook-form';
 import propic from '../assets/svg/product-picture.svg';
 
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { postDataProduct } from '../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
-    isNull: state.kategori.isNull,
     kategori: state.kategori.kategori,
-    message: state.kategori.message,
+    barang: state.barang.barang,
+    message: state.barang.message,
   };
 };
 
 const InfoProductAdd = (props) => {
+  const dispatch = useDispatch();
+  const [preview, setPreview] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [show, setShow] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleClose = () => setShow(false);
+
+  const onSubmit = async (data) => {
+    let formData = new FormData();
+    for (const image of selectedFiles) {
+      formData.append('imageProduct', image);
+    }
+    formData.append('namaProduct', data.namaProduct);
+    formData.append('hargaProduct', data.hargaProduct);
+    formData.append('idKategori', data.idKategori);
+    formData.append('deskripsiProduct', data.deskripsi);
+    formData.append('statusProduct', 'PUBLISH');
+
+    dispatch(postDataProduct(formData)).then(() => setShow(true));
+  };
 
   const handleImageChange = (e) => {
-    // console.log(e.target.files[])
+    // console.log(e.target.files);
+    setSelectedFiles(e.target.files);
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map((file) =>
         URL.createObjectURL(file)
       );
 
-      // console.log("filesArray: ", filesArray);
+      // console.log('filesArray: ', filesArray);
 
-      setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+      // selectedFiles(filesArray);
+      setPreview((prevImages) => prevImages.concat(filesArray));
       Array.from(e.target.files).map(
         (file) => URL.revokeObjectURL(file) // avoid memory leak
       );
@@ -35,7 +63,7 @@ const InfoProductAdd = (props) => {
   };
 
   const renderPhotos = (source) => {
-    console.log('source: ', source);
+    // console.log('source: ', source);
     return source.map((photo) => {
       return (
         <div className="col-lg-2" key={photo}>
@@ -51,6 +79,24 @@ const InfoProductAdd = (props) => {
   };
   return (
     <div className="container mt-4">
+      {props.message && show ? (
+        <div className="d-flex justify-content-center">
+          <div className="alert-custom d-flex align-items-center row">
+            <div className="col-md-10 text-center">
+              <p className="p-alert">{props.message}</p>
+            </div>
+            <div className="col-md-2 text-center">
+              <button className="btn" onClick={handleClose}>
+                <FontAwesomeIcon
+                  className="text-white"
+                  icon={faTimes}
+                  fixedWidth
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="row">
         <div
           onClick={handleGoBack}
@@ -62,7 +108,7 @@ const InfoProductAdd = (props) => {
           />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
-          <Form className="w-75">
+          <Form className="w-75" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group mb-3">
               <label
                 htmlFor="namaproduk"
@@ -74,7 +120,11 @@ const InfoProductAdd = (props) => {
                 type="text"
                 className="form-control p-2 custom-font-1 rounded-16px"
                 placeholder="Nama Produk"
+                {...register('namaProduct', { required: true })}
               />
+              {errors.namaProduct && (
+                <p className="error-message">*Nama product is required.</p>
+              )}
             </div>
 
             <div className="form-group mb-3">
@@ -88,7 +138,11 @@ const InfoProductAdd = (props) => {
                 type="text"
                 className="form-control p-2 custom-font-1 rounded-16px"
                 placeholder="Rp 0,00"
+                {...register('hargaProduct', { required: true })}
               />
+              {errors.hargaProduct && (
+                <p className="error-message">*Harga product is required.</p>
+              )}
             </div>
 
             <div className="form-group mb-3">
@@ -98,37 +152,40 @@ const InfoProductAdd = (props) => {
               >
                 Kategori
               </label>
-              <div className="row">
-                <div className="col-md-12">
-                  <select
-                    className="form-select text-muted w-100 px-1 py-2 border rounded-16px"
-                    aria-label="Default select example"
-                  >
-                    <option defaultValue={{ value: null }}>
-                      Pilih Kategori
-                    </option>
-                    {props.kategori.map((item, index = 1) => (
-                      <option value={item.idKategori} key={index}>
-                        {item.namaKategori}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <select
+                className="form-select text-muted w-100 px-1 py-2 border rounded-16px"
+                aria-label="Default select example"
+                {...register('idKategori', { required: true })}
+              >
+                <option defaultValue={{ value: null }}>Pilih Kategori</option>
+                {props.kategori.map((item, index = 1) => (
+                  <option value={item.idKategori} key={index}>
+                    {item.namaKategori}
+                  </option>
+                ))}
+              </select>
+              {errors.idKategori && (
+                <p className="error-message">*Kategori is required.</p>
+              )}
             </div>
 
             <div className="form-group mb-3">
               <label
-                htmlFor="password"
+                htmlFor="deskripsi"
                 className="text-dark fw-bold mb-1 custom-font-2"
               >
                 Deskripsi
               </label>
               <textarea
+                name="deskripsi"
                 className="form-control alamat rounded-16px"
                 cols="3"
-                placeholder="Contoh: Jalan Ikan Hiu 33"
+                placeholder="Deskripsi..."
+                {...register('deskripsi', { required: true })}
               ></textarea>
+              {errors.deskripsi && (
+                <p className="error-message">*Deskripsi is required.</p>
+              )}
             </div>
 
             <div className="form-group">
@@ -144,6 +201,7 @@ const InfoProductAdd = (props) => {
                     type="file"
                     id="file"
                     multiple
+                    {...register('image', { required: true })}
                     onChange={handleImageChange}
                   />
                   <div className="label-holder">
@@ -152,8 +210,11 @@ const InfoProductAdd = (props) => {
                     </label>
                   </div>
                 </div>
-                {renderPhotos(selectedFiles)}
+                {renderPhotos(preview)}
               </div>
+              {errors.image && (
+                <p className="error-message">*Foto product is required.</p>
+              )}
             </div>
 
             <div className="mt-2">

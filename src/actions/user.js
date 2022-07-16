@@ -22,6 +22,7 @@ import {
   GET_TAWARAN_SELLER,
   ADD_TAWARAN,
   GET_TAWARAN_BY_ID,
+  GET_DATA_BY_KATEGORI,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -69,6 +70,16 @@ export const getAllDataProduct = (dispatch) => {
     }
   });
 };
+export const getDataProductByKategori = (kategori) => (dispatch) => {
+  return UserService.getDataProductByKategori(kategori).then((response) => {
+    dispatch({
+      type: GET_DATA_BY_KATEGORI,
+      payload: {
+        data: response.data.data,
+      },
+    });
+  });
+};
 export const getProductByID = (id) => (dispatch) => {
   return UserService.getProductByID(id).then((response) => {
     dispatch({
@@ -79,8 +90,8 @@ export const getProductByID = (id) => (dispatch) => {
     });
   });
 };
-export const postDataProduct = (kategori) => (dispatch) => {
-  return UserService.postDataProduct(kategori).then(() => {
+export const postDataProduct = (formData) => (dispatch) => {
+  return UserService.postDataProduct(formData).then(() => {
     dispatch({
       type: ADD_PRODUCT,
     });
