@@ -10,8 +10,8 @@ import {
   faSearch,
   faPencil,
   faTrash,
+  faUserCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import 'animate.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -22,9 +22,13 @@ import { getAllKategori, deleteKategori } from '../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
+    // kategori
     isNull: state.kategori.isNull,
     kategori: state.kategori.kategori,
     message: state.kategori.message,
+    // user
+    isNullUser: state.user.isNull,
+    user: state.user.user,
   };
 };
 
@@ -94,7 +98,7 @@ const DaftarKategori = (props) => {
     });
   };
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  // const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="container mt-4">
@@ -104,14 +108,26 @@ const DaftarKategori = (props) => {
         <div className="border my-3 px-3  custom-border-auth">
           <div className="row">
             <div className="col-md-1 pt-3">
-              <img src={userPhoto} alt="" className="w-100" />
+              {props.user.profileFoto === null ? (
+                <img src={userPhoto} alt="" className="w-100" />
+              ) : (
+                <img src={props.user.profileFoto} alt="" className="w-100" />
+              )}
             </div>
 
             <div className="col-md-9 pt-3">
               <p className="text-dark font-weight-bold custom-font-1">
-                {user.data.username}
+                {props.user.fullName}
               </p>
-              <p className="text-muted custom-font-5 custom-space-top">Kota</p>
+              {props.user.kota === null ? (
+                <p className="text-muted custom-font-5 custom-space-top">
+                  Kota
+                </p>
+              ) : (
+                <p className="text-muted custom-font-5 custom-space-top">
+                  {props.user.kota}
+                </p>
+              )}
             </div>
 
             <div className="col-md-2 d-flex justify-content-end">
@@ -212,6 +228,27 @@ const DaftarKategori = (props) => {
                   </div>
                 </div>
                 <span>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </span>
+              </Link>
+              <hr className="custom-font-auth" />
+              <Link
+                className="d-flex justify-content-between text-decoration-none"
+                to={'/daftar-penawar'}
+              >
+                <div className="row align-items-center">
+                  <div className="col-md-12">
+                    <span className="mr-2 text-muted">
+                      <FontAwesomeIcon
+                        icon={faUserCheck}
+                        fixedWidth
+                        className="pe-3"
+                      />
+                    </span>
+                    <span className="text-muted">Barang ditawar</span>
+                  </div>
+                </div>
+                <span className="text-muted">
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>

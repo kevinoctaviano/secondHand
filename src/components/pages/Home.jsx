@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,12 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
 import { connect } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import {
+  getAllDataProduct,
+  getAllKategori,
+  getUserByID,
+} from '../../actions/user';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -24,10 +29,17 @@ const mapStateToProps = (state) => {
     isNull: state.barang.isNull,
     barang: state.barang.barang,
     message: state.barang.message,
+    kategori: state.kategori.kategori,
   };
 };
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllDataProduct);
+    dispatch(getAllKategori);
+    dispatch(getUserByID);
+  }, [dispatch]);
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -74,7 +86,7 @@ const Home = (props) => {
             <Button
               className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
               style={{
-                width: '115px',
+                width: '150px',
                 height: '48px',
                 fontSize: '15px',
                 gap: '8px',
@@ -85,83 +97,31 @@ const Home = (props) => {
               </span>
               Semua
             </Button>
-            <Button
-              className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
-              style={{
-                width: '108px',
-                height: '48px',
-                fontSize: '15px',
-                gap: '8px',
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </span>
-              Hobi
-            </Button>
-            <Button
-              className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
-              style={{
-                width: '155px',
-                height: '48px',
-                fontSize: '15px',
-                gap: '8px',
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </span>
-              Kendaraan
-            </Button>
-            <Button
-              className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
-              style={{
-                width: '107px',
-                height: '48px',
-                fontSize: '15px',
-                gap: '8px',
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </span>
-              Baju
-            </Button>
-            <Button
-              className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
-              style={{
-                width: '142px',
-                height: '48px',
-                fontSize: '15px',
-                gap: '8px',
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </span>
-              Elektronik
-            </Button>
-            <Button
-              className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
-              style={{
-                width: '151px',
-                height: '48px',
-                fontSize: '15px',
-                gap: '8px',
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </span>
-              Kesehatan
-            </Button>
+            {/* mapping kategori */}
+            {props.kategori.map((item) => (
+              <Button
+                key={item.idKategori}
+                className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
+                style={{
+                  width: '150px',
+                  height: '48px',
+                  fontSize: '15px',
+                  gap: '8px',
+                }}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </span>
+                {item.namaKategori}
+              </Button>
+            ))}
           </div>
         </div>
         <div className="container mt-4 row">
-          {!props.barang ? (
+          {props.isNull ? (
             <>
-              <h1 className="text-dark display-5 text-center">
-                Belum Ada Data
+              <h1 className="text-dark display-6 text-center">
+                {props.message}
               </h1>
               <img
                 src={empty}

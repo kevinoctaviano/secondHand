@@ -8,18 +8,19 @@ export default function NavbarTemplate({ name }) {
         <Navbar.Brand href="/">
           <img src={brand} alt="brand" className="custom-logo-navbar" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mx-auto">
-            <Nav.Link
-              className="fw-bold"
-              href="#"
-              style={{ fontSize: '16px', color: '#000' }}
-            >
-              {name}
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        <Nav className="mx-auto">
+          <p
+            className="fw-bold"
+            style={{
+              fontSize: '16px',
+              color: '#000',
+              marginBottom: '0px',
+              marginRight: '100px',
+            }}
+          >
+            {name}
+          </p>
+        </Nav>
       </Container>
     </Navbar>
   );

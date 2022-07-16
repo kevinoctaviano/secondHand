@@ -4,6 +4,8 @@ import message from './message';
 import user from './user';
 import kategori from './kategori';
 import barang from './barang';
+import wishlist from './wishlist';
+import tawaran from './tawaran';
 
 export default combineReducers({
   auth,
@@ -11,4 +13,6 @@ export default combineReducers({
   user,
   kategori,
   barang,
+  wishlist,
+  tawaran,
 });

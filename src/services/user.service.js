@@ -5,40 +5,113 @@ const header = { headers: authHeader(), 'Content-type': 'application/json' };
 
 const API_URL = 'https://second-hand-backend.herokuapp.com/';
 
-const getAllDataProduct = () => {
-  return axios.get(API_URL + 'Product?kategori=&q=&pageNo=0&pageSize=20');
-};
-
+// kategori
 const getAllKategori = () => {
   return axios.get(API_URL + 'kategori', { headers: authHeader() });
 };
-
+const deleteKategori = (id) => {
+  return axios.delete(API_URL + `kategori/${id}`, { headers: authHeader() });
+};
 const getKategoriByID = (id) => {
   return axios.get(API_URL + `kategori/${id}`, { headers: authHeader() });
 };
-
-const deleteKategori = (id) => {
-  return axios.get(API_URL + `kategori/${id}`, { headers: authHeader() });
-};
-
-const getUserByID = (id) => {
-  return axios.get(API_URL + `Users/${id}`, { headers: authHeader() });
-};
-
 const postKategori = (namaKategori) => {
   return axios.post(API_URL + 'kategori', { namaKategori }, header);
 };
-
 const updateKategori = (namaKategori, id) => {
   return axios.put(API_URL + `kategori/${id}`, { namaKategori }, header);
 };
 
+// product
+const getAllDataProduct = () => {
+  return axios.get(API_URL + 'Product?kategori=&q=&pageNo=0&pageSize=20');
+};
+const postDataProduct = (data) => {
+  return axios.post(
+    API_URL + 'Product',
+    { data },
+    {
+      headers: authHeader(),
+      'Content-type': 'multipart/form-data',
+    }
+  );
+};
+const getProductByID = (idProduct) => {
+  return axios.get(API_URL + `Product/${idProduct}`, { headers: authHeader() });
+};
+const getProductUser = () => {
+  return axios.get(API_URL + 'product-user', { headers: authHeader() });
+};
+
+// users
+const getUserByID = () => {
+  return axios.get(API_URL + 'Users', { headers: authHeader() });
+};
+const updateUser = (data) => {
+  return axios.put(
+    API_URL + 'Users',
+    { data },
+    {
+      headers: authHeader(),
+      'Content-type': 'multipart/form-data',
+    }
+  );
+};
+const changePassword = (data) => {
+  return axios.put(API_URL + 'Users', { data }, header);
+};
+
+// wishlist
+const getAllWishlist = () => {
+  return axios.get(API_URL + 'wishlist', { headers: authHeader() });
+};
+const getWishlistByID = (id) => {
+  return axios.get(API_URL + `wishlist/${id}`, { headers: authHeader() });
+};
+const postWishlist = (data) => {
+  return axios.post(API_URL + 'wishlist', { data }, header);
+};
+const deleteWishlist = (id) => {
+  return axios.delete(API_URL + `Wishlist/${id}`, { headers: authHeader() });
+};
+
+// tawaran
+const getTawaranBuyer = () => {
+  return axios.get(API_URL + 'tawaran-buyer', { headers: authHeader() });
+};
+const getTawaranSeller = () => {
+  return axios.get(API_URL + 'tawaran-seller', { headers: authHeader() });
+};
+const postTawaran = (idProduct) => {
+  return axios.post(API_URL + `tawaran/${idProduct}`, {
+    headers: authHeader(),
+  });
+};
+const getTawaranByID = (idTawaran) => {
+  return axios.post(API_URL + `tawaran/${idTawaran}`, {
+    headers: authHeader(),
+  });
+};
+
 export default {
   getAllDataProduct,
+  getTawaranBuyer,
+  getTawaranSeller,
+  getTawaranByID,
+  postTawaran,
+  getProductUser,
+  getProductByID,
   getAllKategori,
+  getAllWishlist,
   getKategoriByID,
+  getWishlistByID,
   postKategori,
   getUserByID,
+  updateUser,
   updateKategori,
   deleteKategori,
+  changePassword,
+  postDataProduct,
+  postWishlist,
+  deleteWishlist,
 };

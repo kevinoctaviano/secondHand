@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   faAngleRight,
   faBoxOpen,
@@ -7,28 +8,37 @@ import {
   faUserCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import React from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
-import kosong from '../assets/svg/kosong.svg';
+import empty from '../assets/svg/empty.svg';
+
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
+    // barang
+    isNull: state.barang.isNull,
+    barang: state.barang.barang,
+    message: state.barang.message,
     // user
     isNullUser: state.user.isNull,
     user: state.user.user,
   };
 };
 
-const DaftarJualDiminati = (props) => {
+const Tawaran = (props) => {
+  // Mengubah format currency menjadi format rupiah
+  let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
   // const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
         <h4 className="text-dark fw-bold">Daftar Jual Saya</h4>
 
-        <div className="border my-3 px-3  custom-border-auth">
+        <div className="border my-3 px-3 custom-border-auth">
           <div className="row">
             <div className="col-md-1 pt-3">
               {props.user.profileFoto === null ? (
@@ -65,12 +75,10 @@ const DaftarJualDiminati = (props) => {
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-4">
             <div className="w-100 border px-4 py-4 custom-border-auth">
               <h5 className="fw-bold mb-3">Kategori</h5>
-
               <Link
                 className="d-flex justify-content-between text-decoration-none"
                 to="/daftar-jual"
@@ -84,7 +92,7 @@ const DaftarJualDiminati = (props) => {
                         className="pe-3"
                       />
                     </span>
-                    <span className="text-muted">Semua Produk</span>
+                    <span className="text-dark">Semua Produk</span>
                   </div>
                 </div>
                 <span className="text-muted">
@@ -93,22 +101,22 @@ const DaftarJualDiminati = (props) => {
               </Link>
               <hr className="custom-font-auth" />
               <Link
-                className="d-flex justify-content-between text-decoration-none custom-font-auth"
+                className="d-flex justify-content-between text-decoration-none"
                 to="/diminati"
               >
                 <div className="row align-items-center">
                   <div className="col-md-12">
-                    <span className="mr-2">
+                    <span className="mr-2 text-muted">
                       <FontAwesomeIcon
                         icon={faHeart}
                         fixedWidth
                         className="pe-3"
                       />
                     </span>
-                    <span className="fw-bold">Diminati</span>
+                    <span className="text-muted">Diminati</span>
                   </div>
                 </div>
-                <span>
+                <span className="text-muted">
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>
@@ -156,33 +164,66 @@ const DaftarJualDiminati = (props) => {
               </Link>
               <hr className="custom-font-auth" />
               <Link
-                className="d-flex justify-content-between text-decoration-none"
+                className="d-flex justify-content-between text-decoration-none custom-font-auth"
                 to={'/daftar-penawar'}
               >
                 <div className="row align-items-center">
                   <div className="col-md-12">
-                    <span className="mr-2 text-muted">
+                    <span className="mr-2">
                       <FontAwesomeIcon
                         icon={faUserCheck}
                         fixedWidth
                         className="pe-3"
                       />
                     </span>
-                    <span className="text-dark">Barang ditawar</span>
+                    <span className="fw-bold">Barang ditawar</span>
                   </div>
                 </div>
-                <span className="text-muted">
+                <span>
                   <FontAwesomeIcon icon={faAngleRight} />
                 </span>
               </Link>
             </div>
           </div>
-
-          <div className="col-md-8 d-flex justify-content-center">
+          <div className="col-md-8">
             <div className="row">
-              <div className="col-md-4">
-                <img src={kosong} alt="Kosong" />
-              </div>
+              {!props.barang ? (
+                <>
+                  <h1 className="text-dark display-5 text-center">
+                    Belum Ada Data
+                  </h1>
+                  <img
+                    src={empty}
+                    alt="kosong"
+                    className="mt-4 mx-auto d-block"
+                    style={{ width: '350px' }}
+                  />
+                </>
+              ) : (
+                props.barang.map((item, index = 1) => (
+                  <div
+                    className="col-lg-4 d-flex justify-content-center"
+                    key={index}
+                  >
+                    <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                      <img
+                        src={item.imageProduct[0].urlImage}
+                        className="card-home"
+                        alt=""
+                      />
+                      <h5 className="mt-1 text-sm font-normal">
+                        {item.namaProduct}
+                      </h5>
+                      <h5 className="mt-1 text-10px font-normal text-muted">
+                        {item.kategori.namaKategori}
+                      </h5>
+                      <h5 className="mt-1 text-sm font-normal">
+                        {formatter.format(item.hargaProduct)}
+                      </h5>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -191,4 +232,4 @@ const DaftarJualDiminati = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(DaftarJualDiminati);
+export default connect(mapStateToProps, null)(Tawaran);

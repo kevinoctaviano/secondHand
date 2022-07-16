@@ -52,7 +52,7 @@ const AddKategori = (props) => {
     <div className="container mt-4">
       {props.message && show ? (
         <div className="d-flex justify-content-center">
-          <div className="alert-custom d-flex align-items-center row animate__backInDown">
+          <div className="alert-custom d-flex align-items-center row">
             <div className="col-md-10 text-center">
               <p className="p-alert">{props.message}</p>
             </div>
