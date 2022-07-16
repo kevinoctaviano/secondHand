@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import {
   getAllDataProduct,
   getAllKategori,
   getUserByID,
+  getDataProductByKategori,
 } from '../../actions/user';
 // Import Swiper styles
 import 'swiper/css';
@@ -35,16 +36,26 @@ const mapStateToProps = (state) => {
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  const [filteredItems, setFilteredItems] = useState(null);
+
   useEffect(() => {
     dispatch(getAllDataProduct);
+    dispatch(getDataProductByKategori(filteredItems));
     dispatch(getAllKategori);
     dispatch(getUserByID);
-  }, [dispatch]);
+  }, [dispatch, filteredItems]);
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
   });
+
+  // filter items
+  const handleFilter = (e) => {
+    let filterItems = e.target.value;
+    console.log(filterItems);
+    setFilteredItems(filterItems);
+  };
 
   return (
     <>
@@ -108,6 +119,8 @@ const Home = (props) => {
                   fontSize: '15px',
                   gap: '8px',
                 }}
+                value={item.namaKategori}
+                onClick={handleFilter}
               >
                 <span>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -133,12 +146,17 @@ const Home = (props) => {
           ) : (
             props.barang.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
-                <div className="card mb-3 shadow-md px-2 pt-2 pb-4">
+                <div
+                  className="card mb-3 shadow-md px-2 pt-2 pb-4"
+                  style={{ height: '250px' }}
+                >
                   <Link className="card-home-product" to={'/product-buyer'}>
                     <div className="d-flex justify-content-center">
                       <img
-                        src={item.imageProduct[0].urlImage}
+                        src={item.imageProduct[0]?.urlImage}
                         className="card-home"
+                        style={{ height: '99.9px' }}
+                        alt={item.namaProduct}
                       />
                     </div>
                     <h5 className="mt-2 text-sm text-dark font-normal">

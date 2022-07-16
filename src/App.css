@@ -346,6 +346,10 @@ img.card-home {
   border-radius: 5px;
 }
 
+p.error-message {
+  color: red;
+}
+
 .alert-custom {
   width: 500px;
   height: 52px;

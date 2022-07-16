@@ -26,15 +26,15 @@ const updateKategori = (namaKategori, id) => {
 const getAllDataProduct = () => {
   return axios.get(API_URL + 'Product?kategori=&q=&pageNo=0&pageSize=20');
 };
-const postDataProduct = (data) => {
-  return axios.post(
-    API_URL + 'Product',
-    { data },
-    {
-      headers: authHeader(),
-      'Content-type': 'multipart/form-data',
-    }
+const getDataProductByKategori = (kategori) => {
+  return axios.get(
+    API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=20`
   );
+};
+const postDataProduct = async (data) => {
+  return await axios.post(API_URL + 'Product', data, {
+    headers: authHeader(),
+  });
 };
 const getProductByID = (idProduct) => {
   return axios.get(API_URL + `Product/${idProduct}`, { headers: authHeader() });
@@ -48,14 +48,9 @@ const getUserByID = () => {
   return axios.get(API_URL + 'Users', { headers: authHeader() });
 };
 const updateUser = (data) => {
-  return axios.put(
-    API_URL + 'Users',
-    { data },
-    {
-      headers: authHeader(),
-      'Content-type': 'multipart/form-data',
-    }
-  );
+  return axios.put(API_URL + 'Users', data, {
+    headers: authHeader(),
+  });
 };
 const changePassword = (data) => {
   return axios.put(API_URL + 'Users', { data }, header);
@@ -93,6 +88,7 @@ const getTawaranByID = (idTawaran) => {
   });
 };
 
+// eslint-disable-next-line
 export default {
   getAllDataProduct,
   getTawaranBuyer,
@@ -105,6 +101,7 @@ export default {
   getAllWishlist,
   getKategoriByID,
   getWishlistByID,
+  getDataProductByKategori,
   postKategori,
   getUserByID,
   updateUser,

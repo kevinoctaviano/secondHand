@@ -20,6 +20,7 @@ export const GET_KATEGORI_BY_ID = 'GET_KATEGORI_BY_ID';
 
 export const GET_ALL_DATA = 'GET_ALL_DATA';
 export const GET_DATA_NULL = 'GET_DATA_NULL';
+export const GET_DATA_BY_KATEGORI = 'GET_DATA_BY_KATEGORI';
 export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
 export const GET_PRODUCT_USER = 'GET_PRODUCT_USER';
 export const ADD_PRODUCT = 'ADD_PRODUCT';

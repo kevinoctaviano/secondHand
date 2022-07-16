@@ -4,6 +4,7 @@ import {
   ADD_PRODUCT,
   GET_PRODUCT_BY_ID,
   GET_PRODUCT_USER,
+  GET_DATA_BY_KATEGORI,
 } from '../actions/types';
 const initialState = { isNull: true, barang: [], message: null };
 
@@ -43,6 +44,13 @@ const barang = (state = initialState, action) => {
         ...state,
         isNull: false,
         message: 'Berhasil Menambahkan Data Barang',
+      };
+    case GET_DATA_BY_KATEGORI:
+      return {
+        ...state,
+        isNull: false,
+        barang: payload.data,
+        message: null,
       };
     default:
       return state;

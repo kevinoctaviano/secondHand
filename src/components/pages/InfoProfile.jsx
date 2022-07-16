@@ -9,7 +9,8 @@ import {
 import Form from 'react-validation/build/form';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { updateUser, changePassword } from '../../actions/user';
+import { updateUser } from '../../actions/user';
+import { useForm } from 'react-hook-form';
 
 const mapStateToProps = (state) => {
   return {
@@ -24,66 +25,52 @@ const InfoProfile = (props) => {
   const dispatch = useDispatch();
   const form = useRef();
   const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [show, setShow] = useState(false);
-  const [nama, setNama] = useState(props.user.fullName);
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [alamat, setAlamat] = useState('');
-  const [noHandphone, setNoHandphone] = useState('');
-  const [kota, setKota] = useState('');
-  const [password, setPassword] = useState('');
+  const [selectedFiles, setSelectedFiles] = useState();
+  // handle password
+  const password = useRef({});
+  password.current = watch('password', '');
 
   // Handle Update User
-  const handleNama = (e) => {
-    const fullName = e.target.value;
-    setNama(fullName);
-  };
-  const handleAlamat = (e) => {
-    const address = e.target.value;
-    setAlamat(address);
-  };
-  const handleNoHandphone = (e) => {
-    const noHP = e.target.value;
-    setNoHandphone(noHP);
-  };
-  const handleKota = (e) => {
-    const city = e.target.value;
-    setKota(city);
-  };
   const handleImageChange = (e) => {
-    setSelectedFiles(e.target.files[0]);
+    const profilePicture = e.target.files[0];
+    setSelectedFiles(profilePicture);
   };
-  const handleUpdateUser = (e) => {
-    e.preventDefault();
+  const handleUpdateUser = (data) => {
+    // e.preventDefault();
     let formData = new FormData();
     formData.append('profileFoto', selectedFiles);
-    formData.append('fullName', nama);
-    formData.append('kota', kota);
-    formData.append('noWa', noHandphone);
-    formData.append('alamat', alamat);
-    dispatch(
-      updateUser(formData)
-        .then(() => setShow(true))
-        .catch((error) => {
-          console.error(error);
-        })
-    );
+    formData.append('fullName', data.fullName);
+    formData.append('kota', data.kota);
+    formData.append('noWa', data.noWa);
+    formData.append('alamat', data.alamat);
+    formData.append('password', data.password);
+    formData.append('username', props.user.username);
+    formData.append('email', props.user.email);
+
+    dispatch(updateUser(formData))
+      .then(() => setShow(true))
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  // change password
-  const onChangePassword = (e) => {
-    const sandi = e.target.value;
-    setPassword(sandi);
-  };
-  const handleChangePassword = (e) => {
-    e.preventDefault();
-    let formData = new FormData();
-    formData.append('password', password);
-    dispatch(
-      changePassword(formData)
-        .then(() => setShow(true))
-        .catch((error) => console.error(error))
-    );
-  };
+  // const handleChangePassword = (e) => {
+  //   e.preventDefault();
+  //   let formData = new FormData();
+  //   formData.append('password', password);
+  //   dispatch(
+  //     changePassword(formData)
+  //       .then(() => setShow(true))
+  //       .catch((error) => console.error(error))
+  //   );
+  // };
 
   const handleClose = () => setShow(false);
 
@@ -123,13 +110,13 @@ const InfoProfile = (props) => {
       <div className="col-lg-10 p-0">
         <div className="center-custom">
           <div className="w-75 mt-3">
-            <Form onSubmit={handleUpdateUser} ref={form}>
+            <Form onSubmit={handleSubmit(handleUpdateUser)} ref={form}>
               <div className="center-custom">
                 <div className="d-flex justify-content-center align-items-center custom-bg-photo-profile">
                   <input
                     type="file"
-                    name="profile-picture"
                     id="profile-picture"
+                    {...register('profileFoto', { required: true })}
                     onChange={handleImageChange}
                   />
                   <label htmlFor="profile-picture">
@@ -140,6 +127,9 @@ const InfoProfile = (props) => {
                   </label>
                 </div>
               </div>
+              {errors.profileFoto && (
+                <p className="error-message">*Foto user is required.</p>
+              )}
               <div className="form-group mb-3">
                 <label htmlFor="nama" className="fw-bold custom-font-2">
                   Nama*
@@ -148,11 +138,12 @@ const InfoProfile = (props) => {
                   type="text"
                   className="form-control custom-font-1 rounded-16px"
                   placeholder="Nama"
-                  onChange={handleNama}
-                  value={nama}
+                  {...register('fullName', { required: true })}
                 />
+                {errors.fullName && (
+                  <p className="error-message">*Nama user is required.</p>
+                )}
               </div>
-
               <div className="form-group mb-3">
                 <label htmlFor="kota" className="fw-bold custom-font-2">
                   Kota*
@@ -164,7 +155,7 @@ const InfoProfile = (props) => {
                       aria-label="Default select example"
                       name="kota"
                       id="kota"
-                      onSelect={handleKota}
+                      {...register('kota', { required: true })}
                     >
                       <option deafultvalue={{ value: null }}>Pilih Kota</option>
                       <option value="Jakarta">Jakarta</option>
@@ -185,11 +176,14 @@ const InfoProfile = (props) => {
                   className="form-control alamat rounded-16px"
                   cols="3"
                   placeholder="Contoh: Jalan Ikan Hiu 33"
-                  onChange={handleAlamat}
+                  {...register('alamat', { required: true })}
                 ></textarea>
+                {errors.alamat && (
+                  <p className="error-message">*Alamat is required.</p>
+                )}
               </div>
 
-              <div className="form-group mb-1">
+              <div className="form-group mb-3">
                 <label htmlFor="nohandphone" className="fw-bold custom-font-2">
                   No Handphone*
                 </label>
@@ -197,10 +191,56 @@ const InfoProfile = (props) => {
                   type="text"
                   className="form-control custom-font-1 rounded-16px"
                   placeholder="Contoh: +628123456789"
-                  onChange={handleNoHandphone}
+                  {...register('noWa', { required: true })}
                 />
+                {errors.noWa && (
+                  <p className="error-message">*Phone number is required.</p>
+                )}
               </div>
-
+              <div className="form-group mb-3">
+                <label htmlFor="password" className="fw-bold custom-font-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control custom-font-1 rounded-16px"
+                  placeholder="Password..."
+                  {...register('password', {
+                    required: '*Password is required',
+                    minLength: {
+                      value: 8,
+                      message: '*Password must have at least 8 characters',
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <p className="error-message">{errors.password.message}</p>
+                )}
+              </div>
+              <div className="form-group mb-1">
+                <label
+                  htmlFor="confirm-password"
+                  className="fw-bold custom-font-2"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control custom-font-1 rounded-16px"
+                  placeholder="Confirm password..."
+                  {...register('confirmPassword', {
+                    required: '*Confirm password is required',
+                    validate: (value) =>
+                      value === password.current ||
+                      '*The passwords do not match',
+                  })}
+                />
+                {errors.confirmPassword && (
+                  <p className="error-message">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
+              </div>
               <button
                 type="submit"
                 className="mt-3 form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1"
@@ -208,39 +248,39 @@ const InfoProfile = (props) => {
                 Simpan
               </button>
             </Form>
-            <Form onSubmit={handleChangePassword} ref={form}>
-              <h4 className="text-center my-3">Change Password</h4>
-              <div className="form-group mb-3">
-                <label htmlFor="newpassword" className="fw-bold custom-font-2">
-                  New password
-                </label>
-                <input
-                  type="password"
-                  className="form-control custom-font-1 rounded-16px"
-                  placeholder="New password..."
-                  onChange={onChangePassword}
-                />
-              </div>
-              <div className="form-group mb-3">
-                <label
-                  htmlFor="confirm-password"
-                  className="fw-bold custom-font-2"
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  className="form-control custom-font-1 rounded-16px"
-                  placeholder="Confirm password..."
-                />
-              </div>
-              <button
+            {/* <Form onSubmit={handleChangePassword} ref={form}>
+            <h4 className="text-center my-3">Change Password</h4>
+            <div className="form-group mb-3">
+              <label htmlFor="newpassword" className="fw-bold custom-font-2">
+                New password
+              </label>
+              <input
+                type="password"
+                className="form-control custom-font-1 rounded-16px"
+                placeholder="New password..."
+                onChange={onChangePassword}
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label
+                htmlFor="confirm-password"
+                className="fw-bold custom-font-2"
+              >
+                Confirm password
+              </label>
+              <input
+                type="password"
+                className="form-control custom-font-1 rounded-16px"
+                placeholder="Confirm password..."
+              />
+            </div>
+            <button
                 type="submit"
                 className="form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1"
               >
                 Change password
               </button>
-            </Form>
+            </Form> */}
           </div>
         </div>
       </div>
