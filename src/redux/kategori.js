@@ -1,5 +1,6 @@
 import {
   GET_ALL_KATEGORI,
+  GET_KATEGORI_NULL,
   GET_KATEGORI_BY_ID,
   UPDATE_KATEGORI,
   ADD_KATEGORI,
@@ -18,7 +19,6 @@ const kategori = (state = initialState, action) => {
         kategori: payload.data,
         message: null,
       };
-
     case GET_KATEGORI_BY_ID:
       return {
         ...state,
@@ -26,26 +26,29 @@ const kategori = (state = initialState, action) => {
         kategori: payload.data,
         message: null,
       };
-
     case ADD_KATEGORI:
       return {
         ...state,
         isNull: false,
         message: 'Berhasil Tambah Data Kategori',
       };
-
     case UPDATE_KATEGORI:
       return {
         ...state,
         isNull: false,
         message: 'Berhasil Ubah Data Kategori',
       };
-
     case DELETE_KATEGORI:
       return {
         ...state,
         isNull: false,
         message: 'Berhasil Hapus Data Kategori',
+      };
+    case GET_KATEGORI_NULL:
+      return {
+        ...state,
+        isNull: true,
+        message: 'Belum Ada Data Kategori',
       };
 
     default:
