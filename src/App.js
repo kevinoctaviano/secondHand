@@ -20,6 +20,7 @@ import LayoutDaftarJualDiminati from './components/layouts/LayoutDaftarJualDimin
 import LayoutKategori from './components/layouts/LayoutKategori';
 import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 import LayoutEditKategori from './components/layouts/LayoutEditKategori';
+import LayoutDaftarTerjual from './components/layouts/LayoutDaftarTerjual';
 
 import { history } from './helpers/history';
 import { getAllKategori, getUserByID } from './actions/user';
@@ -77,6 +78,7 @@ function App() {
                 path={'/diminati'}
                 component={LayoutDaftarJualDiminati}
               />
+              <Route exact path={'/terjual'} component={LayoutDaftarTerjual} />
               <Route
                 exact
                 path={'/info-product-add'}

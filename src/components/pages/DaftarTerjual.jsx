@@ -1,8 +1,8 @@
 import React from 'react';
 import kosong from '../assets/svg/kosong.svg';
 import { connect } from 'react-redux';
-import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const Tawaran = () => {
+const DaftarTerjual = () => {
   // const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="container mt-4">
@@ -34,4 +34,4 @@ const Tawaran = () => {
   );
 };
 
-export default connect(mapStateToProps, null)(Tawaran);
+export default connect(mapStateToProps, null)(DaftarTerjual);
