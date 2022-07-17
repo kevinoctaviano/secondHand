@@ -18,19 +18,22 @@ import brand from '../../assets/svg/brand.svg';
 
 import EventBus from '../../../common/EventBus';
 import { clearMessage } from '../../../actions/message';
-
+import { getDataBySearch } from '../../../actions/user';
 import { history } from '../../../helpers/history';
 import { logout } from '../../../actions/auth';
+import { useState } from 'react';
 
 export default function NavbarHome() {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const navigate = useHistory();
   useEffect(() => {
     history.listen((location) => {
       dispatch(clearMessage()); // clear message when changing location
     });
-  }, [dispatch]);
+    dispatch(getDataBySearch(search));
+  }, [dispatch, search]);
 
   const logOut = useCallback(() => {
     dispatch(logout());
@@ -46,6 +49,11 @@ export default function NavbarHome() {
       EventBus.remove('logout');
     };
   }, [logOut]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <Navbar bg="light shadow-sm" expand="lg">
       <Container>
@@ -60,6 +68,7 @@ export default function NavbarHome() {
               placeholder="Cari disini..."
               className="rounded-16px custom-width-search"
               aria-label="Search"
+              onChange={handleSearch}
             />
             <FontAwesomeIcon
               className="icon text-muted"

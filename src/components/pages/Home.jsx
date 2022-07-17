@@ -39,7 +39,6 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const [kategori, setKategori] = useState('');
   useEffect(() => {
-    // dispatch(getAllDataProduct);
     dispatch(getDataProductByKategori(kategori));
     dispatch(getAllKategori);
     dispatch(getUserByID);
