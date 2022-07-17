@@ -22,14 +22,14 @@ import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 import LayoutEditKategori from './components/layouts/LayoutEditKategori';
 
 import { history } from './helpers/history';
-import { getAllDataProduct, getAllKategori, getUserByID } from './actions/user';
+import { getAllKategori, getUserByID } from './actions/user';
 import LayoutdDaftarPenawar from './components/layouts/LayoutDaftarPenawar';
 
 function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllDataProduct);
+    // dispatch(getAllDataProduct);
     dispatch(getAllKategori);
     dispatch(getUserByID);
   }, [dispatch]);

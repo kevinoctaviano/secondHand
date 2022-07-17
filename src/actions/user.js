@@ -8,7 +8,6 @@ import {
   ADD_KATEGORI,
   ADD_PRODUCT,
   UPDATE_KATEGORI,
-  GET_ALL_DATA,
   DELETE_KATEGORI,
   UPDATE_USER,
   CHANGE_PASSWORD_USER,
@@ -23,6 +22,7 @@ import {
   ADD_TAWARAN,
   GET_TAWARAN_BY_ID,
   GET_DATA_BY_KATEGORI,
+  GET_DATA_BY_SEARCH,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -53,8 +53,9 @@ export const changePassword = (password) => (dispatch) => {
 };
 
 // Product
-export const getAllDataProduct = (dispatch) => {
-  return UserService.getAllDataProduct().then((response) => {
+export const getDataProductByKategori = (kategori) => (dispatch) => {
+  return UserService.getDataProductByKategori(kategori).then((response) => {
+    // console.log(response.data.data);
     const arrayKategori = response.data.data;
     if (arrayKategori.length === 0) {
       dispatch({
@@ -62,7 +63,7 @@ export const getAllDataProduct = (dispatch) => {
       });
     } else {
       dispatch({
-        type: GET_ALL_DATA,
+        type: GET_DATA_BY_KATEGORI,
         payload: {
           data: response.data.data,
         },
@@ -70,15 +71,22 @@ export const getAllDataProduct = (dispatch) => {
     }
   });
 };
-export const getDataProductByKategori = (kategori) => (dispatch) => {
-  return UserService.getDataProductByKategori(kategori).then((response) => {
+export const getDataBySearch = (search) => (dispatch) => {
+  return UserService.getDataBySearch(search).then((response) => {
     // console.log(response.data.data);
-    dispatch({
-      type: GET_DATA_BY_KATEGORI,
-      payload: {
-        data: response.data.data,
-      },
-    });
+    const arrayKategori = response.data.data;
+    if (arrayKategori.length === 0) {
+      dispatch({
+        type: GET_DATA_NULL,
+      });
+    } else {
+      dispatch({
+        type: GET_DATA_BY_SEARCH,
+        payload: {
+          data: response.data.data,
+        },
+      });
+    }
   });
 };
 export const getProductByID = (id) => (dispatch) => {

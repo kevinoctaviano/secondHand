@@ -23,8 +23,10 @@ const updateKategori = (namaKategori, id) => {
 };
 
 // product
-const getAllDataProduct = () => {
-  return axios.get(API_URL + 'Product?kategori=&q=&pageNo=0&pageSize=20');
+const getDataBySearch = (search) => {
+  return axios.get(
+    API_URL + `Product?kategori=&q=${search}&pageNo=0&pageSize=20`
+  );
 };
 const getDataProductByKategori = (kategori) => {
   return axios.get(
@@ -90,8 +92,8 @@ const getTawaranByID = (idTawaran) => {
 
 // eslint-disable-next-line
 export default {
-  getAllDataProduct,
   getTawaranBuyer,
+  getDataBySearch,
   getTawaranSeller,
   getTawaranByID,
   postTawaran,
