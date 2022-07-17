@@ -72,6 +72,7 @@ export const getAllDataProduct = (dispatch) => {
 };
 export const getDataProductByKategori = (kategori) => (dispatch) => {
   return UserService.getDataProductByKategori(kategori).then((response) => {
+    // console.log(response.data.data);
     dispatch({
       type: GET_DATA_BY_KATEGORI,
       payload: {
@@ -102,7 +103,7 @@ export const getProductUser = () => (dispatch) => {
     dispatch({
       type: GET_PRODUCT_USER,
       payload: {
-        data: response.data,
+        data: response.data.data,
       },
     });
   });

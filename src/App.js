@@ -54,12 +54,12 @@ function App() {
               />
               <Route
                 exact
-                path={'/product-buyer'}
+                path={'/product-buyer/:id'}
                 component={LayoutProductBuyer}
               />
               <Route
                 exact
-                path={'/product-seller'}
+                path={'/product-seller/:id'}
                 component={LayoutProductSeller}
               />
               <Route

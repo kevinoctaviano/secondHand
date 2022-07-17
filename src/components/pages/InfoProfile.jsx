@@ -1,16 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowLeft,
-  faCamera,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCamera } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { updateUser } from '../../actions/user';
 import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -23,7 +21,6 @@ const mapStateToProps = (state) => {
 
 const InfoProfile = (props) => {
   const dispatch = useDispatch();
-  const form = useRef();
   const history = useHistory();
   const {
     register,
@@ -31,7 +28,6 @@ const InfoProfile = (props) => {
     watch,
     formState: { errors },
   } = useForm();
-  const [show, setShow] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState();
   // handle password
   const password = useRef({});
@@ -42,7 +38,7 @@ const InfoProfile = (props) => {
     const profilePicture = e.target.files[0];
     setSelectedFiles(profilePicture);
   };
-  const handleUpdateUser = (data) => {
+  const handleUpdateUser = async (data) => {
     // e.preventDefault();
     let formData = new FormData();
     formData.append('profileFoto', selectedFiles);
@@ -54,25 +50,13 @@ const InfoProfile = (props) => {
     formData.append('username', props.user.username);
     formData.append('email', props.user.email);
 
-    dispatch(updateUser(formData))
-      .then(() => setShow(true))
-      .catch((error) => {
-        console.error(error);
-      });
+    const updateUserData = dispatch(updateUser(formData));
+    toast.promise(updateUserData, {
+      pending: 'Sedang menambahkan data...',
+      success: `Berhasil update data user!`,
+      error: 'Promise rejected 🤯',
+    });
   };
-
-  // const handleChangePassword = (e) => {
-  //   e.preventDefault();
-  //   let formData = new FormData();
-  //   formData.append('password', password);
-  //   dispatch(
-  //     changePassword(formData)
-  //       .then(() => setShow(true))
-  //       .catch((error) => console.error(error))
-  //   );
-  // };
-
-  const handleClose = () => setShow(false);
 
   const handleGoBack = () => {
     history.goBack();
@@ -80,24 +64,18 @@ const InfoProfile = (props) => {
 
   return (
     <div className="container-fluid row m-0 mt-4">
-      {props.message && show ? (
-        <div className="d-flex justify-content-center">
-          <div className="alert-custom d-flex align-items-center row">
-            <div className="col-md-10 text-center">
-              <p className="p-alert">{props.message}</p>
-            </div>
-            <div className="col-md-2 text-center">
-              <button className="btn" onClick={handleClose}>
-                <FontAwesomeIcon
-                  className="text-white"
-                  icon={faTimes}
-                  fixedWidth
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div
         onClick={handleGoBack}
         className="col-lg-2 d-flex justify-content-end"
@@ -110,7 +88,7 @@ const InfoProfile = (props) => {
       <div className="col-lg-10 p-0">
         <div className="center-custom">
           <div className="w-75 mt-3">
-            <Form onSubmit={handleSubmit(handleUpdateUser)} ref={form}>
+            <Form onSubmit={handleSubmit(handleUpdateUser)}>
               <div className="center-custom">
                 <div className="d-flex justify-content-center align-items-center custom-bg-photo-profile">
                   <input
@@ -136,7 +114,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control custom-font-1 rounded-16px"
+                  className={`form-control ${
+                    errors.fullName ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Nama"
                   {...register('fullName', { required: true })}
                 />
@@ -151,7 +131,9 @@ const InfoProfile = (props) => {
                 <div className="row">
                   <div className="col-md-12">
                     <select
-                      className="form-select text-muted w-100 border rounded-16px"
+                      className={`form-select ${
+                        errors.kota ? 'is-invalid' : ''
+                      } text-muted w-100 border rounded-16px`}
                       aria-label="Default select example"
                       name="kota"
                       id="kota"
@@ -173,7 +155,9 @@ const InfoProfile = (props) => {
                   Alamat*
                 </label>
                 <textarea
-                  className="form-control alamat rounded-16px"
+                  className={`form-control ${
+                    errors.alamat ? 'is-invalid' : ''
+                  } alamat rounded-16px`}
                   cols="3"
                   placeholder="Contoh: Jalan Ikan Hiu 33"
                   {...register('alamat', { required: true })}
@@ -189,7 +173,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control custom-font-1 rounded-16px"
+                  className={`form-control ${
+                    errors.noWa ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Contoh: +628123456789"
                   {...register('noWa', { required: true })}
                 />
@@ -203,7 +189,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className="form-control custom-font-1 rounded-16px"
+                  className={`form-control ${
+                    errors.password ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Password..."
                   {...register('password', {
                     required: '*Password is required',
@@ -226,7 +214,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className="form-control custom-font-1 rounded-16px"
+                  className={`form-control ${
+                    errors.confirmPassword ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Confirm password..."
                   {...register('confirmPassword', {
                     required: '*Confirm password is required',

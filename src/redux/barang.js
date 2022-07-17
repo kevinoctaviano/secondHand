@@ -6,7 +6,13 @@ import {
   GET_PRODUCT_USER,
   GET_DATA_BY_KATEGORI,
 } from '../actions/types';
-const initialState = { isNull: true, barang: [], message: null };
+const initialState = {
+  isNull: true,
+  barang: [],
+  barangUser: [],
+  barangKategori: [],
+  message: null,
+};
 
 const barang = (state = initialState, action) => {
   const { type, payload } = action;
@@ -17,6 +23,7 @@ const barang = (state = initialState, action) => {
         ...state,
         isNull: false,
         barang: payload.data,
+        barangKategori: payload.data,
         message: null,
       };
     case GET_PRODUCT_BY_ID:
@@ -30,7 +37,7 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        barang: payload.data,
+        barangUser: payload.data,
         message: null,
       };
     case GET_DATA_NULL:
@@ -49,7 +56,7 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        barang: payload.data,
+        barangKategori: payload.data,
         message: null,
       };
     default:

@@ -115,8 +115,32 @@ select {
   background-color: var(--primary);
 }
 
-.custom-font-auth {
+hr.custom-font-auth {
+  border: 0.5px solid var(--primary);
+  margin: 0.3rem;
+}
+.sidebar-custom {
+  box-shadow: inset 0 0 0 0 var(--primary);
+  border-radius: 4px;
   color: var(--primary);
+  margin: 0 -0.2rem;
+  padding: 0.7rem 0.2rem;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.active {
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sidebar-custom:hover {
+  box-shadow: inset 300px 0 0 0 var(--primary);
+  border-radius: 4px;
+  color: white;
 }
 
 .custom-font-1 {
@@ -318,6 +342,11 @@ select {
 #profile-picture[type='file'] {
   display: none;
   cursor: pointer;
+}
+
+.list-active {
+  color: black !important;
+  background: orange !important;
 }
 
 img.img-mini-preview {

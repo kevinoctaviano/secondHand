@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import { useForm } from 'react-hook-form';
 import propic from '../assets/svg/product-picture.svg';
 
 import { connect, useDispatch } from 'react-redux';
 import { postDataProduct } from '../../actions/user';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -21,14 +24,11 @@ const InfoProductAdd = (props) => {
   const dispatch = useDispatch();
   const [preview, setPreview] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [show, setShow] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const handleClose = () => setShow(false);
 
   const onSubmit = async (data) => {
     let formData = new FormData();
@@ -41,7 +41,14 @@ const InfoProductAdd = (props) => {
     formData.append('deskripsiProduct', data.deskripsi);
     formData.append('statusProduct', 'PUBLISH');
 
-    dispatch(postDataProduct(formData)).then(() => setShow(true));
+    const postData = dispatch(postDataProduct(formData)).then(() => {
+      setSelectedFiles([]);
+    });
+    toast.promise(postData, {
+      pending: 'Sedang menambahkan data...',
+      success: `Berhasil menambahkan data!`,
+      error: 'Promise rejected 🤯',
+    });
   };
 
   const handleImageChange = (e) => {
@@ -79,24 +86,18 @@ const InfoProductAdd = (props) => {
   };
   return (
     <div className="container mt-4">
-      {props.message && show ? (
-        <div className="d-flex justify-content-center">
-          <div className="alert-custom d-flex align-items-center row">
-            <div className="col-md-10 text-center">
-              <p className="p-alert">{props.message}</p>
-            </div>
-            <div className="col-md-2 text-center">
-              <button className="btn" onClick={handleClose}>
-                <FontAwesomeIcon
-                  className="text-white"
-                  icon={faTimes}
-                  fixedWidth
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="row">
         <div
           onClick={handleGoBack}
@@ -118,7 +119,9 @@ const InfoProductAdd = (props) => {
               </label>
               <input
                 type="text"
-                className="form-control p-2 custom-font-1 rounded-16px"
+                className={`form-control ${
+                  errors.namaProduct ? 'is-invalid' : ''
+                } p-2 custom-font-1 rounded-16px`}
                 placeholder="Nama Produk"
                 {...register('namaProduct', { required: true })}
               />
@@ -136,7 +139,9 @@ const InfoProductAdd = (props) => {
               </label>
               <input
                 type="text"
-                className="form-control p-2 custom-font-1 rounded-16px"
+                className={`form-control ${
+                  errors.hargaProduct ? 'is-invalid' : ''
+                } p-2 custom-font-1 rounded-16px`}
                 placeholder="Rp 0,00"
                 {...register('hargaProduct', { required: true })}
               />
@@ -153,7 +158,9 @@ const InfoProductAdd = (props) => {
                 Kategori
               </label>
               <select
-                className="form-select text-muted w-100 px-1 py-2 border rounded-16px"
+                className={`form-select ${
+                  errors.idkategori ? 'is-invalid' : ''
+                } text-muted w-100 px-1 py-2 border rounded-16px`}
                 aria-label="Default select example"
                 {...register('idKategori', { required: true })}
               >
@@ -178,7 +185,9 @@ const InfoProductAdd = (props) => {
               </label>
               <textarea
                 name="deskripsi"
-                className="form-control alamat rounded-16px"
+                className={`form-control ${
+                  errors.deskripsi ? 'is-invalid' : ''
+                } alamat rounded-16px`}
                 cols="3"
                 placeholder="Deskripsi..."
                 {...register('deskripsi', { required: true })}
