@@ -283,6 +283,10 @@ hr.custom-font-auth {
 .btn-purple-kategori {
   background-color: #e2d4f0 !important;
 }
+.btn-light.btn-purple-kategori:hover {
+  background-color: #7126b5 !important;
+  color: #fff;
+}
 
 .bg-home {
   display: none;
@@ -310,6 +314,10 @@ hr.custom-font-auth {
 
 .card-home-product {
   text-decoration: none !important;
+}
+
+.card-product:hover {
+  box-shadow: 5px 8px #e2d4f0;
 }
 
 .edit-daftar-jual {

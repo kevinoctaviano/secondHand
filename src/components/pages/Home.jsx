@@ -23,7 +23,6 @@ import 'swiper/css/bundle';
 import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
-import empty from '../assets/svg/empty.svg';
 import { useState } from 'react';
 
 const mapStateToProps = (state) => {
@@ -38,8 +37,9 @@ const mapStateToProps = (state) => {
 const Home = (props) => {
   const dispatch = useDispatch();
   const [kategori, setKategori] = useState('');
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    dispatch(getDataProductByKategori(kategori));
+    dispatch(getDataProductByKategori(kategori)).then(() => setLoading(false));
     dispatch(getAllKategori);
     dispatch(getUserByID);
   }, [dispatch, kategori]);
@@ -148,17 +148,16 @@ const Home = (props) => {
           </div>
         </div>
         <div className="container mt-4 row">
+          {loading && (
+            <div className="d-flex justify-content-center">
+              <span className="spinner-border spinner-border-lg"></span>
+            </div>
+          )}
           {props.isNull ? (
             <>
               <h1 className="text-dark display-6 text-center">
                 {props.message}
               </h1>
-              <img
-                src={empty}
-                alt="kosong"
-                className="mt-4 mx-auto d-block"
-                style={{ width: '350px' }}
-              />
             </>
           ) : (
             props.barang.map((item, index = 1) => (
@@ -168,7 +167,7 @@ const Home = (props) => {
                 onClick={onClickDataProductByID}
               >
                 <div
-                  className="card mb-3 shadow-md px-2 pt-2 pb-4"
+                  className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
                   style={{ height: '250px' }}
                 >
                   <Link
