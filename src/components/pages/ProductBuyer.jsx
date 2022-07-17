@@ -3,11 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import jam from '../assets/svg/jam.svg';
 import jamKecil from '../assets/svg/jam-kecil.svg';
 import userPhoto from '../assets/svg/user-photo.svg';
 
 export default function ProductBuyer() {
+  const params = useParams();
+  console.log(params.id);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

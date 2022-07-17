@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
-import Input from 'react-validation/build/input';
-import CheckButton from 'react-validation/build/button';
-import 'animate.css';
+import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { connect } from 'react-redux';
 
@@ -22,25 +22,19 @@ const mapStateToProps = (state) => {
 
 const AddKategori = (props) => {
   const dispatch = useDispatch();
-  const form = useRef();
-  const checkBtn = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [kategori, setKategori] = useState('');
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-
-  const onChangeKategori = (e) => {
-    const kategori = e.target.value;
-    setKategori(kategori);
-  };
-
-  const handleKategori = (e) => {
-    e.preventDefault();
-
-    if (checkBtn.current.context._errors.length === 0) {
-      dispatch(postKategori(kategori)).then(() => setShow(true));
-    }
+  const handleKategori = async (data) => {
+    const postDataKategori = dispatch(postKategori(data.namaKategori));
+    toast.promise(postDataKategori, {
+      pending: 'Sedang menambahkan data...',
+      success: `Berhasil menambahkan data kategori!`,
+      error: 'Promise rejected 🤯',
+    });
   };
 
   const history = useHistory();
@@ -50,24 +44,18 @@ const AddKategori = (props) => {
 
   return (
     <div className="container mt-4">
-      {props.message && show ? (
-        <div className="d-flex justify-content-center">
-          <div className="alert-custom d-flex align-items-center row">
-            <div className="col-md-10 text-center">
-              <p className="p-alert">{props.message}</p>
-            </div>
-            <div className="col-md-2 text-center">
-              <button className="btn" onClick={handleClose}>
-                <FontAwesomeIcon
-                  className="text-white"
-                  icon={faTimes}
-                  fixedWidth
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="row">
         <div
           onClick={handleGoBack}
@@ -79,21 +67,25 @@ const AddKategori = (props) => {
           />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
-          <Form className="w-75" onSubmit={handleKategori} ref={form}>
+          <Form className="w-75" onSubmit={handleSubmit(handleKategori)}>
             <div className="form-group mb-3">
               <label
-                htmlFor="namaproduk"
                 className="text-dark fw-bold mb-1 custom-font-2"
+                htmlFor="namaKategori"
               >
                 Kategori
               </label>
-              <Input
+              <input
                 type="text"
-                className="form-control p-2 custom-font-1 rounded-16px"
+                className={`form-control ${
+                  errors.namaKategori ? 'is-invalid' : ''
+                } p-2 custom-font-1 rounded-16px`}
                 placeholder="Nama Kategori"
-                onChange={onChangeKategori}
-                name="kategori"
+                {...register('namaKategori', { required: true })}
               />
+              {errors.namaKategori && (
+                <p className="error-message">*Kategori is required.</p>
+              )}
             </div>
             <div className="d-flex justify-content-center">
               <button
@@ -103,7 +95,6 @@ const AddKategori = (props) => {
                 Terbitkan
               </button>
             </div>
-            <CheckButton style={{ display: 'none' }} ref={checkBtn} />
           </Form>
         </div>
       </div>

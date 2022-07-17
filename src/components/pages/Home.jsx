@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +9,10 @@ import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
-  getAllDataProduct,
   getAllKategori,
   getUserByID,
   getDataProductByKategori,
+  getProductByID,
 } from '../../actions/user';
 // Import Swiper styles
 import 'swiper/css';
@@ -24,11 +24,12 @@ import img from '../assets/svg/img-banner.svg';
 import bgMobile from '../assets/svg/bg-mobile-home.svg';
 import btnJual from '../assets/svg/btn-jual.svg';
 import empty from '../assets/svg/empty.svg';
+import { useState } from 'react';
 
 const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
-    barang: state.barang.barang,
+    barang: state.barang.barangKategori,
     message: state.barang.message,
     kategori: state.kategori.kategori,
   };
@@ -36,25 +37,30 @@ const mapStateToProps = (state) => {
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const [filteredItems, setFilteredItems] = useState(null);
-
+  const [kategori, setKategori] = useState('');
   useEffect(() => {
-    dispatch(getAllDataProduct);
-    dispatch(getDataProductByKategori(filteredItems));
+    // dispatch(getAllDataProduct);
+    dispatch(getDataProductByKategori(kategori));
     dispatch(getAllKategori);
     dispatch(getUserByID);
-  }, [dispatch, filteredItems]);
+  }, [dispatch, kategori]);
+
+  const onClickDataProductByID = (params) => {
+    dispatch(getProductByID(params))
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
+  };
+
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
   });
 
-  // filter items
-  const handleFilter = (e) => {
-    let filterItems = e.target.value;
-    console.log(filterItems);
-    setFilteredItems(filterItems);
+  // filter data by kategori
+  const handleKategori = (e) => {
+    const filter = e.target.value;
+    setKategori(filter);
   };
 
   return (
@@ -95,13 +101,19 @@ const Home = (props) => {
         <div className="container mt-4 m-0">
           <div className="row">
             <Button
-              className="btn-purple rounded-16px d-flex justify-content-center align-items-center"
+              className={
+                (!kategori ? 'btn-purple ' : 'btn-light btn-purple-kategori ') +
+                'rounded-16px d-flex justify-content-center align-items-center d-grid gap-2'
+              }
               style={{
                 width: '150px',
                 height: '48px',
                 fontSize: '15px',
                 gap: '8px',
+                marginRight: '1rem',
               }}
+              value=""
+              onClick={handleKategori}
             >
               <span>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -112,15 +124,21 @@ const Home = (props) => {
             {props.kategori.map((item) => (
               <Button
                 key={item.idKategori}
-                className="btn-light btn-purple-kategori rounded-16px d-flex justify-content-center align-items-center ms-3"
+                className={
+                  (kategori === item.namaKategori
+                    ? 'btn-purple '
+                    : 'btn-light btn-purple-kategori ') +
+                  'rounded-16px d-flex justify-content-center align-items-center d-grid gap-2'
+                }
                 style={{
                   width: '150px',
                   height: '48px',
                   fontSize: '15px',
                   gap: '8px',
+                  marginRight: '1rem',
                 }}
                 value={item.namaKategori}
-                onClick={handleFilter}
+                onClick={handleKategori}
               >
                 <span>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -145,12 +163,19 @@ const Home = (props) => {
             </>
           ) : (
             props.barang.map((item, index = 1) => (
-              <div className="col-lg-2" key={index}>
+              <div
+                className="col-lg-2"
+                key={index}
+                onClick={onClickDataProductByID}
+              >
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4"
                   style={{ height: '250px' }}
                 >
-                  <Link className="card-home-product" to={'/product-buyer'}>
+                  <Link
+                    className="card-home-product"
+                    to={`/product-buyer/${item.idProduct}`}
+                  >
                     <div className="d-flex justify-content-center">
                       <img
                         src={item.imageProduct[0]?.urlImage}
@@ -172,7 +197,7 @@ const Home = (props) => {
                   <button className="btn-pink">
                     Add to Wishlist{' '}
                     <span>
-                      <FontAwesomeIcon icon={faHeart} />
+                      <FontAwesomeIcon icon={faHeart} fixedWidth />
                     </span>
                   </button>
                 </div>
