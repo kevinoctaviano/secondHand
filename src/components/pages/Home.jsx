@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper';
 import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllKategori,
   getUserByID,
@@ -38,11 +38,16 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const [kategori, setKategori] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   useEffect(() => {
     dispatch(getDataProductByKategori(kategori)).then(() => setLoading(false));
-    dispatch(getAllKategori);
-    dispatch(getUserByID);
-  }, [dispatch, kategori]);
+    if (isLoggedIn) {
+      dispatch(getAllKategori);
+      dispatch(getUserByID);
+    }
+  }, [dispatch, kategori, isLoggedIn]);
 
   const onClickDataProductByID = (params) => {
     dispatch(getProductByID(params))
