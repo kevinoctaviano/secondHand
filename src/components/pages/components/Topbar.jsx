@@ -17,9 +17,13 @@ function Topbar(props) {
       <div className="row">
         <div className="col-md-1 pt-3">
           {props.user.profileFoto === null ? (
-            <img src={userPhoto} alt="" className="w-100" />
+            <img src={userPhoto} alt={props.user.fullName} className="w-100" />
           ) : (
-            <img src={props.user.profileFoto} alt="" className="w-100" />
+            <img
+              src={props.user.profileFoto}
+              alt={props.user.fullName}
+              className="profile-photo"
+            />
           )}
         </div>
 

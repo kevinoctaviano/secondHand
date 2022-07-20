@@ -91,6 +91,7 @@ export const getDataBySearch = (search) => (dispatch) => {
 };
 export const getProductByID = (id) => (dispatch) => {
   return UserService.getProductByID(id).then((response) => {
+    // console.log(response.data);
     dispatch({
       type: GET_PRODUCT_BY_ID,
       payload: {
