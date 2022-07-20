@@ -55,7 +55,7 @@ function App() {
               />
               <Route
                 exact
-                path={'/product-buyer/:id'}
+                path={'/product-buyer/:idProduct'}
                 component={LayoutProductBuyer}
               />
               <Route

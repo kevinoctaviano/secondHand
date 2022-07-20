@@ -8,7 +8,7 @@ import {
 } from '../actions/types';
 const initialState = {
   isNull: true,
-  barang: [],
+  barangID: [],
   barangUser: [],
   barangKategori: [],
   message: null,
@@ -22,7 +22,7 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        barang: payload.data,
+        barangID: payload.data,
         message: null,
       };
     case GET_PRODUCT_USER:

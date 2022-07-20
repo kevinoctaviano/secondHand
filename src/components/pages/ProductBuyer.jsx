@@ -1,16 +1,37 @@
+import React, { useState, useEffect } from 'react';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
-import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import jam from '../assets/svg/jam.svg';
-import jamKecil from '../assets/svg/jam-kecil.svg';
-import userPhoto from '../assets/svg/user-photo.svg';
+import { getProductByID } from '../../actions/user';
 
-export default function ProductBuyer() {
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.barang.isNull,
+    barangKategori: state.barang.barangKategori,
+    message: state.barang.message,
+  };
+};
+
+const ProductBuyer = (props) => {
   const params = useParams();
-  console.log(params.id);
+  const dispatch = useDispatch();
+  // const { barangID } = useSelector((state) => state.barang);
+  useEffect(() => {
+    dispatch(getProductByID(params.id));
+  }, [dispatch, params]);
+
+  // Mengubah format currency menjadi format rupiah
+  let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
+
+  // useEffect(() => {
+  //   dispatch(getProductByID(params.id));
+  // }, [params]);
 
   const [show, setShow] = useState(false);
 
@@ -29,18 +50,16 @@ export default function ProductBuyer() {
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
             >
-              <SwiperSlide className="d-flex justify-content-center">
-                <img src={jam} alt="Product" className="w-75 rounded-16px" />
-              </SwiperSlide>
-              <SwiperSlide className="d-flex justify-content-center">
-                <img src={jam} alt="Product" className="w-75 rounded-16px" />
-              </SwiperSlide>
-              <SwiperSlide className="d-flex justify-content-center">
-                <img src={jam} alt="Product" className="w-75 rounded-16px" />
-              </SwiperSlide>
-              <SwiperSlide className="d-flex justify-content-center">
-                <img src={jam} alt="Product" className="w-75 rounded-16px" />
-              </SwiperSlide>
+              {/* {barangID.imageProduct?.map((item) => ( */}
+              {props.barangID.imageProduct?.map((item) => (
+                <SwiperSlide className="d-flex justify-content-center">
+                  <img
+                    src={item?.urlImage}
+                    alt={props.barangID.namaProduct}
+                    className="w-75 rounded-16px"
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
           <div className="col-lg-4">
@@ -50,9 +69,15 @@ export default function ProductBuyer() {
                 style={{ width: '336px', height: '204px' }}
               >
                 <div className="card-body ps-4 pt-4">
-                  <h5 className="card-title mb-3">Jam Tangan Casio</h5>
-                  <h6 className="card-subtitle text-muted mb-3">Aksesoris</h6>
-                  <h4 className="card-text fw-bold mb-3">Rp 250.000</h4>
+                  <h5 className="card-title mb-3">
+                    {props.barangID.namaProduct}
+                  </h5>
+                  <h6 className="card-subtitle text-muted mb-3">
+                    {props.barangID.kategori.namaKategori}
+                  </h6>
+                  <h4 className="card-text fw-bold mb-3">
+                    {formatter.format(props.barangID.hargaProduct)}
+                  </h4>
                   <div className="d-grid">
                     <Button
                       className="btn-purple rounded-16px text-center"
@@ -73,14 +98,14 @@ export default function ProductBuyer() {
                   <div className="row">
                     <div className="col-lg-3">
                       <img
-                        src={userPhoto}
+                        src={props.barangID.users.profileFoto}
                         alt="Buyer"
-                        className="seller-photo"
+                        className="profile-photo"
                       />
                     </div>
                     <div className="sller-desk col-lg-9">
-                      <h5>Nama Penjual</h5>
-                      <p>Kota</p>
+                      <h5>{props.barangID.users.fullName}</h5>
+                      <p>{props.barangID.users.kota}</p>
                     </div>
                   </div>
                 </div>
@@ -96,26 +121,7 @@ export default function ProductBuyer() {
               <div className="card rounded-16px shadow-sm w-100 ms-lg-5 mt-4">
                 <div className="card-body p-4">
                   <h5 className="card-title mb-3">Deskripsi</h5>
-                  <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Totam doloremque consectetur omnis maxime, nisi alias
-                    doloribus minus dignissimos quibusdam iure iste sunt
-                    assumenda laborum. Aliquam, id autem sit dicta incidunt ipsa
-                    assumenda? Temporibus deleniti sed cum suscipit totam a quas
-                    omnis maiores laborum, nesciunt magnam similique cupiditate
-                    alias pariatur quam consequatur porro ipsum reprehenderit,
-                    ex iusto dolore velit. Consectetur, officiis?
-                  </p>
-                  <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Totam doloremque consectetur omnis maxime, nisi alias
-                    doloribus minus dignissimos quibusdam iure iste sunt
-                    assumenda laborum. Aliquam, id autem sit dicta incidunt ipsa
-                    assumenda? Temporibus deleniti sed cum suscipit totam a quas
-                    omnis maiores laborum, nesciunt magnam similique cupiditate
-                    alias pariatur quam consequatur porro ipsum reprehenderit,
-                    ex iusto dolore velit. Consectetur, officiis?
-                  </p>
+                  <p className="card-text">{props.barangID.deskripsiProduct}</p>
                 </div>
               </div>
             </div>
@@ -139,11 +145,17 @@ export default function ProductBuyer() {
             <div className="card-body">
               <div className="row d-flex align-items-center">
                 <div className="col-lg-3">
-                  <img src={jamKecil} className="img-fluid" alt="Buyer" />
+                  <img
+                    src={props.barangID.imageProduct[0]?.urlImage}
+                    className="profile-photo"
+                    alt="Buyer"
+                  />
                 </div>
                 <div className="col-lg-9">
-                  <h5 className="fw-bold">Jam Tangan Casio</h5>
-                  <h6 className="fw-bold">Rp 250.000</h6>
+                  <h5 className="fw-bold">{props.barangID.namaProduct}</h5>
+                  <h6 className="fw-bold">
+                    {formatter.format(props.barangID.hargaProduct)}
+                  </h6>
                 </div>
               </div>
             </div>
@@ -167,4 +179,7 @@ export default function ProductBuyer() {
       </Modal>
     </>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(ProductBuyer);
+// export default ProductBuyer;

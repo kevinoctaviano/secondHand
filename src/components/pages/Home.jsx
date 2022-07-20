@@ -28,7 +28,8 @@ import { useState } from 'react';
 const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
-    barang: state.barang.barangKategori,
+    barangKategori: state.barang.barangKategori,
+    barangID: state.barang.barangID,
     message: state.barang.message,
     kategori: state.kategori.kategori,
   };
@@ -48,12 +49,6 @@ const Home = (props) => {
       dispatch(getUserByID);
     }
   }, [dispatch, kategori, isLoggedIn]);
-
-  const onClickDataProductByID = (params) => {
-    dispatch(getProductByID(params))
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));
-  };
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
@@ -165,12 +160,8 @@ const Home = (props) => {
               </h1>
             </>
           ) : (
-            props.barang.map((item, index = 1) => (
-              <div
-                className="col-lg-2"
-                key={index}
-                onClick={onClickDataProductByID}
-              >
+            props.barangKategori.map((item, index = 1) => (
+              <div className="col-lg-2" key={index}>
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
                   style={{ height: '250px' }}

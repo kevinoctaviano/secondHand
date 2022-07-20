@@ -20,7 +20,7 @@ const required = (value) => {
   }
 };
 
-export default function Login(props) {
+export default function Login() {
   const form = useRef();
   const checkBtn = useRef();
 
