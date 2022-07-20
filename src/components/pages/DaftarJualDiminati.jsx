@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import Swal from 'sweetalert2';
 import kosong from '../assets/svg/kosong.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { connect, useDispatch } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
-import { getAllWishlist } from '../../actions/user';
+import { deleteWishlist, getAllWishlist } from '../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
@@ -25,7 +28,34 @@ const DaftarJualDiminati = (props) => {
     style: 'currency',
     currency: 'IDR',
   });
-  // const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleDeleteWishlist = (idProduct) => (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Hapus wishlist dari daftar wishlist?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, hapus!',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteWishlist(idProduct)).then(() => {
+          Swal.fire(
+            'Wishlist',
+            'Berhasil menghapus data dari daftar wishlist',
+            'success'
+          );
+        });
+      }
+    });
+  };
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
@@ -59,6 +89,15 @@ const DaftarJualDiminati = (props) => {
                       <h5 className="mt-1 text-sm font-normal">
                         {formatter.format(item.product.hargaProduct)}
                       </h5>
+                      <button
+                        className="btn btn-danger"
+                        onClick={handleDeleteWishlist(item.idProduct)}
+                      >
+                        Add to Wishlist{' '}
+                        <span>
+                          <FontAwesomeIcon icon={faTrash} fixedWidth />
+                        </span>
+                      </button>
                     </div>
                   </div>
                 ))

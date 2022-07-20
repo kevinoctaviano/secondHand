@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import tambahProduk from '../assets/svg/tambah-produk.svg';
 import empty from '../assets/svg/empty.svg';
 import { getProductUser } from '../../actions/user';
@@ -87,6 +89,16 @@ const DashboardDaftarJual = (props) => {
                       <h5 className="mt-1 text-sm font-normal">
                         {formatter.format(item.hargaProduct)}
                       </h5>
+                      <Link
+                        className="btn btn-success"
+                        to={`/detail-daftar-jual/${item.idProduct}`}
+                        // onClick={handleDeleteWishlist(item.idProduct)}
+                      >
+                        Edit Product{' '}
+                        <span>
+                          <FontAwesomeIcon icon={faEdit} fixedWidth />
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 ))

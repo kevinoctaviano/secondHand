@@ -21,10 +21,11 @@ import LayoutKategori from './components/layouts/LayoutKategori';
 import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 import LayoutEditKategori from './components/layouts/LayoutEditKategori';
 import LayoutDaftarTerjual from './components/layouts/LayoutDaftarTerjual';
+import LayoutDaftarJualDetail from './components/layouts/LayoutDaftarJualDetail';
+import LayoutdDaftarPenawar from './components/layouts/LayoutDaftarPenawar';
 
 import { history } from './helpers/history';
 import { getAllKategori, getUserByID } from './actions/user';
-import LayoutdDaftarPenawar from './components/layouts/LayoutDaftarPenawar';
 
 function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -55,7 +56,7 @@ function App() {
               />
               <Route
                 exact
-                path={'/product-buyer/:idProduct'}
+                path={'/product-buyer/:id'}
                 component={LayoutProductBuyer}
               />
               <Route
@@ -67,6 +68,11 @@ function App() {
                 exact
                 path={'/daftar-jual'}
                 component={LayoutDashboardDaftarJual}
+              />
+              <Route
+                exact
+                path={'/detail-daftar-jual/:id'}
+                component={LayoutDaftarJualDetail}
               />
               <Route
                 exact

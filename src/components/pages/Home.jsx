@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +13,7 @@ import {
   getAllKategori,
   getUserByID,
   getDataProductByKategori,
-  getProductByID,
+  postWishlist,
 } from '../../actions/user';
 // Import Swiper styles
 import 'swiper/css';
@@ -60,6 +61,34 @@ const Home = (props) => {
   const handleKategori = (e) => {
     const filter = e.target.value;
     setKategori(filter);
+  };
+
+  const handleAddProduct = (idProduct) => (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Tambah data ke daftar wishlist?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, hapus!',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(postWishlist(idProduct)).then(() => {
+          Swal.fire(
+            'Wishlist',
+            'Berhasil menambahkan ke daftar wishlist',
+            'success'
+          );
+        });
+      }
+    });
   };
 
   return (
@@ -188,7 +217,10 @@ const Home = (props) => {
                       {formatter.format(item.hargaProduct)}
                     </h5>
                   </Link>
-                  <button className="btn-pink">
+                  <button
+                    className="btn-pink"
+                    onClick={handleAddProduct(item.idProduct)}
+                  >
                     Add to Wishlist{' '}
                     <span>
                       <FontAwesomeIcon icon={faHeart} fixedWidth />

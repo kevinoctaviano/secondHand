@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const ProductBuyer = (props) => {
+function DaftarJualDiminatiDetail(props) {
   const params = useParams();
 
   const barangID = props.barangKategori.filter(
@@ -174,6 +174,6 @@ const ProductBuyer = (props) => {
       </Modal>
     </>
   );
-};
+}
 
-export default connect(mapStateToProps, null)(ProductBuyer);
+export default connect(mapStateToProps, null)(DaftarJualDiminatiDetail);

@@ -23,13 +23,13 @@ const updateKategori = (namaKategori, id) => {
 };
 
 // product
-const getDataBySearch = (search) => {
-  return axios.get(
+const getDataBySearch = async (search) => {
+  return await axios.get(
     API_URL + `Product?kategori=&q=${search}&pageNo=0&pageSize=20`
   );
 };
-const getDataProductByKategori = (kategori) => {
-  return axios.get(
+const getDataProductByKategori = async (kategori) => {
+  return await axios.get(
     API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=20`
   );
 };
@@ -38,11 +38,13 @@ const postDataProduct = async (data) => {
     headers: authHeader(),
   });
 };
-const getProductByID = (idProduct) => {
-  return axios.get(API_URL + `Product/${idProduct}`, { headers: authHeader() });
+const getProductByID = async (idProduct) => {
+  return await axios
+    .get(API_URL + `Product/${idProduct}`, { headers: authHeader() })
+    .then((response) => console.log(response.data));
 };
-const getProductUser = () => {
-  return axios.get(API_URL + 'product-user', { headers: authHeader() });
+const getProductUser = async () => {
+  return await axios.get(API_URL + 'product-user', { headers: authHeader() });
 };
 
 // users
@@ -65,8 +67,12 @@ const getAllWishlist = () => {
 const getWishlistByID = (id) => {
   return axios.get(API_URL + `wishlist/${id}`, { headers: authHeader() });
 };
-const postWishlist = (data) => {
-  return axios.post(API_URL + 'wishlist', { data }, header);
+const postWishlist = (idProduct) => {
+  return axios.post(
+    API_URL + 'wishlist',
+    { idProduct },
+    { headers: authHeader() }
+  );
 };
 const deleteWishlist = (id) => {
   return axios.delete(API_URL + `Wishlist/${id}`, { headers: authHeader() });
