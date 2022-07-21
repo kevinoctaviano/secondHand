@@ -25,12 +25,12 @@ const updateKategori = (namaKategori, id) => {
 // product
 const getDataBySearch = async (search) => {
   return await axios.get(
-    API_URL + `Product?kategori=&q=${search}&pageNo=0&pageSize=20`
+    API_URL + `Product?kategori=&q=${search}&pageNo=0&pageSize=24`
   );
 };
 const getDataProductByKategori = async (kategori) => {
   return await axios.get(
-    API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=20`
+    API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=24`
   );
 };
 const postDataProduct = async (data) => {
@@ -45,6 +45,11 @@ const getProductByID = async (idProduct) => {
 };
 const getProductUser = async () => {
   return await axios.get(API_URL + 'product-user', { headers: authHeader() });
+};
+const updateDataProduct = (idProduct, data) => {
+  return axios.put(API_URL + `Product/${idProduct}`, data, {
+    headers: authHeader(),
+  });
 };
 
 // users
@@ -85,10 +90,17 @@ const getTawaranBuyer = () => {
 const getTawaranSeller = () => {
   return axios.get(API_URL + 'tawaran-seller', { headers: authHeader() });
 };
-const postTawaran = (idProduct) => {
-  return axios.post(API_URL + `tawaran/${idProduct}`, {
-    headers: authHeader(),
-  });
+const postTawaran = (idProduct, hargaTawar, status) => {
+  return axios.post(
+    API_URL + `tawaran/${idProduct}`,
+    {
+      hargaTawaran: hargaTawar,
+      statutsTawaran: status,
+    },
+    {
+      headers: authHeader(),
+    }
+  );
 };
 const getTawaranByID = (idTawaran) => {
   return axios.post(API_URL + `tawaran/${idTawaran}`, {
@@ -119,4 +131,5 @@ export default {
   postDataProduct,
   postWishlist,
   deleteWishlist,
+  updateDataProduct,
 };

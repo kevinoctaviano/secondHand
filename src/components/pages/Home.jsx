@@ -14,6 +14,7 @@ import {
   getUserByID,
   getDataProductByKategori,
   postWishlist,
+  getTawaranBuyer,
 } from '../../actions/user';
 // Import Swiper styles
 import 'swiper/css';
@@ -45,6 +46,7 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(getDataProductByKategori(kategori)).then(() => setLoading(false));
+    dispatch(getTawaranBuyer);
     if (isLoggedIn) {
       dispatch(getAllKategori);
       dispatch(getUserByID);

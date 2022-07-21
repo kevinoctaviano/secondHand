@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
+import Form from 'react-validation/build/form';
 import 'swiper/css/bundle';
 import { useParams } from 'react-router-dom';
+import { getTawaranBuyer, postTawaran } from '../../actions/user';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
     barangKategori: state.barang.barangKategori,
+    tawaran: state.tawaran.tawaran,
     message: state.barang.message,
   };
 };
 
 const ProductBuyer = (props) => {
   const params = useParams();
-
+  const dispatch = useDispatch();
   const barangID = props.barangKategori.filter(
     (barang) => String(barang.idProduct) === params.id
   );
 
+  // const statusTawaran = props.tawaran.data.filter(
+  //   (tawaran) => String(tawaran.product.idProduct) === params.id
+  // );
+  // useEffect(() => {}, [statusTawaran]);
+  // console.log(typeof statusTawaran[0].statusTawaran);
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -28,9 +39,30 @@ const ProductBuyer = (props) => {
   });
 
   const [show, setShow] = useState(false);
+  const [hargaTawar, setHargaTawar] = useState('');
+  // const [waiting, setWaiting] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const changeHargaTawar = (e) => {
+    const harga = e.target.value;
+    setHargaTawar(harga);
+  };
+
+  const handleHargaTawar = (e) => {
+    e.preventDefault();
+    const idProduct = barangID[0].idProduct;
+    const harga = hargaTawar;
+    const status = 'WAITING';
+    const postTawar = dispatch(postTawaran(idProduct, harga, status));
+    toast.promise(postTawar, {
+      pending: 'Sedang menambahkan data tawaran...',
+      success: `Berhasil menambahkan data tawaran!`,
+      error: 'Promise rejected 🤯',
+    });
+  };
+
   return (
     <>
       <div className="container mt-4">
@@ -156,19 +188,46 @@ const ProductBuyer = (props) => {
             </div>
           </div>
           <div className="mb-3 mt-3">
-            <label htmlFor="" className="form-label">
-              Harga Tawar
-            </label>
-            <input
-              type="email"
-              className="form-control rounded-16px"
-              placeholder="Rp 0,00"
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
             />
-          </div>
-          <div className="d-grid gap-4">
-            <Button className="btn-purple rounded-16px" onClick={handleClose}>
-              Kirim
-            </Button>
+            <Form onSubmit={handleHargaTawar}>
+              <label htmlFor="" className="form-label">
+                Harga Tawar
+              </label>
+              <input
+                type="text"
+                className="form-control rounded-16px"
+                placeholder="Rp 0,00"
+                onChange={changeHargaTawar}
+              />
+              {/* {tawaranID[0].statusTawaran === 'WAITING' ? (
+                <div className="d-grid gap-4">
+                  <Button
+                    type="submit"
+                    className="btn-purple rounded-16px"
+                    disabled
+                  >
+                    Menunggu Konfirmasi Seller
+                  </Button>
+                </div>
+              ) : ( */}
+              <div className="d-grid gap-4">
+                <Button type="submit" className="btn-purple rounded-16px">
+                  Kirim
+                </Button>
+              </div>
+              {/* )} */}
+            </Form>
           </div>
         </Modal.Body>
       </Modal>

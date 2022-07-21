@@ -91,8 +91,7 @@ const DashboardDaftarJual = (props) => {
                       </h5>
                       <Link
                         className="btn btn-success"
-                        to={`/detail-daftar-jual/${item.idProduct}`}
-                        // onClick={handleDeleteWishlist(item.idProduct)}
+                        to={`/product-seller/${item.idProduct}`}
                       >
                         Edit Product{' '}
                         <span>

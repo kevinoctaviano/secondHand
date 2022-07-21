@@ -21,7 +21,7 @@ import LayoutKategori from './components/layouts/LayoutKategori';
 import LayoutAddKategori from './components/layouts/LayoutAddKategori';
 import LayoutEditKategori from './components/layouts/LayoutEditKategori';
 import LayoutDaftarTerjual from './components/layouts/LayoutDaftarTerjual';
-import LayoutDaftarJualDetail from './components/layouts/LayoutDaftarJualDetail';
+import LayoutEditDaftarJual from './components/layouts/LayoutEditDaftarJual';
 import LayoutdDaftarPenawar from './components/layouts/LayoutDaftarPenawar';
 
 import { history } from './helpers/history';
@@ -51,7 +51,7 @@ function App() {
               />
               <Route
                 exact
-                path={'/info-penawar'}
+                path={'/info-penawar/:id'}
                 component={LayoutInfoPenawar}
               />
               <Route
@@ -71,8 +71,8 @@ function App() {
               />
               <Route
                 exact
-                path={'/detail-daftar-jual/:id'}
-                component={LayoutDaftarJualDetail}
+                path={'/edit-daftar-jual/:id'}
+                component={LayoutEditDaftarJual}
               />
               <Route
                 exact
