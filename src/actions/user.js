@@ -23,6 +23,7 @@ import {
   GET_TAWARAN_BY_ID,
   GET_DATA_BY_KATEGORI,
   GET_DATA_BY_SEARCH,
+  UPDATE_PRODUCT,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -104,6 +105,13 @@ export const postDataProduct = (formData) => (dispatch) => {
   return UserService.postDataProduct(formData).then(() => {
     dispatch({
       type: ADD_PRODUCT,
+    });
+  });
+};
+export const updateDataProduct = (idProduct, formData) => (dispatch) => {
+  return UserService.updateDataProduct(idProduct, formData).then(() => {
+    dispatch({
+      type: UPDATE_PRODUCT,
     });
   });
 };
@@ -227,13 +235,13 @@ export const getTawaranSeller = (dispatch) => {
     dispatch({
       type: GET_TAWARAN_SELLER,
       payload: {
-        data: response.data,
+        data: response.data.data,
       },
     });
   });
 };
-export const postTawaran = (idProduct) => (dispatch) => {
-  return UserService.postTawaran(idProduct).then(() => {
+export const postTawaran = (idProduct, hargaTawar, status) => (dispatch) => {
+  return UserService.postTawaran(idProduct, hargaTawar, status).then(() => {
     dispatch({
       type: ADD_TAWARAN,
     });

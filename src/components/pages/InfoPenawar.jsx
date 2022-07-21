@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal } from 'react-bootstrap';
@@ -7,7 +9,22 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import userPhoto from '../assets/svg/user-pembeli.svg';
 import jam from '../assets/svg/jam-kecil.svg';
 
-export default function InfoPenawar() {
+const mapStateToProps = (state) => {
+  return {
+    isNull: state.barang.isNull,
+    tawaran: state.tawaran.tawaran,
+    message: state.barang.message,
+  };
+};
+
+function InfoPenawar(props) {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const tawaranID = props.tawaran.filter(
+    (barang) => String(barang.idTawaran) === params.id
+  );
+
+  console.log(tawaranID[0]);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -21,6 +38,12 @@ export default function InfoPenawar() {
   const handleGoBack = () => {
     history.goBack();
   };
+
+  // Mengubah format currency menjadi format rupiah
+  let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
   return (
     <>
       <div className="container-fluid row m-0 mt-4">
@@ -39,11 +62,15 @@ export default function InfoPenawar() {
               <div className="card-body ps-4">
                 <div className="row d-flex align-items-center">
                   <div className="col-sm-3">
-                    <img src={userPhoto} alt="Buyer" className="img-fluid" />
+                    <img
+                      src={tawaranID[0].users?.profileFoto}
+                      alt="Buyer"
+                      className="profile-photo"
+                    />
                   </div>
                   <div className="col-sm-9">
-                    <h6>Nama Pembeli</h6>
-                    <p className="text-muted">Kota</p>
+                    <h6>{tawaranID[0].users.fullName}</h6>
+                    <p className="text-muted">{tawaranID[0].users.kota}</p>
                   </div>
                 </div>
               </div>
@@ -57,15 +84,23 @@ export default function InfoPenawar() {
               <div className="card-body ps-4">
                 <div className="row">
                   <div className="col-sm-2 d-flex align-items-center">
-                    <img src={jam} alt="Jam" className="img-fluid" />
+                    <img
+                      src={tawaranID[0].product.imageProduct[0]?.urlImage}
+                      alt={tawaranID[0].product.namaProduct}
+                      className="profile-photo"
+                    />
                   </div>
                   <div className="col-sm-7">
                     <p className="text-muted m-0 label-10px">
                       Penawaran Produk
                     </p>
-                    <h6>Jam Tangan Casio</h6>
-                    <h6>Rp 250.000</h6>
-                    <h6>Ditawar Rp 250.000</h6>
+                    <h6>{tawaranID[0].product.namaProduct}</h6>
+                    <h6>
+                      <del>
+                        {formatter.format(tawaranID[0].product.hargaProduct)}
+                      </del>
+                    </h6>
+                    <h6>Ditawar {formatter.format(tawaranID[0].hargaTawar)}</h6>
                   </div>
                   <div className="col-sm-3 d-flex justify-content-end">
                     <p className="text-muted m-0 label-10px">20 Apr, 14:04</p>
@@ -115,23 +150,33 @@ export default function InfoPenawar() {
               <h5 className="fw-bold text-center">Product Match</h5>
               <div className="row mb-3">
                 <div className="col-lg-3 d-flex justify-content-center align-items-center">
-                  <img src={userPhoto} alt="Buyer" className="img-fluid" />
+                  <img
+                    src={tawaranID[0].users?.profileFoto}
+                    alt="Buyer"
+                    className="profile-photo"
+                  />
                 </div>
                 <div className="col-lg-9">
-                  <h6>Nama Pembeli</h6>
-                  <p className="text-muted">Kota</p>
+                  <h6>{tawaranID[0].users.fullName}</h6>
+                  <p className="text-muted">{tawaranID[0].users.kota}</p>
                 </div>
               </div>
               <div className="row">
                 <div className="col-lg-3 d-flex justify-content-center align-items-center">
-                  <img src={jam} alt="Jam" className="img-fluid" />
+                  <img
+                    src={tawaranID[0].product.imageProduct[0]?.urlImage}
+                    alt={tawaranID[0].product.namaProduct}
+                    className="profile-photo"
+                  />
                 </div>
                 <div className="col-lg-9">
-                  <h6>Jam Tangan Casio</h6>
+                  <h6>{tawaranID[0].product.namaProduct}</h6>
                   <p className="m-0">
-                    <del>Rp 250.000</del>
+                    <del>
+                      {formatter.format(tawaranID[0].product.hargaProduct)}
+                    </del>
                   </p>
-                  <p>Ditawar Rp 200.000</p>
+                  <p>Ditawar {formatter.format(tawaranID[0].hargaTawar)}</p>
                 </div>
               </div>
             </div>
@@ -153,3 +198,4 @@ export default function InfoPenawar() {
     </>
   );
 }
+export default connect(mapStateToProps, null)(InfoPenawar);

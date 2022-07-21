@@ -91,9 +91,9 @@ const DaftarJualDiminati = (props) => {
                       </h5>
                       <button
                         className="btn btn-danger"
-                        onClick={handleDeleteWishlist(item.idProduct)}
+                        onClick={handleDeleteWishlist(item.wishlistId)}
                       >
-                        Add to Wishlist{' '}
+                        Delete Wishlist{' '}
                         <span>
                           <FontAwesomeIcon icon={faTrash} fixedWidth />
                         </span>
