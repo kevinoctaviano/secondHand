@@ -33,21 +33,32 @@ const getDataProductByKategori = async (kategori) => {
     API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=24`
   );
 };
+const getDataProductAllUser = async () => {
+  return await axios.get(
+    API_URL + `Product?kategori=&q=&pageNo=0&pageSize=24`,
+    { headers: authHeader() }
+  );
+};
 const postDataProduct = async (data) => {
   return await axios.post(API_URL + 'Product', data, {
     headers: authHeader(),
   });
 };
 const getProductByID = async (idProduct) => {
-  return await axios
-    .get(API_URL + `Product/${idProduct}`, { headers: authHeader() })
-    .then((response) => console.log(response.data));
+  return await axios.get(API_URL + `Product/${idProduct}`, {
+    headers: authHeader(),
+  });
 };
 const getProductUser = async () => {
   return await axios.get(API_URL + 'product-user', { headers: authHeader() });
 };
 const updateDataProduct = (idProduct, data) => {
   return axios.put(API_URL + `Product/${idProduct}`, data, {
+    headers: authHeader(),
+  });
+};
+const deleteProduct = (idProduct) => {
+  return axios.delete(API_URL + `Product/${idProduct}`, {
     headers: authHeader(),
   });
 };
@@ -129,6 +140,8 @@ const getNotifikasi = () => {
 // eslint-disable-next-line
 export default {
   postStatusTawaranSuccess,
+  deleteProduct,
+  getDataProductAllUser,
   getTawaranBuyer,
   getNotifikasi,
   getDataBySearch,

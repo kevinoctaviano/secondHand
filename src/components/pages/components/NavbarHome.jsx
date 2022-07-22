@@ -18,7 +18,11 @@ import brand from '../../assets/svg/brand.svg';
 
 import EventBus from '../../../common/EventBus';
 import { clearMessage } from '../../../actions/message';
-import { getDataBySearch, getNotifikasi } from '../../../actions/user';
+import {
+  getDataBySearch,
+  getDataProductAllUser,
+  getNotifikasi,
+} from '../../../actions/user';
 import { history } from '../../../helpers/history';
 import { logout } from '../../../actions/auth';
 import { useState } from 'react';
@@ -34,6 +38,7 @@ const mapStateToProps = (state) => {
 
 function NavbarHome(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
 
@@ -98,7 +103,7 @@ function NavbarHome(props) {
   const [isMounted, setIsMounted] = useState(false);
   // const [notifikasi, setNotifikasi] = useState([]);
   // console.log('ini state redux :', props.notifikasi);
-  // console.log('ini use state notif: ', notifikasi);
+  // console.log('ini use state notif: ', props.notifikasi);
 
   const getDataNotifikasi = () => {
     // if (props.notifikasi.data === undefined) {
@@ -162,44 +167,52 @@ function NavbarHome(props) {
                 id="basic-nav-dropdown"
                 align="end"
               >
-                {/* {console.log(props.notifikasi)} */}
-                {props.notifikasi.map((item, index = 1) => (
-                  <div key={index}>
-                    <NavDropdown.Item
-                      href={`/info-penawar/${item.idNotifikasi}`}
-                    >
-                      <div className="row">
-                        <div className="col-lg-2">
-                          <img
-                            src={item.product.imageProduct[0]?.urlImage}
-                            alt={item.product.namaProduct}
-                            style={{
-                              width: '48px',
-                              height: '48px',
-                              borderRadius: '12px',
-                            }}
-                          />
+                {props.notifikasi.length === 0 ? (
+                  <NavDropdown.Item href={`#`}>
+                    <h6>Belum ada notifikasi...</h6>
+                  </NavDropdown.Item>
+                ) : (
+                  props.notifikasi.map((item, index = 1) => (
+                    <div key={index}>
+                      <NavDropdown.Item
+                        href={`/info-penawar/${item.idNotifikasi}`}
+                      >
+                        <div className="row">
+                          <div className="col-lg-2">
+                            <img
+                              src={item.product.imageProduct[0]?.urlImage}
+                              alt={item.product.namaProduct}
+                              style={{
+                                width: '48px',
+                                height: '48px',
+                                borderRadius: '12px',
+                              }}
+                            />
+                          </div>
+                          <div className="col-lg-7">
+                            <p className="text-muted m-0 label-10px">
+                              Penawaran Produk
+                            </p>
+                            <h6>{item.product.namaProduct}</h6>
+                            <h6>
+                              {formatter.format(item.product.hargaProduct)}
+                            </h6>
+                            <h6>
+                              Ditawar{' '}
+                              {formatter.format(item.product?.hargaTawar)}
+                            </h6>
+                          </div>
+                          <div className="col-lg-3">
+                            <p className="text-muted m-0 label-10px">
+                              {formatDate(item.creaDateTime)}
+                            </p>
+                          </div>
                         </div>
-                        <div className="col-lg-7">
-                          <p className="text-muted m-0 label-10px">
-                            Penawaran Produk
-                          </p>
-                          <h6>{item.product.namaProduct}</h6>
-                          <h6>{formatter.format(item.product.hargaProduct)}</h6>
-                          <h6>
-                            Ditawar {formatter.format(item.product?.hargaTawar)}
-                          </h6>
-                        </div>
-                        <div className="col-lg-3">
-                          <p className="text-muted m-0 label-10px">
-                            {formatDate(item.creaDateTime)}
-                          </p>
-                        </div>
-                      </div>
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                  </div>
-                ))}
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                    </div>
+                  ))
+                )}
               </NavDropdown>
               <NavDropdown
                 className="dropdown-menu-profile"

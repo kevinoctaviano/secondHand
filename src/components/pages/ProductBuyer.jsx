@@ -11,6 +11,7 @@ import { getTawaranBuyer, postTawaran } from '../../actions/user';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
+import userPhoto from '../assets/svg/user-photo.svg';
 
 const mapStateToProps = (state) => {
   return {
@@ -148,15 +149,27 @@ const ProductBuyer = (props) => {
                 <div className="card-body ps-4">
                   <div className="row">
                     <div className="col-lg-3">
-                      <img
-                        src={barangID[0].users.profileFoto}
-                        alt="Buyer"
-                        className="profile-photo"
-                      />
+                      {barangID[0].users.profileFoto === null ? (
+                        <img
+                          src={userPhoto}
+                          alt={barangID[0].users.fullName}
+                          className="w-100"
+                        />
+                      ) : (
+                        <img
+                          src={barangID[0].users.profileFoto}
+                          alt={barangID[0].users.fullName}
+                          className="profile-photo"
+                        />
+                      )}
                     </div>
                     <div className="sller-desk col-lg-9">
                       <h5>{barangID[0].users.fullName}</h5>
-                      <p>{barangID[0].users.kota}</p>
+                      {barangID[0].users.profileFoto === null ? (
+                        <p>Kota</p>
+                      ) : (
+                        <p>{barangID[0].users.kota}</p>
+                      )}
                     </div>
                   </div>
                 </div>

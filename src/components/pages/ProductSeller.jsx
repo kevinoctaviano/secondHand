@@ -9,7 +9,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
 import { useParams } from 'react-router-dom';
-import { deleteWishlist } from '../../actions/user';
+import { deleteProduct } from '../../actions/user';
+import userPhoto from '../assets/svg/user-photo.svg';
 
 const mapStateToProps = (state) => {
   return {
@@ -49,7 +50,7 @@ function ProductSeller(props) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteWishlist(idProduct)).then(() => {
+        dispatch(deleteProduct(idProduct)).then(() => {
           Swal.fire('Product', 'Berhasil menghapus data product', 'success');
         });
       }
@@ -127,15 +128,27 @@ function ProductSeller(props) {
                 <div className="card-body ps-4">
                   <div className="row">
                     <div className="col-lg-3">
-                      <img
-                        src={barangID[0].users.profileFoto}
-                        alt="Seller"
-                        className="profile-photo"
-                      />
+                      {barangID[0].users.profileFoto === null ? (
+                        <img
+                          src={userPhoto}
+                          alt={barangID[0].users.fullName}
+                          className="w-100"
+                        />
+                      ) : (
+                        <img
+                          src={barangID[0].users.profileFoto}
+                          alt={barangID[0].users.fullName}
+                          className="profile-photo"
+                        />
+                      )}
                     </div>
                     <div className="sller-desk col-lg-9">
                       <h5>{barangID[0].users.fullName}</h5>
-                      <p>{barangID[0].users.kota}</p>
+                      {barangID[0].users.profileFoto === null ? (
+                        <p>Kota</p>
+                      ) : (
+                        <p>{barangID[0].users.kota}</p>
+                      )}
                     </div>
                   </div>
                 </div>

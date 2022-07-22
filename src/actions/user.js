@@ -1,5 +1,6 @@
 import {
   GET_ALL_KATEGORI,
+  GET_ALL_KATEGORI_USER,
   GET_KATEGORI_NULL,
   GET_WISHLIST_NULL,
   GET_USER_BY_ID,
@@ -26,6 +27,7 @@ import {
   UPDATE_PRODUCT,
   GET_NOTIFIKASI,
   ADD_STATUS_TAWARAN,
+  DELETE_PRODUCT,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -56,6 +58,23 @@ export const changePassword = (password) => (dispatch) => {
 };
 
 // Product
+export const getDataProductAllUser = (dispatch) => {
+  return UserService.getDataProductAllUser().then((response) => {
+    const arrayKategori = response.data;
+    if (arrayKategori.length === 0) {
+      dispatch({
+        type: GET_DATA_NULL,
+      });
+    } else {
+      dispatch({
+        type: GET_ALL_KATEGORI_USER,
+        payload: {
+          data: response.data.data,
+        },
+      });
+    }
+  });
+};
 export const getDataProductByKategori = (kategori) => (dispatch) => {
   return UserService.getDataProductByKategori(kategori).then((response) => {
     // console.log(response.data.data);
@@ -124,6 +143,13 @@ export const getProductUser = () => (dispatch) => {
       payload: {
         data: response.data.data,
       },
+    });
+  });
+};
+export const deleteProduct = (idProduct) => (dispatch) => {
+  return UserService.deleteProduct(idProduct).then((response) => {
+    dispatch({
+      type: DELETE_PRODUCT,
     });
   });
 };

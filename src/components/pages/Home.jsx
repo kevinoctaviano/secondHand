@@ -14,6 +14,7 @@ import {
   getUserByID,
   getDataProductByKategori,
   postWishlist,
+  getDataProductAllUser,
   getTawaranBuyer,
 } from '../../actions/user';
 // Import Swiper styles
@@ -31,6 +32,7 @@ const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
     barangKategori: state.barang.barangKategori,
+    // barangKategoriUser: state.barang.barangKategoriUser,
     barangID: state.barang.barangID,
     message: state.barang.message,
     kategori: state.kategori.kategori,
@@ -47,8 +49,9 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getDataProductByKategori(kategori)).then(() => setLoading(false));
     dispatch(getTawaranBuyer);
+    dispatch(getAllKategori);
     if (isLoggedIn) {
-      dispatch(getAllKategori);
+      dispatch(getDataProductAllUser);
       dispatch(getUserByID);
     }
   }, [dispatch, kategori, isLoggedIn]);
@@ -73,7 +76,7 @@ const Home = (props) => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Ya, hapus!',
+      confirmButtonText: 'Ya, tambah!',
       showClass: {
         popup: 'animate__animated animate__fadeInDown',
       },
@@ -195,7 +198,7 @@ const Home = (props) => {
               <div className="col-lg-2" key={index}>
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
-                  style={{ height: '250px' }}
+                  style={{ height: '270px' }}
                 >
                   <Link
                     className="card-home-product"
