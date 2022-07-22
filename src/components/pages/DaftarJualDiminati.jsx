@@ -66,10 +66,10 @@ const DaftarJualDiminati = (props) => {
           <div className="col-md-8">
             <div className="row">
               {props.wishlist.length !== 0 ? (
-                props.wishlist.map((item) => (
+                props.wishlist.map((item, index = 1) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"
-                    key={item.product.idProduct}
+                    key={index}
                   >
                     <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                       <div className="d-flex justify-content-center">

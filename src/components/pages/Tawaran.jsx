@@ -30,8 +30,6 @@ const Tawaran = (props) => {
     style: 'currency',
     currency: 'IDR',
   });
-  // console.log(props.tawaran);
-  // const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="container mt-4">
       <div className="w-75 mx-auto">
@@ -45,7 +43,7 @@ const Tawaran = (props) => {
                 props.tawaran.map((item) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"
-                    key={item.product.idProduct}
+                    key={item.idTawaran}
                   >
                     <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
                       <div className="d-flex justify-content-center">

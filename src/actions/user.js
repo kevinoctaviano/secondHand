@@ -24,6 +24,8 @@ import {
   GET_DATA_BY_KATEGORI,
   GET_DATA_BY_SEARCH,
   UPDATE_PRODUCT,
+  GET_NOTIFIKASI,
+  ADD_STATUS_TAWARAN,
 } from './types';
 import UserService from '../services/user.service';
 
@@ -225,7 +227,7 @@ export const getTawaranBuyer = (dispatch) => {
     dispatch({
       type: GET_TAWARAN_BUYER,
       payload: {
-        data: response.data,
+        data: response.data.data,
       },
     });
   });
@@ -247,6 +249,13 @@ export const postTawaran = (idProduct, hargaTawar, status) => (dispatch) => {
     });
   });
 };
+export const postStatusTawaran = (idTawaran) => (dispatch) => {
+  return UserService.postStatusTawaranSuccess(idTawaran).then(() => {
+    dispatch({
+      type: ADD_STATUS_TAWARAN,
+    });
+  });
+};
 export const getTawaranByID = (idTawaran) => (dispatch) => {
   return UserService.getTawaranByID(idTawaran).then((response) => {
     dispatch({
@@ -254,6 +263,17 @@ export const getTawaranByID = (idTawaran) => (dispatch) => {
       payload: {
         data: response.data,
       },
+    });
+  });
+};
+
+// notifikasi
+export const getNotifikasi = () => (dispatch) => {
+  return UserService.getNotifikasi().then((response) => {
+    // console.log(response);
+    dispatch({
+      type: GET_NOTIFIKASI,
+      payload: { data: response.data.data },
     });
   });
 };
