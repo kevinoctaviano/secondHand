@@ -40,6 +40,7 @@ function NavbarHome(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [search, setSearch] = useState('');
+  const [kategori, setKategori] = useState('');
   const dispatch = useDispatch();
 
   // Mengubah format currency menjadi format rupiah
@@ -77,8 +78,8 @@ function NavbarHome(props) {
     history.listen((location) => {
       dispatch(clearMessage()); // clear message when changing location
     });
-    dispatch(getDataBySearch(search));
-  }, [dispatch, search]);
+    dispatch(getDataProductAllUser(kategori, search));
+  }, [dispatch, search, kategori]);
 
   const logOut = useCallback(() => {
     dispatch(logout());

@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
     barangKategori: state.barang.barangKategori,
-    // barangKategoriUser: state.barang.barangKategoriUser,
+    barangKategoriUser: state.barang.barangKategoriUser,
     barangID: state.barang.barangID,
     message: state.barang.message,
     kategori: state.kategori.kategori,
@@ -42,6 +42,7 @@ const mapStateToProps = (state) => {
 const Home = (props) => {
   const dispatch = useDispatch();
   const [kategori, setKategori] = useState('');
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -51,7 +52,7 @@ const Home = (props) => {
     dispatch(getTawaranBuyer);
     dispatch(getAllKategori);
     if (isLoggedIn) {
-      dispatch(getDataProductAllUser);
+      dispatch(getDataProductAllUser(kategori, search));
       dispatch(getUserByID);
     }
   }, [dispatch, kategori, isLoggedIn]);
@@ -193,6 +194,47 @@ const Home = (props) => {
                 {props.message}
               </h1>
             </>
+          ) : isLoggedIn ? (
+            props.barangKategoriUser.map((item, index = 1) => (
+              <div className="col-lg-2" key={index}>
+                <div
+                  className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
+                  style={{ height: '270px' }}
+                >
+                  <Link
+                    className="card-home-product"
+                    to={`/product-buyer/${item.idProduct}`}
+                  >
+                    <div className="d-flex justify-content-center">
+                      <img
+                        src={item.imageProduct[0]?.urlImage}
+                        className="card-home"
+                        style={{ height: '99.9px' }}
+                        alt={item.namaProduct}
+                      />
+                    </div>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {item.namaProduct}
+                    </h5>
+                    <h5 className="mt-1 text-10px font-normal text-muted">
+                      {item.kategori.namaKategori}
+                    </h5>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {formatter.format(item.hargaProduct)}
+                    </h5>
+                  </Link>
+                  <button
+                    className="btn-pink"
+                    onClick={handleAddProduct(item.idProduct)}
+                  >
+                    Add to Wishlist{' '}
+                    <span>
+                      <FontAwesomeIcon icon={faHeart} fixedWidth />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            ))
           ) : (
             props.barangKategori.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
