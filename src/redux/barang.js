@@ -5,11 +5,14 @@ import {
   GET_PRODUCT_USER,
   GET_DATA_BY_KATEGORI,
   GET_DATA_BY_SEARCH,
+  GET_ALL_KATEGORI_USER,
+  DELETE_PRODUCT,
 } from '../actions/types';
 const initialState = {
   isNull: true,
   barangUser: [],
   barangKategori: [],
+  barangKategoriUser: [],
   message: null,
 };
 
@@ -50,12 +53,25 @@ const barang = (state = initialState, action) => {
         barangKategori: payload.data,
         message: null,
       };
+    case GET_ALL_KATEGORI_USER:
+      return {
+        ...state,
+        isNull: false,
+        barangKategori: payload.data,
+        message: null,
+      };
     case GET_DATA_BY_SEARCH:
       return {
         ...state,
         isNull: false,
         barangKategori: payload.data,
         message: null,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        isNull: false,
+        message: 'Berhasil hapus data product',
       };
     default:
       return state;
