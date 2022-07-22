@@ -107,10 +107,30 @@ const getTawaranByID = (idTawaran) => {
     headers: authHeader(),
   });
 };
+const postStatusTawaranSuccess = (idTawaran) => {
+  return axios.put(
+    API_URL + `tawaran/${idTawaran}`,
+    {
+      statutsTawaran: 'ACCEPTED',
+    },
+    {
+      headers: authHeader(),
+    }
+  );
+};
+
+// notifikasi
+const getNotifikasi = () => {
+  return axios.get(API_URL + 'notfikasi', {
+    headers: authHeader(),
+  });
+};
 
 // eslint-disable-next-line
 export default {
+  postStatusTawaranSuccess,
   getTawaranBuyer,
+  getNotifikasi,
   getDataBySearch,
   getTawaranSeller,
   getTawaranByID,

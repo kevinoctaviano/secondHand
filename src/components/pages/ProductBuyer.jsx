@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
@@ -15,7 +16,7 @@ const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
     barangKategori: state.barang.barangKategori,
-    tawaran: state.tawaran.tawaran,
+    tawaranBuyer: state.tawaran.tawaranBuyer,
     message: state.barang.message,
   };
 };
@@ -23,15 +24,28 @@ const mapStateToProps = (state) => {
 const ProductBuyer = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
+  const [statusTawaran, setStatusTawaran] = useState('');
   const barangID = props.barangKategori.filter(
     (barang) => String(barang.idProduct) === params.id
   );
 
-  // const statusTawaran = props.tawaran.data.filter(
-  //   (tawaran) => String(tawaran.product.idProduct) === params.id
-  // );
-  // useEffect(() => {}, [statusTawaran]);
-  // console.log(typeof statusTawaran[0].statusTawaran);
+  useEffect(() => {
+    dispatch(getTawaranBuyer);
+    const handleStatus = () => {
+      if (props.tawaranBuyer !== []) {
+        const statusTawaran = props.tawaranBuyer.filter(
+          (tawaran) => String(tawaran.product.idProduct) === params.id
+        );
+        if (statusTawaran.length === 0) {
+          setStatusTawaran('');
+        } else {
+          setStatusTawaran(statusTawaran[0].statusTawaran);
+        }
+      }
+    };
+    handleStatus();
+  }, [dispatch, params, props]);
+
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -40,7 +54,6 @@ const ProductBuyer = (props) => {
 
   const [show, setShow] = useState(false);
   const [hargaTawar, setHargaTawar] = useState('');
-  // const [waiting, setWaiting] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -76,7 +89,6 @@ const ProductBuyer = (props) => {
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
             >
-              {/* {barangKategori.imageProduct?.map((item) => ( */}
               {barangID[0].imageProduct?.map((item) => (
                 <SwiperSlide
                   className="d-flex justify-content-center"
@@ -105,14 +117,26 @@ const ProductBuyer = (props) => {
                   <h4 className="card-text fw-bold mb-3">
                     {formatter.format(barangID[0].hargaProduct)}
                   </h4>
-                  <div className="d-grid">
-                    <Button
-                      className="btn-purple rounded-16px text-center"
-                      onClick={handleShow}
-                    >
-                      Saya tertarik dan ingin nego
-                    </Button>
-                  </div>
+                  {statusTawaran === 'WAITING' ? (
+                    <div className="d-grid gap-4">
+                      <Button
+                        type="submit"
+                        className="btn-purple rounded-16px"
+                        disabled
+                      >
+                        Menunggu Konfirmasi Seller
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="d-grid">
+                      <Button
+                        className="btn-purple rounded-16px text-center"
+                        onClick={handleShow}
+                      >
+                        Saya tertarik dan ingin nego
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -210,23 +234,12 @@ const ProductBuyer = (props) => {
                 placeholder="Rp 0,00"
                 onChange={changeHargaTawar}
               />
-              {/* {tawaranID[0].statusTawaran === 'WAITING' ? (
-                <div className="d-grid gap-4">
-                  <Button
-                    type="submit"
-                    className="btn-purple rounded-16px"
-                    disabled
-                  >
-                    Menunggu Konfirmasi Seller
-                  </Button>
-                </div>
-              ) : ( */}
+
               <div className="d-grid gap-4">
                 <Button type="submit" className="btn-purple rounded-16px">
                   Kirim
                 </Button>
               </div>
-              {/* )} */}
             </Form>
           </div>
         </Modal.Body>

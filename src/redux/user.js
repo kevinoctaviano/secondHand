@@ -2,8 +2,9 @@ import {
   GET_USER_BY_ID,
   UPDATE_USER,
   CHANGE_PASSWORD_USER,
+  GET_NOTIFIKASI,
 } from '../actions/types';
-const initialState = { isNull: true, user: [], message: null };
+const initialState = { isNull: true, user: [], notifikasi: [], message: null };
 
 const user = (state = initialState, action) => {
   const { type, payload } = action;
@@ -26,6 +27,13 @@ const user = (state = initialState, action) => {
         ...state,
         isNull: false,
         message: 'Berhasil Update Password User',
+      };
+    case GET_NOTIFIKASI:
+      return {
+        ...state,
+        isNull: false,
+        notifikasi: payload.data,
+        message: 'Berhasil menampilkan notifikasi',
       };
 
     default:

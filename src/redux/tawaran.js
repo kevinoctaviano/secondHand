@@ -4,7 +4,12 @@ import {
   GET_TAWARAN_SELLER,
   GET_TAWARAN_BY_ID,
 } from '../actions/types';
-const initialState = { isNull: true, tawaran: [], message: null };
+const initialState = {
+  isNull: true,
+  tawaran: [],
+  tawaranBuyer: [],
+  message: null,
+};
 
 const tawaran = (state = initialState, action) => {
   const { type, payload } = action;
@@ -20,7 +25,7 @@ const tawaran = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        tawaran: payload.data,
+        tawaranBuyer: payload.data,
         message: null,
       };
     case GET_TAWARAN_SELLER:
