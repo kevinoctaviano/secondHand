@@ -57,7 +57,7 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        barangKategori: payload.data,
+        barangKategoriUser: payload.data,
         message: null,
       };
     case GET_DATA_BY_SEARCH:

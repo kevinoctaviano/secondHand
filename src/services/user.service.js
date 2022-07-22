@@ -33,9 +33,9 @@ const getDataProductByKategori = async (kategori) => {
     API_URL + `Product?kategori=${kategori}&q=&pageNo=0&pageSize=24`
   );
 };
-const getDataProductAllUser = async () => {
+const getDataProductAllUser = async (kategori, search) => {
   return await axios.get(
-    API_URL + `Product?kategori=&q=&pageNo=0&pageSize=24`,
+    API_URL + `Product?kategori=${kategori}&q=${search}&pageNo=0&pageSize=24`,
     { headers: authHeader() }
   );
 };

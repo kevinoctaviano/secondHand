@@ -58,22 +58,24 @@ export const changePassword = (password) => (dispatch) => {
 };
 
 // Product
-export const getDataProductAllUser = (dispatch) => {
-  return UserService.getDataProductAllUser().then((response) => {
-    const arrayKategori = response.data;
-    if (arrayKategori.length === 0) {
-      dispatch({
-        type: GET_DATA_NULL,
-      });
-    } else {
-      dispatch({
-        type: GET_ALL_KATEGORI_USER,
-        payload: {
-          data: response.data.data,
-        },
-      });
+export const getDataProductAllUser = (kategori, search) => (dispatch) => {
+  return UserService.getDataProductAllUser(kategori, search).then(
+    (response) => {
+      const arrayKategori = response.data;
+      if (arrayKategori.length === 0) {
+        dispatch({
+          type: GET_DATA_NULL,
+        });
+      } else {
+        dispatch({
+          type: GET_ALL_KATEGORI_USER,
+          payload: {
+            data: response.data.data,
+          },
+        });
+      }
     }
-  });
+  );
 };
 export const getDataProductByKategori = (kategori) => (dispatch) => {
   return UserService.getDataProductByKategori(kategori).then((response) => {
