@@ -155,7 +155,7 @@ const ProductBuyer = (props) => {
                         <img
                           src={userPhoto}
                           alt={barangID[0].users.fullName}
-                          className="w-100"
+                          className="profile-photo"
                         />
                       ) : (
                         <img
@@ -207,7 +207,7 @@ const ProductBuyer = (props) => {
             Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan
             segera dihubungi penjual.
           </p>
-          <div className="card rounded-16px mt-3" style={{ height: '120px' }}>
+          <div className="card rounded-16px mt-3 card-height-modal">
             <div className="card-body">
               <div className="row d-flex align-items-center">
                 <div className="col-lg-3">
