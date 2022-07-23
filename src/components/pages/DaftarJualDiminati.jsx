@@ -73,7 +73,7 @@ const DaftarJualDiminati = (props) => {
                     key={index}
                   >
                     <Link
-                      className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4"
+                      className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4 icon-add-product-daftarjual"
                       to={`/product-buyer/${item.product.idProduct}`}
                     >
                       <div className="d-flex justify-content-center">
@@ -108,7 +108,11 @@ const DaftarJualDiminati = (props) => {
               ) : (
                 <div className="d-flex justify-content-center">
                   <div className="col-lg-4">
-                    <img src={kosong} alt="Kosong" />
+                    <img
+                      src={kosong}
+                      className="icon-add-product-daftarjual"
+                      alt="Kosong"
+                    />
                   </div>
                 </div>
               )}

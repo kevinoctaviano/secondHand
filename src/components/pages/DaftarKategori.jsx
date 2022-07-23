@@ -100,7 +100,7 @@ const DaftarKategori = (props) => {
         <div className="row">
           <Sidebar />
           <div className="col-md-8">
-            <div className="card shadow mb-4">
+            <div className="card shadow mb-4 icon-add-product-daftarjual">
               <div className="card-header py-3 row">
                 <div className="col-lg-6 d-flex align-self-center">
                   <h6 className="m-0 fw-bold custom-font-auth ">

@@ -51,7 +51,7 @@ const DaftarTerjual = (props) => {
                     className="col-lg-4 d-flex justify-content-center"
                     key={item.idTawaran}
                   >
-                    <div className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4">
+                    <div className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4 icon-add-product-daftarjual">
                       <div className="d-flex justify-content-center">
                         <img
                           src={item.product.imageProduct[0]?.urlImage}
@@ -81,7 +81,11 @@ const DaftarTerjual = (props) => {
               ) : (
                 <div className="d-flex justify-content-center">
                   <div className="col-lg-4">
-                    <img src={kosong} alt="Kosong" />
+                    <img
+                      src={kosong}
+                      className="icon-add-product-daftarjual"
+                      alt="Kosong"
+                    />
                   </div>
                 </div>
               )}
