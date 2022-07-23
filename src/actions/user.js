@@ -245,6 +245,9 @@ export const deleteWishlist = (id) => (dispatch) => {
   return UserService.deleteWishlist(id).then(() => {
     dispatch({
       type: DELETE_WISHLIST,
+      payload: {
+        id: id
+      }
     });
   });
 };
