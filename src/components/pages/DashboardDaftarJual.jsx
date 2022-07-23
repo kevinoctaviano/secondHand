@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import tambahProduk from '../assets/svg/tambah-produk.svg';
 import empty from '../assets/svg/empty.svg';
 import { getProductUser } from '../../actions/user';
@@ -26,7 +24,6 @@ const DashboardDaftarJual = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductUser());
-    // console.log(props.barang);
   }, [dispatch]);
 
   // Mengubah format currency menjadi format rupiah
@@ -71,7 +68,10 @@ const DashboardDaftarJual = (props) => {
                     className="col-lg-4 d-flex justify-content-center"
                     key={index}
                   >
-                    <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                    <Link
+                      className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4"
+                      to={`/product-seller/${item.idProduct}`}
+                    >
                       <div className="d-flex justify-content-center">
                         <img
                           src={item.imageProduct[0]?.urlImage}
@@ -89,16 +89,7 @@ const DashboardDaftarJual = (props) => {
                       <h5 className="mt-1 text-sm font-normal">
                         {formatter.format(item.hargaProduct)}
                       </h5>
-                      <Link
-                        className="btn btn-success"
-                        to={`/product-seller/${item.idProduct}`}
-                      >
-                        Edit Product{' '}
-                        <span>
-                          <FontAwesomeIcon icon={faEdit} fixedWidth />
-                        </span>
-                      </Link>
-                    </div>
+                    </Link>
                   </div>
                 ))
               )}

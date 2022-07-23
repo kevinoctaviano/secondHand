@@ -21,6 +21,10 @@ const mapStateToProps = (state) => {
 const Tawaran = (props) => {
   const dispatch = useDispatch();
 
+  const tawaranWaiting = props.tawaran.filter(
+    (tawaran) => tawaran.statusTawaran === 'WAITING'
+  );
+
   useEffect(() => {
     dispatch(getTawaranSeller);
   }, [dispatch]);
@@ -39,13 +43,13 @@ const Tawaran = (props) => {
           <Sidebar />
           <div className="col-md-8">
             <div className="row">
-              {props.tawaran.length !== 0 ? (
-                props.tawaran.map((item) => (
+              {tawaranWaiting.length !== 0 ? (
+                tawaranWaiting.map((item) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"
                     key={item.idTawaran}
                   >
-                    <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                    <div className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4">
                       <div className="d-flex justify-content-center">
                         <img
                           src={item.product.imageProduct[0]?.urlImage}

@@ -9,13 +9,14 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
 import { useParams } from 'react-router-dom';
-import { deleteProduct } from '../../actions/user';
+import { deleteProduct, getProductUser } from '../../actions/user';
 import userPhoto from '../assets/svg/user-photo.svg';
+import { useEffect } from 'react';
 
 const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
-    barangKategori: state.barang.barangKategori,
+    barangUser: state.barang.barangUser,
     message: state.barang.message,
   };
 };
@@ -23,9 +24,14 @@ const mapStateToProps = (state) => {
 function ProductSeller(props) {
   const params = useParams();
   const dispatch = useDispatch();
-  const barangID = props.barangKategori.filter(
+
+  const barangID = props.barangUser.filter(
     (barang) => String(barang.idProduct) === params.id
   );
+
+  useEffect(() => {
+    dispatch(getProductUser);
+  });
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {

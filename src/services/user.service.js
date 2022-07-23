@@ -91,7 +91,7 @@ const postWishlist = (idProduct) => {
   );
 };
 const deleteWishlist = (id) => {
-  return axios.delete(API_URL + `Wishlist/${id}`, { headers: authHeader() });
+  return axios.delete(API_URL + `wishlist/${id}`, { headers: authHeader() });
 };
 
 // tawaran
@@ -118,11 +118,11 @@ const getTawaranByID = (idTawaran) => {
     headers: authHeader(),
   });
 };
-const postStatusTawaranSuccess = (idTawaran) => {
+const postStatusTawaran = (idTawaran, statutsTawaran) => {
   return axios.put(
     API_URL + `tawaran/${idTawaran}`,
     {
-      statutsTawaran: 'ACCEPTED',
+      statutsTawaran,
     },
     {
       headers: authHeader(),
@@ -139,7 +139,7 @@ const getNotifikasi = () => {
 
 // eslint-disable-next-line
 export default {
-  postStatusTawaranSuccess,
+  postStatusTawaran,
   deleteProduct,
   getDataProductAllUser,
   getTawaranBuyer,

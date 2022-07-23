@@ -13,7 +13,6 @@ import {
 import fi_bell from '../../assets/svg/fi_bell.svg';
 import fi_user from '../../assets/svg/fi_user.svg';
 import fi_list from '../../assets/svg/fi_list.svg';
-import jam from '../../assets/svg/jam.svg';
 import brand from '../../assets/svg/brand.svg';
 
 import EventBus from '../../../common/EventBus';
@@ -42,6 +41,8 @@ function NavbarHome(props) {
   const [search, setSearch] = useState('');
   const [kategori, setKategori] = useState('');
   const dispatch = useDispatch();
+
+  const notifLimit = props.notifikasi.slice(0, 5);
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
@@ -78,8 +79,11 @@ function NavbarHome(props) {
     history.listen((location) => {
       dispatch(clearMessage()); // clear message when changing location
     });
-    dispatch(getDataProductAllUser(kategori, search));
-  }, [dispatch, search, kategori]);
+    if (isLoggedIn) {
+      dispatch(getDataProductAllUser(kategori, search));
+    }
+    dispatch(getDataBySearch(search));
+  }, [dispatch, search, kategori, isLoggedIn]);
 
   const logOut = useCallback(() => {
     dispatch(logout());
@@ -102,28 +106,18 @@ function NavbarHome(props) {
 
   const [timer, setTimer] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
-  // const [notifikasi, setNotifikasi] = useState([]);
-  // console.log('ini state redux :', props.notifikasi);
-  // console.log('ini use state notif: ', props.notifikasi);
-
-  const getDataNotifikasi = () => {
-    // if (props.notifikasi.data === undefined) {
-    dispatch(getNotifikasi());
-    // setNotifikasi(props.notifikasi);
-    // console.log('ini notif: ', props.notifikasi);
-    // } else {
-    //   setNotifikasi([]);
-    // }
-    clearTimeout(timer);
-    setTimer(setTimeout(getDataNotifikasi, 2000));
-  };
 
   useEffect(() => {
+    const getDataNotifikasi = () => {
+      dispatch(getNotifikasi);
+      clearTimeout(timer);
+      setTimer(setTimeout(getDataNotifikasi, 2000));
+    };
     if (!isMounted) {
       getDataNotifikasi();
       setIsMounted(true);
     }
-  }, []);
+  }, [isMounted, dispatch, timer]);
 
   return (
     <Navbar bg="light shadow-sm" expand="lg">
@@ -168,21 +162,23 @@ function NavbarHome(props) {
                 id="basic-nav-dropdown"
                 align="end"
               >
-                {props.notifikasi.length === 0 ? (
+                {notifLimit.length === 0 ? (
                   <NavDropdown.Item href={`#`}>
                     <h6>Belum ada notifikasi...</h6>
                   </NavDropdown.Item>
                 ) : (
-                  props.notifikasi.map((item, index = 1) => (
+                  notifLimit.map((item, index = 1) => (
                     <div key={index}>
                       <NavDropdown.Item
-                        href={`/info-penawar/${item.idNotifikasi}`}
+                        href={`/info-penawar/${item.tawaran.idTawaran}`}
                       >
                         <div className="row">
                           <div className="col-lg-2">
                             <img
-                              src={item.product.imageProduct[0]?.urlImage}
-                              alt={item.product.namaProduct}
+                              src={
+                                item.tawaran.product.imageProduct[0]?.urlImage
+                              }
+                              alt={item.tawaran.product.namaProduct}
                               style={{
                                 width: '48px',
                                 height: '48px',
@@ -194,13 +190,17 @@ function NavbarHome(props) {
                             <p className="text-muted m-0 label-10px">
                               Penawaran Produk
                             </p>
-                            <h6>{item.product.namaProduct}</h6>
+                            <h6>{item.tawaran.product.namaProduct}</h6>
                             <h6>
-                              {formatter.format(item.product.hargaProduct)}
+                              <del>
+                                {formatter.format(
+                                  item.tawaran.product.hargaProduct
+                                )}
+                              </del>
                             </h6>
                             <h6>
                               Ditawar{' '}
-                              {formatter.format(item.product?.hargaTawar)}
+                              {formatter.format(item.tawaran.hargaTawar)}
                             </h6>
                           </div>
                           <div className="col-lg-3">
