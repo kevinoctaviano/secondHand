@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { postStatusTawaran } from '../../actions/user';
+import { postStatusTawaran, getTawaranSeller } from '../../actions/user';
 import { useEffect } from 'react';
 import userPhoto from '../assets/svg/user-photo.svg';
 
@@ -23,13 +23,16 @@ const mapStateToProps = (state) => {
 function InfoPenawar(props) {
   const params = useParams();
   const dispatch = useDispatch();
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
   useEffect(() => {
-    const tawaranID = props.tawaran.filter(
-      (barang) => String(barang.idTawaran) === params.id
-    );
-    setStatusTawaran(tawaranID);
-  }, [dispatch, props, params]);
+    if (isLoggedIn) {
+      dispatch(getTawaranSeller);
+      const tawaranID = props.tawaran.filter(
+        (barang) => String(barang.idTawaran) === params.id
+      );
+      setStatusTawaran(tawaranID);
+    }
+  }, [dispatch, props, params, isLoggedIn]);
 
   const [statusTawaran, setStatusTawaran] = useState([]);
 
