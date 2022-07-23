@@ -428,6 +428,10 @@ p.p-alert {
   margin-bottom: 0px !important;
 }
 
+.card-height-modal {
+  height: 120px;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
@@ -492,18 +496,18 @@ No media query for `xs` since this is the default in Bootstrap */
     margin-top: 15px;
     margin-bottom: 15px;
   }
-  .edit-daftar-jual {
-    width: 50px !important;
-    height: 35px !important;
-    border: 1px solid #7126b5 !important;
-    border-radius: 8px !important;
-  }
   img.profile-photo {
     max-width: 80px;
     max-height: 80px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+  .btn-purple {
+    margin-top: 1rem !important;
+  }
+  .card-height-modal {
+    height: 150px;
   }
 }
 
