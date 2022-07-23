@@ -275,9 +275,18 @@ hr.custom-font-auth {
   border-radius: 20px;
 }
 
+.card-daftar-diminati {
+  width: 206.67px;
+  height: 245px;
+  text-decoration: none;
+  color: black;
+}
+
 .card-daftar-jual {
   width: 206.67px;
-  height: 250px;
+  height: 198px;
+  text-decoration: none;
+  color: black;
 }
 
 .btn-purple-kategori {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal } from 'react-bootstrap';
@@ -8,8 +8,9 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getTawaranSeller, postStatusTawaran } from '../../actions/user';
+import { postStatusTawaran } from '../../actions/user';
 import { useEffect } from 'react';
+import userPhoto from '../assets/svg/user-photo.svg';
 
 const mapStateToProps = (state) => {
   return {
@@ -22,46 +23,40 @@ const mapStateToProps = (state) => {
 function InfoPenawar(props) {
   const params = useParams();
   const dispatch = useDispatch();
-  const [IDTawaran, setIDTawaran] = useState('');
-
-  const tawaranID = props.tawaran.filter(
-    (barang) => String(barang.idTawaran) === params.id
-  );
-  // setIDTawaran(tawaranID);
-  console.log('a :', tawaranID[0]);
 
   useEffect(() => {
-    const handleStatus = () => {
-      if (props.tawaran !== []) {
-        const statusTawaran = props.tawaran.filter(
-          (barang) => String(barang.idTawaran) === params.id
-        );
-        console.log(statusTawaran);
-        if (statusTawaran.length === 0) {
-          setIDTawaran('');
-        } else {
-          setIDTawaran(statusTawaran[0].idTawaran);
-        }
-      }
-    };
-    handleStatus();
-  }, [props, params]);
-  console.log('props :', IDTawaran);
-  // console.log('tawaran :', IDTawaran);
-  // console.log(IDTawaran);
-  // console.log(IDTawaran);
+    const tawaranID = props.tawaran.filter(
+      (barang) => String(barang.idTawaran) === params.id
+    );
+    setStatusTawaran(tawaranID);
+  }, [dispatch, props, params]);
+
+  const [statusTawaran, setStatusTawaran] = useState([]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    const idTawar = tawaranID[0].idTawaran;
-    const status = dispatch(postStatusTawaran(idTawar));
+  const handleShow = (idTawaran) => {
+    const tawaranStatus = 'ACCEPTED';
+    const status = dispatch(postStatusTawaran(idTawaran, tawaranStatus));
     toast.promise(status, {
       pending: 'Sedang mengubah status...',
       success: `Berhasil deal dengan buyer!`,
       error: 'Promise rejected 🤯',
     });
-    setShow(true);
+    status.then(() => setShow(true));
+  };
+  const handleTolak = (idTawaran) => {
+    const tawaranStatus = 'REJECTED';
+    const status = dispatch(postStatusTawaran(idTawaran, tawaranStatus));
+    toast.promise(status, {
+      pending: 'Sedang mengubah status...',
+      success: 'Menolak deal dengan buyer...',
+      error: 'Promise rejected 🤯',
+    });
+    status.then(() => {
+      return <Redirect to={'/daftar-penawar'} />;
+    });
   };
 
   const handleWhatsapp = () => {
@@ -78,8 +73,32 @@ function InfoPenawar(props) {
     style: 'currency',
     currency: 'IDR',
   });
-  return (
-    <>
+
+  let formatDate = (date) => {
+    const monthMap = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr.',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sept',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    const tanggal = new Date(date);
+    const hari = tanggal.getDate();
+    const bulan = tanggal.getMonth();
+    const jam = tanggal.getHours();
+    const menit = tanggal.getMinutes();
+
+    return `${hari} ${monthMap[bulan]}, ${jam}.${menit}`;
+  };
+  return statusTawaran.map((item, index = 1) => (
+    <div key={index}>
       <div className="container-fluid row m-0 mt-4">
         <ToastContainer
           position="top-center"
@@ -102,23 +121,38 @@ function InfoPenawar(props) {
             className="custom-font-3 arrow-left"
           />
         </div>
+
         <div className="col-lg-10">
           <div className="center-custom">
             <div className="card rounded-16px card-custom">
               <div className="card-body ps-4">
                 <div className="row d-flex align-items-center">
                   <div className="col-sm-3">
-                    <img
-                      src={tawaranID[0] && tawaranID[0].users?.profileFoto}
-                      alt="Buyer"
-                      className="profile-photo"
-                    />
+                    {item.users.profileFoto === null ? (
+                      <img
+                        src={userPhoto}
+                        alt={item.users.fullName}
+                        className="profile-photo"
+                      />
+                    ) : (
+                      <img
+                        src={item.users.profileFoto}
+                        alt={item.users.fullName}
+                        className="profile-photo"
+                      />
+                    )}
                   </div>
                   <div className="col-sm-9">
-                    <h6>{tawaranID[0] && tawaranID[0].users.fullName}</h6>
-                    <p className="text-muted">
-                      {tawaranID[0] && tawaranID[0].users.kota}
-                    </p>
+                    <h6>{item.users.fullName}</h6>
+                    {item.users.kota === null ? (
+                      <p className="text-muted custom-font-5 custom-space-top">
+                        Kota
+                      </p>
+                    ) : (
+                      <p className="text-muted custom-font-5 custom-space-top">
+                        {item.users.kota}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -133,11 +167,8 @@ function InfoPenawar(props) {
                 <div className="row">
                   <div className="col-sm-2 d-flex align-items-center">
                     <img
-                      src={
-                        tawaranID[0] &&
-                        tawaranID[0].product.imageProduct[0]?.urlImage
-                      }
-                      alt={tawaranID[0] && tawaranID[0].product.namaProduct}
+                      src={item.product.imageProduct[0]?.urlImage}
+                      alt={item.product.namaProduct}
                       className="profile-photo"
                     />
                   </div>
@@ -145,23 +176,16 @@ function InfoPenawar(props) {
                     <p className="text-muted m-0 label-10px">
                       Penawaran Produk
                     </p>
-                    <h6>{tawaranID[0] && tawaranID[0].product.namaProduct}</h6>
+                    <h6>{item.product.namaProduct}</h6>
                     <h6>
-                      <del>
-                        {formatter.format(
-                          tawaranID[0] && tawaranID[0].product.hargaProduct
-                        )}
-                      </del>
+                      <del>{formatter.format(item.product.hargaProduct)}</del>
                     </h6>
-                    <h6>
-                      Ditawar{' '}
-                      {formatter.format(
-                        tawaranID[0] && tawaranID[0].hargaTawar
-                      )}
-                    </h6>
+                    <h6>Ditawar {formatter.format(item.hargaTawar)}</h6>
                   </div>
                   <div className="col-sm-3 d-flex justify-content-end">
-                    <p className="text-muted m-0 label-10px">20 Apr, 14:04</p>
+                    <p className="text-muted m-0 label-10px">
+                      {formatDate(item.creaDateTime)}
+                    </p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -173,13 +197,14 @@ function InfoPenawar(props) {
                       marginRight: '16px',
                       marginTop: '16px',
                     }}
+                    onClick={() => handleTolak(item.idTawaran)}
                   >
                     Tolak
                   </button>
                   <button
                     className="mt-3 form-group fw-bold text-white border-light custom-border-auth custom-button-auth custom-font-1"
                     style={{ width: '158px', height: '36px' }}
-                    onClick={handleShow(tawaranID[0] && tawaranID[0].idTawaran)}
+                    onClick={() => handleShow(item.idTawaran)}
                   >
                     Terima
                   </button>
@@ -209,42 +234,30 @@ function InfoPenawar(props) {
               <div className="row mb-3">
                 <div className="col-lg-3 d-flex justify-content-center align-items-center">
                   <img
-                    src={tawaranID[0] && tawaranID[0].users?.profileFoto}
+                    src={item.users?.profileFoto}
                     alt="Buyer"
                     className="profile-photo"
                   />
                 </div>
                 <div className="col-lg-9">
-                  <h6>{tawaranID[0] && tawaranID[0].users.fullName}</h6>
-                  <p className="text-muted">
-                    {tawaranID[0] && tawaranID[0].users.kota}
-                  </p>
+                  <h6>{item.users.fullName}</h6>
+                  <p className="text-muted">{item.users.kota}</p>
                 </div>
               </div>
               <div className="row">
                 <div className="col-lg-3 d-flex justify-content-center align-items-center">
                   <img
-                    src={
-                      tawaranID[0] &&
-                      tawaranID[0].product.imageProduct[0]?.urlImage
-                    }
-                    alt={tawaranID[0] && tawaranID[0].product.namaProduct}
+                    src={item.product.imageProduct[0]?.urlImage}
+                    alt={item.product.namaProduct}
                     className="profile-photo"
                   />
                 </div>
                 <div className="col-lg-9">
-                  <h6>{tawaranID[0] && tawaranID[0].product.namaProduct}</h6>
+                  <h6>{item.product.namaProduct}</h6>
                   <p className="m-0">
-                    <del>
-                      {formatter.format(
-                        tawaranID[0] && tawaranID[0].product.hargaProduct
-                      )}
-                    </del>
+                    <del>{formatter.format(item.product.hargaProduct)}</del>
                   </p>
-                  <p>
-                    Ditawar{' '}
-                    {formatter.format(tawaranID[0] && tawaranID[0].hargaTawar)}
-                  </p>
+                  <p>Ditawar {formatter.format(item.hargaTawar)}</p>
                 </div>
               </div>
             </div>
@@ -263,7 +276,7 @@ function InfoPenawar(props) {
           </div>
         </Modal.Body>
       </Modal>
-    </>
-  );
+    </div>
+  ));
 }
 export default connect(mapStateToProps, null)(InfoPenawar);

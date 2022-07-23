@@ -16,7 +16,7 @@ import userPhoto from '../assets/svg/user-photo.svg';
 const mapStateToProps = (state) => {
   return {
     isNull: state.barang.isNull,
-    barangKategori: state.barang.barangKategori,
+    barangKategoriUser: state.barang.barangKategoriUser,
     tawaranBuyer: state.tawaran.tawaranBuyer,
     message: state.barang.message,
   };
@@ -25,8 +25,10 @@ const mapStateToProps = (state) => {
 const ProductBuyer = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
+
   const [statusTawaran, setStatusTawaran] = useState('');
-  const barangID = props.barangKategori.filter(
+
+  const barangID = props.barangKategoriUser.filter(
     (barang) => String(barang.idProduct) === params.id
   );
 

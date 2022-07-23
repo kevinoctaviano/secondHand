@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
 import { deleteWishlist, getAllWishlist } from '../../actions/user';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
   return {
@@ -71,7 +72,10 @@ const DaftarJualDiminati = (props) => {
                     className="col-lg-4 d-flex justify-content-center"
                     key={index}
                   >
-                    <div className="card card-daftar-jual mb-3 shadow-md px-2 pt-2 pb-4">
+                    <Link
+                      className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4"
+                      to={`/product-buyer/${item.product.idProduct}`}
+                    >
                       <div className="d-flex justify-content-center">
                         <img
                           src={item.product.imageProduct[0]?.urlImage}
@@ -98,7 +102,7 @@ const DaftarJualDiminati = (props) => {
                           <FontAwesomeIcon icon={faTrash} fixedWidth />
                         </span>
                       </button>
-                    </div>
+                    </Link>
                   </div>
                 ))
               ) : (

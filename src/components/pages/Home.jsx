@@ -52,10 +52,12 @@ const Home = (props) => {
     dispatch(getTawaranBuyer);
     dispatch(getAllKategori);
     if (isLoggedIn) {
-      dispatch(getDataProductAllUser(kategori, search));
+      dispatch(getDataProductAllUser(kategori, search)).then(() =>
+        setLoading(false)
+      );
       dispatch(getUserByID);
     }
-  }, [dispatch, kategori, isLoggedIn]);
+  }, [dispatch, kategori, isLoggedIn, search]);
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {

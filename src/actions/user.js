@@ -277,8 +277,8 @@ export const postTawaran = (idProduct, hargaTawar, status) => (dispatch) => {
     });
   });
 };
-export const postStatusTawaran = (idTawaran) => (dispatch) => {
-  return UserService.postStatusTawaranSuccess(idTawaran).then(() => {
+export const postStatusTawaran = (idTawaran, tawaranStatus) => (dispatch) => {
+  return UserService.postStatusTawaran(idTawaran, tawaranStatus).then(() => {
     dispatch({
       type: ADD_STATUS_TAWARAN,
     });
@@ -296,7 +296,7 @@ export const getTawaranByID = (idTawaran) => (dispatch) => {
 };
 
 // notifikasi
-export const getNotifikasi = () => (dispatch) => {
+export const getNotifikasi = (dispatch) => {
   return UserService.getNotifikasi().then((response) => {
     // console.log(response);
     dispatch({
