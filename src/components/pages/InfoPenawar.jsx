@@ -32,7 +32,7 @@ function InfoPenawar(props) {
       );
       setStatusTawaran(tawaranID);
     }
-  }, [dispatch, props, params]);
+  }, [dispatch, props, params, isLoggedIn]);
 
   const [statusTawaran, setStatusTawaran] = useState([]);
 
