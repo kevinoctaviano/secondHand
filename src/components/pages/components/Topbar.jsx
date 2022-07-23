@@ -15,7 +15,7 @@ function Topbar(props) {
   return (
     <div className="border my-3 px-3  custom-border-auth">
       <div className="row">
-        <div className="col-md-1 pt-3">
+        <div className="col-md-1 pt-3 d-flex justify-content-center">
           {props.user.profileFoto === null ? (
             <img
               src={userPhoto}
