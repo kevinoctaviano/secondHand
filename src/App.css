@@ -301,6 +301,10 @@ hr.custom-font-auth {
   display: none;
 }
 
+.mySwiper {
+  display: block;
+}
+
 .gift {
   display: none;
 }
@@ -461,6 +465,9 @@ No media query for `xs` since this is the default in Bootstrap */
   .bg-home {
     display: block;
   }
+  .mySwiper {
+    display: none;
+  }
   .margin-top-home {
     margin-top: 0px;
   }
@@ -484,6 +491,19 @@ No media query for `xs` since this is the default in Bootstrap */
   .icon-add-product-daftarjual {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+  .edit-daftar-jual {
+    width: 50px !important;
+    height: 35px !important;
+    border: 1px solid #7126b5 !important;
+    border-radius: 8px !important;
+  }
+  img.profile-photo {
+    max-width: 80px;
+    max-height: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
