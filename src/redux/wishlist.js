@@ -19,7 +19,8 @@ const wishlist = (state = initialState, action) => {
     case DELETE_WISHLIST:
       return {
         ...state,
-        isNull: false,
+        isNull: true,
+        wishlist: state.wishlist.filter((item) => item.wishlistId !== payload.id),
         message: 'Berhasil menghapus data wishlist',
       };
     case GET_ALL_WISHLIST:
