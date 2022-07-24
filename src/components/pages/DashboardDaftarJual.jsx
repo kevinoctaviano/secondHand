@@ -50,6 +50,7 @@ const DashboardDaftarJual = (props) => {
                   />
                 </Link>
               </div>
+
               {!props.barang ? (
                 <>
                   <h1 className="text-dark display-5 text-center">
@@ -63,6 +64,7 @@ const DashboardDaftarJual = (props) => {
                   />
                 </>
               ) : (
+
                 props.barang.map((item, index = 1) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"

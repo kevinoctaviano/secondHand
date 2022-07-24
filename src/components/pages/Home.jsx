@@ -46,7 +46,13 @@ const Home = (props) => {
   const [loading, setLoading] = useState(true);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const productPublish = props.barangKategori.filter(
+    (item) => item.statusProduct === 'PUBLISH'
+  );
 
+  const productPublishUser = props.barangKategoriUser.filter(
+    (item) => item.statusProduct === 'PUBLISH'
+  );
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getDataProductAllUser(kategori, search)).then(() =>
@@ -200,56 +206,72 @@ const Home = (props) => {
               </h1>
             </>
           ) : isLoggedIn ? (
-            props.barangKategoriUser.length === 0 ? (
-              <>
-                <h1 className="text-dark display-6 text-center">
-                  Belum Ada Data Barang Penjual Lain
-                </h1>
-              </>
-            ) : (
-              props.barangKategoriUser.map((item, index = 1) => (
-                <div className="col-lg-2" key={index}>
-                  <div
-                    className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
-                    style={{ height: '270px' }}
+            productPublishUser.map((item, index = 1) => (
+              <div className="col-lg-2" key={index}>
+                <div
+                  className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
+                  style={{ height: '270px' }}
+                >
+                  <Link
+                    className="card-home-product"
+                    to={`/product-buyer/${item.idProduct}`}
                   >
-                    <Link
-                      className="card-home-product"
-                      to={`/product-buyer/${item.idProduct}`}
-                    >
-                      <div className="d-flex justify-content-center">
-                        <img
-                          src={item.imageProduct[0]?.urlImage}
-                          className="card-home"
-                          style={{ height: '99.9px' }}
-                          alt={item.namaProduct}
-                        />
-                      </div>
-                      <h5 className="mt-2 text-sm text-dark font-normal">
-                        {item.namaProduct}
-                      </h5>
-                      <h5 className="mt-1 text-10px font-normal text-muted">
-                        {item.kategori.namaKategori}
-                      </h5>
-                      <h5 className="mt-2 text-sm text-dark font-normal">
-                        {formatter.format(item.hargaProduct)}
-                      </h5>
-                    </Link>
-                    <button
-                      className="btn-pink"
-                      onClick={handleAddProduct(item.idProduct)}
-                    >
-                      Add to Wishlist{' '}
-                      <span>
-                        <FontAwesomeIcon icon={faHeart} fixedWidth />
-                      </span>
-                    </button>
-                  </div>
+                    <div className="d-flex justify-content-center">
+                      <img
+                        src={item.imageProduct[0]?.urlImage}
+                        className="card-home"
+                        style={{ height: '99.9px' }}
+                        alt={item.namaProduct}
+                      />
+                    </div>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {item.namaProduct}
+                    </h5>
+                    <h5 className="mt-1 text-10px font-normal text-muted">
+                      {item.kategori.namaKategori}
+                    </h5>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {formatter.format(item.hargaProduct)}
+                    </h5>
+                  </Link>
+
+                  <Link
+                    className="card-home-product"
+                    to={`/product-buyer/${item.idProduct}`}
+                  >
+                    <div className="d-flex justify-content-center">
+                      <img
+                        src={item.imageProduct[0]?.urlImage}
+                        className="card-home"
+                        style={{ height: '99.9px' }}
+                        alt={item.namaProduct}
+                      />
+                    </div>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {item.namaProduct}
+                    </h5>
+                    <h5 className="mt-1 text-10px font-normal text-muted">
+                      {item.kategori.namaKategori}
+                    </h5>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {formatter.format(item.hargaProduct)}
+                    </h5>
+                  </Link>
+                  <button
+                    className="btn-pink"
+                    onClick={handleAddProduct(item.idProduct)}
+                  >
+                    Add to Wishlist{' '}
+                    <span>
+                      <FontAwesomeIcon icon={faHeart} fixedWidth />
+                    </span>
+                  </button>
                 </div>
-              ))
-            )
+              </div>
+            ))
+
           ) : (
-            props.barangKategori.map((item, index = 1) => (
+            productPublish.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"

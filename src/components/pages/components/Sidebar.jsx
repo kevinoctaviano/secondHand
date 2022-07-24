@@ -6,6 +6,10 @@ import {
   faHeart,
   faSearch,
   faUserCheck,
+  faBoxArchive,
+
+  faListCheck,
+
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
@@ -91,9 +95,38 @@ function Sidebar() {
           activeClassName="active"
         >
           <span>
-            <FontAwesomeIcon icon={faUserCheck} fixedWidth />
+
+            <FontAwesomeIcon icon={faListCheck} />
           </span>
           Daftar Tawaran Saya
+          <span>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </span>
+        </NavLink>
+        <hr className="custom-font-auth" />
+        <NavLink
+          className="d-flex justify-content-between sidebar-custom"
+          to={'/produk-dibuat'}
+          activeClassName="active"
+        >
+          <span>
+            <FontAwesomeIcon icon={faBoxArchive} fixedWidth />
+          </span>
+          Daftar Produk Dibuat
+          <span>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </span>
+        </NavLink>
+        <hr className="custom-font-auth" />
+        <NavLink
+          className="d-flex justify-content-between sidebar-custom"
+          to={'/produk-publish'}
+          activeClassName="active"
+        >
+          <span>
+            <FontAwesomeIcon icon={faUserCheck} fixedWidth />
+          </span>
+          Daftar Produk Publish
           <span>
             <FontAwesomeIcon icon={faAngleRight} />
           </span>

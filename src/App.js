@@ -27,6 +27,8 @@ import LayoutdDaftarPenawar from './components/layouts/LayoutDaftarPenawar';
 import { history } from './helpers/history';
 import { getAllKategori, getUserByID } from './actions/user';
 import LayoutdDaftarTawaranSaya from './components/layouts/LayoutDaftarTawaranSaya';
+import LayoutProductTerbuat from './components/layouts/LayoutProdukDibuat';
+import LayoutProductPublish from './components/layouts/LayoutProdukPublish';
 
 function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -80,6 +82,15 @@ function App() {
                 path={'/daftar-penawar'}
                 component={LayoutdDaftarPenawar}
               />
+              <Route
+                exact
+                path={'/produk-dibuat'}
+                component={LayoutProductTerbuat}
+              />
+              <Route
+                exact
+                path={'/produk-publish'}
+                component={LayoutProductPublish} />
               <Route exact
                 path={'/tawaran-saya'}
                 component={LayoutdDaftarTawaranSaya} />
