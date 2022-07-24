@@ -47,21 +47,19 @@ const InfoProductAdd = (props) => {
     toast.promise(postData, {
       pending: 'Sedang menambahkan data...',
       success: `Berhasil menambahkan data!`,
-      error: 'Promise rejected 🤯',
+      error: `Maximum post product is 4`,
     });
   };
 
   const handleImageChange = (e) => {
-    // console.log(e.target.files);
+
     setSelectedFiles(e.target.files);
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map((file) =>
         URL.createObjectURL(file)
       );
 
-      // console.log('filesArray: ', filesArray);
 
-      // selectedFiles(filesArray);
       setPreview((prevImages) => prevImages.concat(filesArray));
       Array.from(e.target.files).map(
         (file) => URL.revokeObjectURL(file) // avoid memory leak
@@ -70,7 +68,7 @@ const InfoProductAdd = (props) => {
   };
 
   const renderPhotos = (source) => {
-    // console.log('source: ', source);
+
     return source.map((photo) => {
       return (
         <div className="col-lg-2" key={photo}>
@@ -119,9 +117,8 @@ const InfoProductAdd = (props) => {
               </label>
               <input
                 type="text"
-                className={`form-control ${
-                  errors.namaProduct ? 'is-invalid' : ''
-                } p-2 custom-font-1 rounded-16px`}
+                className={`form-control ${errors.namaProduct ? 'is-invalid' : ''
+                  } p-2 custom-font-1 rounded-16px`}
                 placeholder="Nama Produk"
                 {...register('namaProduct', { required: true })}
               />
@@ -139,9 +136,8 @@ const InfoProductAdd = (props) => {
               </label>
               <input
                 type="text"
-                className={`form-control ${
-                  errors.hargaProduct ? 'is-invalid' : ''
-                } p-2 custom-font-1 rounded-16px`}
+                className={`form-control ${errors.hargaProduct ? 'is-invalid' : ''
+                  } p-2 custom-font-1 rounded-16px`}
                 placeholder="Rp 0,00"
                 {...register('hargaProduct', { required: true })}
               />
@@ -158,9 +154,8 @@ const InfoProductAdd = (props) => {
                 Kategori
               </label>
               <select
-                className={`form-select ${
-                  errors.idkategori ? 'is-invalid' : ''
-                } text-muted w-100 px-1 py-2 border rounded-16px`}
+                className={`form-select ${errors.idkategori ? 'is-invalid' : ''
+                  } text-muted w-100 px-1 py-2 border rounded-16px`}
                 aria-label="Default select example"
                 {...register('idKategori', { required: true })}
               >
@@ -185,9 +180,8 @@ const InfoProductAdd = (props) => {
               </label>
               <textarea
                 name="deskripsi"
-                className={`form-control ${
-                  errors.deskripsi ? 'is-invalid' : ''
-                } alamat rounded-16px`}
+                className={`form-control ${errors.deskripsi ? 'is-invalid' : ''
+                  } alamat rounded-16px`}
                 cols="3"
                 placeholder="Deskripsi..."
                 {...register('deskripsi', { required: true })}
