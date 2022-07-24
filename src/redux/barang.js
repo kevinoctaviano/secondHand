@@ -71,6 +71,7 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
+        barangUser: state.barangUser.filter((item) => item.idProduct !== payload.id),
         message: 'Berhasil hapus data product',
       };
     default:
