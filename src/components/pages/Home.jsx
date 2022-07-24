@@ -234,6 +234,29 @@ const Home = (props) => {
                       {formatter.format(item.hargaProduct)}
                     </h5>
                   </Link>
+
+                  <Link
+                    className="card-home-product"
+                    to={`/product-buyer/${item.idProduct}`}
+                  >
+                    <div className="d-flex justify-content-center">
+                      <img
+                        src={item.imageProduct[0]?.urlImage}
+                        className="card-home"
+                        style={{ height: '99.9px' }}
+                        alt={item.namaProduct}
+                      />
+                    </div>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {item.namaProduct}
+                    </h5>
+                    <h5 className="mt-1 text-10px font-normal text-muted">
+                      {item.kategori.namaKategori}
+                    </h5>
+                    <h5 className="mt-2 text-sm text-dark font-normal">
+                      {formatter.format(item.hargaProduct)}
+                    </h5>
+                  </Link>
                   <button
                     className="btn-pink"
                     onClick={handleAddProduct(item.idProduct)}
@@ -246,6 +269,7 @@ const Home = (props) => {
                 </div>
               </div>
             ))
+
           ) : (
             productPublish.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
