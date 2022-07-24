@@ -95,14 +95,14 @@ const ProductBuyer = (props) => {
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
             >
-              {barangID[0].imageProduct?.map((item) => (
+              {barangID[0]?.imageProduct?.map((item) => (
                 <SwiperSlide
                   className="d-flex justify-content-center"
                   key={item.imageId}
                 >
                   <img
                     src={item?.urlImage}
-                    alt={barangID[0].namaProduct}
+                    alt={barangID[0]?.namaProduct}
                     className="w-75 rounded-16px"
                   />
                 </SwiperSlide>
@@ -116,12 +116,14 @@ const ProductBuyer = (props) => {
                 style={{ width: '336px', height: '204px' }}
               >
                 <div className="card-body ps-4 pt-4">
-                  <h5 className="card-title mb-3">{barangID[0].namaProduct}</h5>
+                  <h5 className="card-title mb-3">
+                    {barangID[0]?.namaProduct}
+                  </h5>
                   <h6 className="card-subtitle text-muted mb-3">
-                    {barangID[0].kategori.namaKategori}
+                    {barangID[0]?.kategori.namaKategori}
                   </h6>
                   <h4 className="card-text fw-bold mb-3">
-                    {formatter.format(barangID[0].hargaProduct)}
+                    {formatter.format(barangID[0]?.hargaProduct)}
                   </h4>
                   {statusTawaran === 'WAITING' ? (
                     <div className="d-grid gap-4">
@@ -154,26 +156,26 @@ const ProductBuyer = (props) => {
                 <div className="card-body ps-4">
                   <div className="row">
                     <div className="col-lg-3">
-                      {barangID[0].users.profileFoto === null ? (
+                      {barangID[0]?.users.profileFoto === null ? (
                         <img
                           src={userPhoto}
-                          alt={barangID[0].users.fullName}
+                          alt={barangID[0]?.users.fullName}
                           className="profile-photo"
                         />
                       ) : (
                         <img
-                          src={barangID[0].users.profileFoto}
-                          alt={barangID[0].users.fullName}
+                          src={barangID[0]?.users.profileFoto}
+                          alt={barangID[0]?.users.fullName}
                           className="profile-photo"
                         />
                       )}
                     </div>
                     <div className="sller-desk col-lg-9">
-                      <h5>{barangID[0].users.fullName}</h5>
-                      {barangID[0].users.profileFoto === null ? (
+                      <h5>{barangID[0]?.users.fullName}</h5>
+                      {barangID[0]?.users.profileFoto === null ? (
                         <p>Kota</p>
                       ) : (
-                        <p>{barangID[0].users.kota}</p>
+                        <p>{barangID[0]?.users.kota}</p>
                       )}
                     </div>
                   </div>
@@ -190,7 +192,7 @@ const ProductBuyer = (props) => {
               <div className="card rounded-16px shadow-sm w-100 ms-lg-5 mt-4">
                 <div className="card-body p-4">
                   <h5 className="card-title mb-3">Deskripsi</h5>
-                  <p className="card-text">{barangID[0].deskripsiProduct}</p>
+                  <p className="card-text">{barangID[0]?.deskripsiProduct}</p>
                 </div>
               </div>
             </div>
@@ -215,15 +217,15 @@ const ProductBuyer = (props) => {
               <div className="row d-flex align-items-center">
                 <div className="col-lg-3">
                   <img
-                    src={barangID[0].imageProduct[0]?.urlImage}
+                    src={barangID[0]?.imageProduct[0]?.urlImage}
                     className="profile-photo"
                     alt="Buyer"
                   />
                 </div>
                 <div className="col-lg-9">
-                  <h5 className="fw-bold">{barangID[0].namaProduct}</h5>
+                  <h5 className="fw-bold">{barangID[0]?.namaProduct}</h5>
                   <h6 className="fw-bold">
-                    {formatter.format(barangID[0].hargaProduct)}
+                    {formatter.format(barangID[0]?.hargaProduct)}
                   </h6>
                 </div>
               </div>

@@ -64,6 +64,7 @@ function InfoPenawar(props) {
 
   const handleWhatsapp = () => {
     window.open('https://wa.me/085156896874', '_blank');
+    return <Redirect to={'/terjual'} />;
   };
 
   const history = useHistory();
@@ -236,15 +237,31 @@ function InfoPenawar(props) {
               <h5 className="fw-bold text-center">Product Match</h5>
               <div className="row mb-3">
                 <div className="col-lg-3 d-flex justify-content-center align-items-center">
-                  <img
-                    src={item.users?.profileFoto}
-                    alt="Buyer"
-                    className="profile-photo"
-                  />
+                  {item.users.profileFoto === null ? (
+                    <img
+                      src={userPhoto}
+                      alt={item.users.fullName}
+                      className="profile-photo"
+                    />
+                  ) : (
+                    <img
+                      src={item.users.profileFoto}
+                      alt={item.users.fullName}
+                      className="profile-photo"
+                    />
+                  )}
                 </div>
                 <div className="col-lg-9">
                   <h6>{item.users.fullName}</h6>
-                  <p className="text-muted">{item.users.kota}</p>
+                  {item.users.kota === null ? (
+                    <p className="text-muted custom-font-5 custom-space-top">
+                      Kota
+                    </p>
+                  ) : (
+                    <p className="text-muted custom-font-5 custom-space-top">
+                      {item.users.kota}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="row">
