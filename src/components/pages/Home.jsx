@@ -46,7 +46,13 @@ const Home = (props) => {
   const [loading, setLoading] = useState(true);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const productPublish = props.barangKategori.filter(
+    (item) => item.statusProduct === 'PUBLISH'
+  );
 
+  const productPublishUser = props.barangKategoriUser.filter(
+    (item) => item.statusProduct === 'PUBLISH'
+  );
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getDataProductAllUser(kategori, search)).then(() =>
@@ -200,7 +206,7 @@ const Home = (props) => {
               </h1>
             </>
           ) : isLoggedIn ? (
-            props.barangKategoriUser.map((item, index = 1) => (
+            productPublishUser.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
@@ -241,7 +247,7 @@ const Home = (props) => {
               </div>
             ))
           ) : (
-            props.barangKategori.map((item, index = 1) => (
+            productPublish.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
                 <div
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
