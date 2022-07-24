@@ -138,7 +138,7 @@ function ProductSeller(props) {
                         <img
                           src={userPhoto}
                           alt={barangID[0].users.fullName}
-                          className="w-100"
+                          className="profile-photo"
                         />
                       ) : (
                         <img

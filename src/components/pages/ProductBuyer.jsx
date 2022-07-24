@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
@@ -27,27 +27,30 @@ const ProductBuyer = (props) => {
   const dispatch = useDispatch();
 
   const [statusTawaran, setStatusTawaran] = useState('');
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const barangID = props.barangKategoriUser.filter(
     (barang) => String(barang.idProduct) === params.id
   );
 
   useEffect(() => {
-    dispatch(getTawaranBuyer);
-    const handleStatus = () => {
-      if (props.tawaranBuyer !== []) {
-        const statusTawaran = props.tawaranBuyer.filter(
-          (tawaran) => String(tawaran.product.idProduct) === params.id
-        );
-        if (statusTawaran.length === 0) {
-          setStatusTawaran('');
-        } else {
-          setStatusTawaran(statusTawaran[0].statusTawaran);
+    if (isLoggedIn) {
+      dispatch(getTawaranBuyer);
+      const handleStatus = () => {
+        if (props.tawaranBuyer !== []) {
+          const statusTawaran = props.tawaranBuyer.filter(
+            (tawaran) => String(tawaran.product.idProduct) === params.id
+          );
+          if (statusTawaran.length === 0) {
+            setStatusTawaran('');
+          } else {
+            setStatusTawaran(statusTawaran[0].statusTawaran);
+          }
         }
-      }
-    };
-    handleStatus();
-  }, [dispatch, params, props]);
+      };
+      handleStatus();
+    }
+  }, [dispatch, params, props, isLoggedIn]);
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
@@ -155,7 +158,7 @@ const ProductBuyer = (props) => {
                         <img
                           src={userPhoto}
                           alt={barangID[0].users.fullName}
-                          className="w-100"
+                          className="profile-photo"
                         />
                       ) : (
                         <img
@@ -207,7 +210,7 @@ const ProductBuyer = (props) => {
             Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan
             segera dihubungi penjual.
           </p>
-          <div className="card rounded-16px mt-3" style={{ height: '120px' }}>
+          <div className="card rounded-16px mt-3 card-height-modal">
             <div className="card-body">
               <div className="row d-flex align-items-center">
                 <div className="col-lg-3">
@@ -251,7 +254,10 @@ const ProductBuyer = (props) => {
               />
 
               <div className="d-grid gap-4">
-                <Button type="submit" className="btn-purple rounded-16px">
+                <Button
+                  type="submit"
+                  className="btn-purple btn-purple-modal rounded-16px"
+                >
                   Kirim
                 </Button>
               </div>

@@ -42,7 +42,9 @@ function NavbarHome(props) {
   const [kategori, setKategori] = useState('');
   const dispatch = useDispatch();
 
-  const notifLimit = props.notifikasi.slice(0, 5);
+  const notifLimit = props.notifikasi
+    .filter((notif) => notif.tawaran.statusTawaran === 'WAITING')
+    .slice(0, 5);
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
@@ -109,7 +111,9 @@ function NavbarHome(props) {
 
   useEffect(() => {
     const getDataNotifikasi = () => {
-      dispatch(getNotifikasi);
+      if (isLoggedIn) {
+        dispatch(getNotifikasi);
+      }
       clearTimeout(timer);
       setTimer(setTimeout(getDataNotifikasi, 2000));
     };
@@ -117,7 +121,7 @@ function NavbarHome(props) {
       getDataNotifikasi();
       setIsMounted(true);
     }
-  }, [isMounted, dispatch, timer]);
+  }, [isMounted, dispatch, timer, isLoggedIn]);
 
   return (
     <Navbar bg="light shadow-sm" expand="lg">

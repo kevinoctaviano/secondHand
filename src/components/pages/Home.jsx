@@ -48,14 +48,17 @@ const Home = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getDataProductByKategori(kategori)).then(() => setLoading(false));
-    dispatch(getTawaranBuyer);
-    dispatch(getAllKategori);
     if (isLoggedIn) {
       dispatch(getDataProductAllUser(kategori, search)).then(() =>
         setLoading(false)
       );
       dispatch(getUserByID);
+      dispatch(getTawaranBuyer);
+    } else {
+      dispatch(getDataProductByKategori(kategori)).then(() =>
+        setLoading(false)
+      );
+      dispatch(getAllKategori);
     }
   }, [dispatch, kategori, isLoggedIn, search]);
 
@@ -266,10 +269,7 @@ const Home = (props) => {
                       {formatter.format(item.hargaProduct)}
                     </h5>
                   </Link>
-                  <button
-                    className="btn-pink"
-                    onClick={handleAddProduct(item.idProduct)}
-                  >
+                  <button className="btn-pink" disabled>
                     Add to Wishlist{' '}
                     <span>
                       <FontAwesomeIcon icon={faHeart} fixedWidth />

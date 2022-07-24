@@ -1,7 +1,9 @@
 import React from 'react';
 import userPhoto from '../../assets/svg/user-photo.svg';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getUserByID } from '../../../actions/user';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,12 +14,21 @@ const mapStateToProps = (state) => {
 };
 
 function Topbar(props) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserByID);
+  }, [dispatch, props]);
   return (
     <div className="border my-3 px-3  custom-border-auth">
       <div className="row">
-        <div className="col-md-1 pt-3">
+        <div className="col-md-1 pt-3 d-flex justify-content-center">
           {props.user.profileFoto === null ? (
-            <img src={userPhoto} alt={props.user.fullName} className="w-100" />
+            <img
+              src={userPhoto}
+              alt={props.user.fullName}
+              className="profile-photo"
+            />
           ) : (
             <img
               src={props.user.profileFoto}
