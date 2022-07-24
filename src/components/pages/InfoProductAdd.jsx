@@ -41,14 +41,27 @@ const InfoProductAdd = (props) => {
     formData.append('deskripsiProduct', data.deskripsi);
     formData.append('statusProduct', 'PUBLISH');
 
-    const postData = dispatch(postDataProduct(formData)).then(() => {
-      setSelectedFiles([]);
-    });
+    const postData = dispatch(postDataProduct(formData))
+      .then(() => {
+        setSelectedFiles([]);
+        toast.success(`Berhasil menambahkan data!`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual')
+        })
+      }).catch((error) => {
+        history.push("/daftar-jual")
+        toast.error(`${error.message}`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual')
+        })
+      }).finally(() => {
+        history.push("/daftar-jual")
+
+
+      });
+
     toast.promise(postData, {
       pending: 'Sedang menambahkan data...',
-      success: `Berhasil menambahkan data!`,
-      error: `Maximum post product is 4`,
-
     });
 
   };
