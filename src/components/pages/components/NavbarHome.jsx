@@ -158,8 +158,10 @@ function NavbarHome(props) {
             </Nav>
           ) : (
             <Nav className="ms-auto my-2 my-lg-0">
-              <Nav.Link href="/daftar-jual">
-                <img src={fi_list} alt="List" />
+              <Nav.Link >
+                <Link to={"/daftar-jual"}>
+                  <img src={fi_list} alt="List" />
+                </Link>
               </Nav.Link>
               <NavDropdown
                 title={<img src={fi_bell} alt="Bell" />}
