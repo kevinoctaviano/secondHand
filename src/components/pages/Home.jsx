@@ -212,28 +212,7 @@ const Home = (props) => {
                   className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
                   style={{ height: '270px' }}
                 >
-                  <Link
-                    className="card-home-product"
-                    to={`/product-buyer/${item.idProduct}`}
-                  >
-                    <div className="d-flex justify-content-center">
-                      <img
-                        src={item.imageProduct[0]?.urlImage}
-                        className="card-home"
-                        style={{ height: '99.9px' }}
-                        alt={item.namaProduct}
-                      />
-                    </div>
-                    <h5 className="mt-2 text-sm text-dark font-normal">
-                      {item.namaProduct}
-                    </h5>
-                    <h5 className="mt-1 text-10px font-normal text-muted">
-                      {item.kategori.namaKategori}
-                    </h5>
-                    <h5 className="mt-2 text-sm text-dark font-normal">
-                      {formatter.format(item.hargaProduct)}
-                    </h5>
-                  </Link>
+
 
                   <Link
                     className="card-home-product"
