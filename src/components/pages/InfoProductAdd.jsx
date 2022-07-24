@@ -48,7 +48,9 @@ const InfoProductAdd = (props) => {
       pending: 'Sedang menambahkan data...',
       success: `Berhasil menambahkan data!`,
       error: `Maximum post product is 4`,
+
     });
+
   };
 
   const handleImageChange = (e) => {

@@ -152,6 +152,9 @@ export const deleteProduct = (idProduct) => (dispatch) => {
   return UserService.deleteProduct(idProduct).then((response) => {
     dispatch({
       type: DELETE_PRODUCT,
+      payload: {
+        id: idProduct
+      }
     });
   });
 };
