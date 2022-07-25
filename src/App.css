@@ -436,6 +436,12 @@ p.p-alert {
   margin-top: 1rem !important;
 }
 
+.notif {
+  position: absolute;
+  top: 0.5px;
+  right: 0.5px;
+}
+
 /* X-Small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap */
 
@@ -509,6 +515,11 @@ No media query for `xs` since this is the default in Bootstrap */
   }
   .card-height-modal {
     height: 150px;
+  }
+  .notif {
+    position: absolute;
+    top: 0.5px;
+    right: 365px;
   }
 }
 

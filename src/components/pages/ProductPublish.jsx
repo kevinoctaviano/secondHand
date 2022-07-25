@@ -66,10 +66,10 @@ const ProductPublish = (props) => {
           <div className="col-md-8">
             <div className="row">
               {productDibuat.length !== 0 ? (
-                productDibuat.map((item) => (
+                productDibuat.map((item, index = 1) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"
-                    key={item.idTawaran}
+                    key={index}
                   >
                     <div className="card card-daftar-diminati mb-3 shadow-md px-2 pt-2 pb-4">
                       <div className="d-flex justify-content-center">
