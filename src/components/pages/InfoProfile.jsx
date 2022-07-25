@@ -25,8 +25,14 @@ const InfoProfile = (props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+  } = useForm();
+
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    watch,
+    formState: { errors: errors2 },
   } = useForm();
   const [selectedFiles, setSelectedFiles] = useState();
   // handle password
@@ -40,7 +46,6 @@ const InfoProfile = (props) => {
   };
 
   const handleUpdateUser = async (data) => {
-
     let formData = new FormData();
     formData.append('profileFoto', selectedFiles);
     formData.append('fullName', data.fullName);
@@ -129,8 +134,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${errors.fullName ? 'is-invalid' : ''
-                    } custom-font-1 rounded-16px`}
+                  className={`form-control ${
+                    errors.fullName ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Nama"
                   {...register('fullName', { required: true })}
                 />
@@ -145,8 +151,9 @@ const InfoProfile = (props) => {
                 <div className="row">
                   <div className="col-md-12">
                     <select
-                      className={`form-select ${errors.kota ? 'is-invalid' : ''
-                        } text-muted w-100 border rounded-16px`}
+                      className={`form-select ${
+                        errors.kota ? 'is-invalid' : ''
+                      } text-muted w-100 border rounded-16px`}
                       aria-label="Default select example"
                       name="kota"
                       id="kota"
@@ -168,8 +175,9 @@ const InfoProfile = (props) => {
                   Alamat*
                 </label>
                 <textarea
-                  className={`form-control ${errors.alamat ? 'is-invalid' : ''
-                    } alamat rounded-16px`}
+                  className={`form-control ${
+                    errors.alamat ? 'is-invalid' : ''
+                  } alamat rounded-16px`}
                   cols="3"
                   placeholder="Contoh: Jalan Ikan Hiu 33"
                   {...register('alamat', { required: true })}
@@ -185,8 +193,9 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${errors.noWa ? 'is-invalid' : ''
-                    } custom-font-1 rounded-16px`}
+                  className={`form-control ${
+                    errors.noWa ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Contoh: +628123456789"
                   {...register('noWa', { required: true })}
                 />
@@ -202,7 +211,7 @@ const InfoProfile = (props) => {
                 Simpan
               </button>
             </Form>
-            <Form onSubmit={handleSubmit(handleChangePassword)}>
+            <Form onSubmit={handleSubmit2(handleChangePassword)}>
               <h4 className="text-center my-3">Change Password</h4>
               <div className="form-group mb-3">
                 <label htmlFor="password" className="fw-bold custom-font-2">
@@ -210,10 +219,11 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className={`form-control ${errors.password ? 'is-invalid' : ''
-                    } custom-font-1 rounded-16px`}
+                  className={`form-control ${
+                    errors2.password ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Password..."
-                  {...register('password', {
+                  {...register2('password', {
                     required: '*Password is required',
                     minLength: {
                       value: 8,
@@ -221,8 +231,8 @@ const InfoProfile = (props) => {
                     },
                   })}
                 />
-                {errors.password && (
-                  <p className="error-message">{errors.password.message}</p>
+                {errors2.password && (
+                  <p className="error-message">{errors2.password.message}</p>
                 )}
               </div>
               <div className="form-group mb-1">
@@ -234,19 +244,20 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''
-                    } custom-font-1 rounded-16px`}
+                  className={`form-control ${
+                    errors2.confirmPassword ? 'is-invalid' : ''
+                  } custom-font-1 rounded-16px`}
                   placeholder="Confirm password..."
-                  {...register('confirmPassword', {
+                  {...register2('confirmPassword', {
                     required: '*Confirm password is required',
                     validate: (value) =>
                       value === password.current ||
                       '*The passwords do not match',
                   })}
                 />
-                {errors.confirmPassword && (
+                {errors2.confirmPassword && (
                   <p className="error-message">
-                    {errors.confirmPassword.message}
+                    {errors2.confirmPassword.message}
                   </p>
                 )}
               </div>
