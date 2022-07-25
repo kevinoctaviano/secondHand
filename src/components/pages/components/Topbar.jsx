@@ -23,16 +23,16 @@ function Topbar(props) {
     <div className="border my-3 px-3  custom-border-auth">
       <div className="row">
         <div className="col-md-1 pt-3 d-flex justify-content-center">
-          {props.user.profileFoto === null ? (
+          {props.user?.profileFoto === null ? (
             <img
               src={userPhoto}
-              alt={props.user.fullName}
+              alt={props.user?.fullName}
               className="profile-photo"
             />
           ) : (
             <img
-              src={props.user.profileFoto}
-              alt={props.user.fullName}
+              src={props.user?.profileFoto}
+              alt={props.user?.fullName}
               className="profile-photo"
             />
           )}

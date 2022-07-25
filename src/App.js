@@ -29,12 +29,13 @@ import { getAllKategori, getUserByID } from './actions/user';
 import LayoutdDaftarTawaranSaya from './components/layouts/LayoutDaftarTawaranSaya';
 import LayoutProductTerbuat from './components/layouts/LayoutProdukDibuat';
 import LayoutProductPublish from './components/layouts/LayoutProdukPublish';
+import LayoutDetailsProfile from './components/layouts/LayoutDetailsProfile';
 
 function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(getAllDataProduct);
+
     dispatch(getAllKategori);
     dispatch(getUserByID);
   }, [dispatch]);
@@ -87,6 +88,10 @@ function App() {
                 path={'/produk-dibuat'}
                 component={LayoutProductTerbuat}
               />
+              <Route
+                exact
+                path={'/ubah-profile'}
+                component={LayoutDetailsProfile} />
               <Route
                 exact
                 path={'/produk-publish'}

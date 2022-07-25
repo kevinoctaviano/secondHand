@@ -131,6 +131,20 @@ function Sidebar() {
             <FontAwesomeIcon icon={faAngleRight} />
           </span>
         </NavLink>
+        <hr className="custom-font-auth" />
+        <NavLink
+          className="d-flex justify-content-between sidebar-custom"
+          to={'/ubah-profile'}
+          activeClassName="active"
+        >
+          <span>
+            <FontAwesomeIcon icon={faUserCheck} fixedWidth />
+          </span>
+          Akun Saya
+          <span>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </span>
+        </NavLink>
       </div>
     </div>
   );
