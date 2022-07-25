@@ -35,7 +35,6 @@ function App() {
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-
     dispatch(getAllKategori);
     dispatch(getUserByID);
   }, [dispatch]);
@@ -50,7 +49,7 @@ function App() {
             <>
               <Route
                 exact
-                path={'/info-profile'}
+                path={'/ubah-profile'}
                 component={LayoutInfoProfile}
               />
               <Route
@@ -90,15 +89,19 @@ function App() {
               />
               <Route
                 exact
-                path={'/ubah-profile'}
-                component={LayoutDetailsProfile} />
+                path={'/info-profile'}
+                component={LayoutDetailsProfile}
+              />
               <Route
                 exact
                 path={'/produk-publish'}
-                component={LayoutProductPublish} />
-              <Route exact
+                component={LayoutProductPublish}
+              />
+              <Route
+                exact
                 path={'/tawaran-saya'}
-                component={LayoutdDaftarTawaranSaya} />
+                component={LayoutdDaftarTawaranSaya}
+              />
               <Route
                 exact
                 path={'/diminati'}

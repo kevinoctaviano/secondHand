@@ -7,9 +7,7 @@ import {
   faSearch,
   faUserCheck,
   faBoxArchive,
-
   faListCheck,
-
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
@@ -95,7 +93,6 @@ function Sidebar() {
           activeClassName="active"
         >
           <span>
-
             <FontAwesomeIcon icon={faListCheck} />
           </span>
           Daftar Tawaran Saya
@@ -134,7 +131,7 @@ function Sidebar() {
         <hr className="custom-font-auth" />
         <NavLink
           className="d-flex justify-content-between sidebar-custom"
-          to={'/ubah-profile'}
+          to={'/info-profile'}
           activeClassName="active"
         >
           <span>

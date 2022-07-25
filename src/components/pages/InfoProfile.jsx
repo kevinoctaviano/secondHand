@@ -5,7 +5,7 @@ import { faArrowLeft, faCamera } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-validation/build/form';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { updateUser } from '../../actions/user';
+import { updateUser, changePassword } from '../../actions/user';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,6 +38,7 @@ const InfoProfile = (props) => {
     const profilePicture = e.target.files[0];
     setSelectedFiles(profilePicture);
   };
+
   const handleUpdateUser = async (data) => {
     // e.preventDefault();
     let formData = new FormData();
@@ -55,6 +56,20 @@ const InfoProfile = (props) => {
       pending: 'Sedang menambahkan data...',
       success: `Berhasil update data user!`,
       error: 'Promise rejected 🤯',
+    });
+  };
+
+  const handleChangePassword = (data) => {
+    let formData = new FormData();
+    formData.append('password', data.password);
+    const changePass = dispatch(changePassword(formData));
+    toast.promise(changePass, {
+      pending: 'Sedang mengubah password...',
+      success: `Berhasil update password!`,
+      error: 'Promise rejected 🤯',
+    });
+    changePass.then(() => {
+      history.push('/info-profile');
     });
   };
 
@@ -183,6 +198,16 @@ const InfoProfile = (props) => {
                   <p className="error-message">*Phone number is required.</p>
                 )}
               </div>
+
+              <button
+                type="submit"
+                className="mt-3 form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1"
+              >
+                Simpan
+              </button>
+            </Form>
+            <Form onSubmit={handleSubmit(handleChangePassword)}>
+              <h4 className="text-center my-3">Change Password</h4>
               <div className="form-group mb-3">
                 <label htmlFor="password" className="fw-bold custom-font-2">
                   Password
@@ -233,44 +258,11 @@ const InfoProfile = (props) => {
               </div>
               <button
                 type="submit"
-                className="mt-3 form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1"
-              >
-                Simpan
-              </button>
-            </Form>
-            {/* <Form onSubmit={handleChangePassword} ref={form}>
-            <h4 className="text-center my-3">Change Password</h4>
-            <div className="form-group mb-3">
-              <label htmlFor="newpassword" className="fw-bold custom-font-2">
-                New password
-              </label>
-              <input
-                type="password"
-                className="form-control custom-font-1 rounded-16px"
-                placeholder="New password..."
-                onChange={onChangePassword}
-              />
-            </div>
-            <div className="form-group mb-3">
-              <label
-                htmlFor="confirm-password"
-                className="fw-bold custom-font-2"
-              >
-                Confirm password
-              </label>
-              <input
-                type="password"
-                className="form-control custom-font-1 rounded-16px"
-                placeholder="Confirm password..."
-              />
-            </div>
-            <button
-                type="submit"
                 className="form-group fw-bold text-white border-light py-2 w-100 custom-border-auth custom-button-auth custom-font-1"
               >
                 Change password
               </button>
-            </Form> */}
+            </Form>
           </div>
         </div>
       </div>
