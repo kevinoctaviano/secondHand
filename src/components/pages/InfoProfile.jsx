@@ -40,7 +40,7 @@ const InfoProfile = (props) => {
   };
 
   const handleUpdateUser = async (data) => {
-    // e.preventDefault();
+
     let formData = new FormData();
     formData.append('profileFoto', selectedFiles);
     formData.append('fullName', data.fullName);
@@ -129,9 +129,8 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${
-                    errors.fullName ? 'is-invalid' : ''
-                  } custom-font-1 rounded-16px`}
+                  className={`form-control ${errors.fullName ? 'is-invalid' : ''
+                    } custom-font-1 rounded-16px`}
                   placeholder="Nama"
                   {...register('fullName', { required: true })}
                 />
@@ -146,9 +145,8 @@ const InfoProfile = (props) => {
                 <div className="row">
                   <div className="col-md-12">
                     <select
-                      className={`form-select ${
-                        errors.kota ? 'is-invalid' : ''
-                      } text-muted w-100 border rounded-16px`}
+                      className={`form-select ${errors.kota ? 'is-invalid' : ''
+                        } text-muted w-100 border rounded-16px`}
                       aria-label="Default select example"
                       name="kota"
                       id="kota"
@@ -170,9 +168,8 @@ const InfoProfile = (props) => {
                   Alamat*
                 </label>
                 <textarea
-                  className={`form-control ${
-                    errors.alamat ? 'is-invalid' : ''
-                  } alamat rounded-16px`}
+                  className={`form-control ${errors.alamat ? 'is-invalid' : ''
+                    } alamat rounded-16px`}
                   cols="3"
                   placeholder="Contoh: Jalan Ikan Hiu 33"
                   {...register('alamat', { required: true })}
@@ -188,9 +185,8 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${
-                    errors.noWa ? 'is-invalid' : ''
-                  } custom-font-1 rounded-16px`}
+                  className={`form-control ${errors.noWa ? 'is-invalid' : ''
+                    } custom-font-1 rounded-16px`}
                   placeholder="Contoh: +628123456789"
                   {...register('noWa', { required: true })}
                 />
@@ -214,9 +210,8 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className={`form-control ${
-                    errors.password ? 'is-invalid' : ''
-                  } custom-font-1 rounded-16px`}
+                  className={`form-control ${errors.password ? 'is-invalid' : ''
+                    } custom-font-1 rounded-16px`}
                   placeholder="Password..."
                   {...register('password', {
                     required: '*Password is required',
@@ -239,9 +234,8 @@ const InfoProfile = (props) => {
                 </label>
                 <input
                   type="password"
-                  className={`form-control ${
-                    errors.confirmPassword ? 'is-invalid' : ''
-                  } custom-font-1 rounded-16px`}
+                  className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''
+                    } custom-font-1 rounded-16px`}
                   placeholder="Confirm password..."
                   {...register('confirmPassword', {
                     required: '*Confirm password is required',
