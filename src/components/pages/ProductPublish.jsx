@@ -36,7 +36,7 @@ const ProductPublish = (props) => {
     formData.append('statusProduct', 'DIBUAT');
     await updateStatusProduct(id, formData)
       .then((data) => {
-        toast.success(`Berhasil publish produk!`, {
+        toast.success(`Berhasil takedown produk!`, {
           autoClose: 5000,
         });
       })
@@ -80,7 +80,7 @@ const ProductPublish = (props) => {
                           alt={item.namaProduct}
                         />
                       </div>
-                      <h5 className="mt-1 text-sm font-normal">
+                      <h5 className="mt-4 text-sm font-normal">
                         {item.namaProduct}
                       </h5>
                       <h5 className="mt-1 text-10px font-normal text-muted">
