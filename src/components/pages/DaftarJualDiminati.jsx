@@ -84,7 +84,7 @@ const DaftarJualDiminati = (props) => {
                           alt={item.product.namaProduct}
                         />
                       </div>
-                      <h5 className="mt-1 text-sm font-normal">
+                      <h5 className="mt-4 text-sm font-normal">
                         {item.product.namaProduct}
                       </h5>
                       <h5 className="mt-1 text-10px font-normal text-muted">

@@ -56,8 +56,6 @@ function InfoPenawar(props) {
     });
     status.then(() => {
       setShow(true);
-      history.push('/daftar-terjual');
-      dispatch(getTawaranSeller);
     });
   };
   const handleTolak = (idTawaran, idProduct) => {
@@ -72,7 +70,7 @@ function InfoPenawar(props) {
       error: 'Promise rejected 🤯',
     });
     status.then(() => {
-      history.push('/daftar-terjual');
+      history.push('/terjual');
       dispatch(getTawaranSeller);
     });
   };
@@ -83,7 +81,7 @@ function InfoPenawar(props) {
       '_blank'
     );
     openWindow.then(() => {
-      history.push('/daftar-terjual');
+      history.push('/terjual');
       dispatch(getTawaranSeller);
     });
   };

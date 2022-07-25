@@ -43,6 +43,10 @@ function NavbarHome(props) {
   const [kategori, setKategori] = useState('');
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getNotifikasi);
+  }, [dispatch, props]);
+
   const notifLimit = props.notifikasi
     .filter((notif) => notif.tawaran.statusTawaran === 'WAITING')
     .slice(0, 5);
