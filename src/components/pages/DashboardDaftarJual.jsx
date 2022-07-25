@@ -3,6 +3,7 @@ import tambahProduk from '../assets/svg/tambah-produk.svg';
 import empty from '../assets/svg/empty.svg';
 import { getProductUser } from '../../actions/user';
 import { Link } from 'react-router-dom';
+
 import { connect, useDispatch } from 'react-redux';
 
 import Topbar from './components/Topbar';
@@ -41,6 +42,7 @@ const DashboardDaftarJual = (props) => {
           <Sidebar />
           <div className="col-md-8">
             <div className="row">
+
               <div className="col-lg-4 d-flex justify-content-center">
                 <Link to={'/info-product-add'}>
                   <img
