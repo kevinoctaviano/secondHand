@@ -5,6 +5,12 @@ const header = { headers: authHeader(), 'Content-type': 'application/json' };
 
 const API_URL = 'https://second-hand-backend.herokuapp.com/';
 
+
+export async function updatePasswordUsers(payload) {
+  return axios.put(`${API_URL}Users-password`, payload, {
+    headers: authHeader()
+  })
+}
 // kategori
 const getAllKategori = () => {
   return axios.get(API_URL + 'kategori', { headers: authHeader() });

@@ -97,6 +97,10 @@ function NavbarHome(props) {
     navigate.push('/');
   }, [dispatch, navigate]);
 
+  const profile = () => {
+    navigate.push('/ubah-profile')
+  }
+
   useEffect(() => {
     EventBus.on('logout', () => {
       logOut();
@@ -131,9 +135,11 @@ function NavbarHome(props) {
   return (
     <Navbar bg="light shadow-sm" expand="lg">
       <Container>
-        <Navbar.Brand href="/">
-          <img src={brand} alt="brand" className="custom-logo-navbar" />
-        </Navbar.Brand>
+        <Link to={"/"}>
+          <Navbar.Brand >
+            <img src={brand} alt="brand" className="custom-logo-navbar" />
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex wrapper">
@@ -247,12 +253,14 @@ function NavbarHome(props) {
                 id="basic-nav-dropdown"
                 align="end"
               >
-                <NavDropdown.Item href="/info-profile">
-                  <span className="me-3">
-                    <FontAwesomeIcon icon={faUserAstronaut} />
-                  </span>
-                  Profile
-                </NavDropdown.Item>
+                <Link to={"/ubah-profile"}>
+                  <NavDropdown.Item onClick={profile} >
+                    <span className="me-3">
+                      <FontAwesomeIcon icon={faUserAstronaut} />
+                    </span>
+                    Profile
+                  </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logOut}>
                   <span className="me-3">
