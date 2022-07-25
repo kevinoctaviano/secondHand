@@ -54,7 +54,7 @@ function Topbar(props) {
         <div className="col-md-2 d-flex justify-content-end">
           <div className="d-flex align-self-center">
             <Link
-              to={'/info-profile'}
+              to={'/ubah-profile'}
               className="edit-daftar-jual btn btn-ungu fw-bold d-flex align-items-center"
             >
               Edit
