@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useState, useRef } from 'react'
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import { connect, useDispatch } from 'react-redux';
 import { updateUser } from '../../actions/user';
-
+import { Modal } from 'react-bootstrap';
+import { updatePasswordUsers } from '../../services/user.service'
 import { toast } from 'react-toastify';
 import userPhoto from '../assets/svg/user-photo.svg'
-
 import { useForm } from 'react-hook-form';
 import Form from 'react-validation/build/form';
 
@@ -28,14 +27,25 @@ const DetailsProfile = (props) => {
     const {
         register,
         handleSubmit,
-        watch,
+
         formState: { errors },
+    } = useForm();
+
+    const {
+        register: register2,
+        handleSubmit: handleSubmit2,
+        watch: watch2,
+        formState: { errors: errors2 },
     } = useForm();
 
     const [selectedFiles, setSelectedFiles] = useState();
     // handle password
-    // const password = useRef({});
-    // password.current = watch('password', '');
+    const password = useRef({});
+    password.current = watch2('password', '');
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     // Handle Update User
     const handleImageChange = (e) => {
@@ -80,6 +90,25 @@ const DetailsProfile = (props) => {
 
         }
     };
+
+    const handleUpdatePassword = async (data) => {
+        let formData = new FormData()
+        formData.append('password', data.password)
+        await updatePasswordUsers(formData).then(() => {
+            toast.success(`Berhasil Update Password!`, {
+                autoClose: 5000,
+            });
+        }).catch((err) => {
+            toast.error(`Update password failed!`, {
+                autoClose: 5000,
+            });
+
+        }).finally(() => {
+            handleClose()
+        })
+
+
+    };
     return (
         <div className="container mt-4">
             <div className="w-75 mx-auto">
@@ -104,6 +133,7 @@ const DetailsProfile = (props) => {
                                             <label className='btn text-white mt-2' style={{ backgroundColor: '#7126b5', width: '100%' }} for="img">Pilih Foto</label>
                                         </div>
                                         <button
+                                            onClick={handleShow}
                                             style={{ backgroundColor: '#7126b5', width: '100%' }}
                                             type="submit"
                                             className="mt-3 btn text-white"
@@ -206,6 +236,76 @@ const DetailsProfile = (props) => {
                     </div>
                 </div>
             </div>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton></Modal.Header>
+                <Modal.Body className="px-5">
+                    <h5 className="fw-bold">Ubah Password kamu</h5>
+
+                    <div className="mb-3 mt-3">
+
+                        <Form >
+                            <div className="form-group mb-3">
+                                <label htmlFor="password" className="fw-bold custom-font-2">
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className={`form-control ${errors2.password ? 'is-invalid' : ''
+                                        } custom-font-1 rounded-16px`}
+                                    placeholder="Password..."
+                                    {...register2('password', {
+                                        required: '*Password is required',
+                                        minLength: {
+                                            value: 8,
+                                            message: '*Password must have at least 8 characters',
+                                        },
+                                    })}
+                                />
+                                {errors2.password && (
+                                    <p className="error-message">{errors2.password.message}</p>
+                                )}
+                            </div>
+                            <div className="form-group mb-1">
+                                <label
+                                    htmlFor="confirm-password"
+                                    className="fw-bold custom-font-2"
+                                >
+                                    Confirm Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className={`form-control ${errors2.confirmPassword ? 'is-invalid' : ''
+                                        } custom-font-1 rounded-16px`}
+                                    placeholder="Confirm password..."
+                                    {...register2('confirmPassword', {
+                                        required: '*Confirm password is required',
+                                        validate: (value) =>
+                                            value === password.current ||
+                                            '*The passwords do not match',
+                                    })}
+                                />
+                                {errors2.confirmPassword && (
+                                    <p className="error-message">
+                                        {errors2.confirmPassword.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="d-grid gap-4">
+                                <span className='btn mt-3 text-white' style={{ backgroundColor: '#7126b5' }}
+                                    onClick={handleSubmit2(handleUpdatePassword)}>
+                                    Update
+                                </span>
+                            </div>
+                        </Form>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }
