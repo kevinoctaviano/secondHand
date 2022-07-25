@@ -9,9 +9,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css/bundle';
 import { useParams, useHistory } from 'react-router-dom';
-import { deleteProduct, getProductUser } from '../../actions/user';
+import { deleteProduct, getProductUserbyID } from '../../actions/user';
 import userPhoto from '../assets/svg/user-photo.svg';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const mapStateToProps = (state) => {
   return {
@@ -25,15 +26,20 @@ function ProductSeller(props) {
   const navigate = useHistory();
   const params = useParams();
   const dispatch = useDispatch();
-
-  const barangID = props.barangUser.filter(
-    (barang) => String(barang.idProduct) === params.id
-  );
+  const [barangID, setBarangID] = useState(null);
 
   useEffect(() => {
-    dispatch(getProductUser);
-  }, [dispatch]);
+    const getBarangUser = () => {
+      dispatch(getProductUserbyID);
+      const barangId = props.barangUser.filter(
+        (barang) => String(barang.idProduct) === params.id
+      );
+      setBarangID(barangId[0]);
+    };
+    getBarangUser();
+  }, [dispatch, props, params]);
 
+  console.log(barangID);
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -80,14 +86,14 @@ function ProductSeller(props) {
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
             >
-              {barangID[0]?.imageProduct?.map((item) => (
+              {barangID?.imageProduct?.map((item) => (
                 <SwiperSlide
                   className="d-flex justify-content-center"
                   key={item.imageId}
                 >
                   <img
                     src={item?.urlImage}
-                    alt={barangID[0].namaProduct}
+                    alt={barangID.namaProduct}
                     className="w-75 rounded-16px"
                   />
                 </SwiperSlide>
@@ -101,19 +107,17 @@ function ProductSeller(props) {
                 style={{ width: '336px', height: '266px' }}
               >
                 <div className="card-body ps-4 pt-4">
-                  <h5 className="card-title mb-3">
-                    {barangID[0]?.namaProduct}
-                  </h5>
+                  <h5 className="card-title mb-3">{barangID?.namaProduct}</h5>
                   <h6 className="card-subtitle text-muted mb-3">
-                    {barangID[0]?.kategori.namaKategori}
+                    {barangID?.kategori.namaKategori}
                   </h6>
                   <h4 className="card-text fw-bold mb-3">
-                    {formatter.format(barangID[0]?.hargaProduct)}
+                    {formatter.format(barangID?.hargaProduct)}
                   </h4>
                   <div className="d-grid">
                     <Button
                       className="btn-purple rounded-16px text-center"
-                      onClick={handleDeleteWishlist(barangID[0]?.idProduct)}
+                      onClick={handleDeleteWishlist(barangID?.idProduct)}
                     >
                       Delete Product{' '}
                       <span>
@@ -122,7 +126,7 @@ function ProductSeller(props) {
                     </Button>
                     <Link
                       className="btn btn-edit rounded-16px mt-3 w-100 d-flex align-items-center justify-content-center"
-                      to={`/edit-daftar-jual/${barangID[0]?.idProduct}`}
+                      to={`/edit-daftar-jual/${barangID?.idProduct}`}
                       style={{
                         height: '45px',
                       }}
@@ -141,26 +145,26 @@ function ProductSeller(props) {
                 <div className="card-body ps-4">
                   <div className="row">
                     <div className="col-lg-3">
-                      {barangID[0]?.users.profileFoto === null ? (
+                      {barangID?.users.profileFoto === null ? (
                         <img
                           src={userPhoto}
-                          alt={barangID[0]?.users.fullName}
+                          alt={barangID?.users.fullName}
                           className="profile-photo"
                         />
                       ) : (
                         <img
-                          src={barangID[0]?.users.profileFoto}
-                          alt={barangID[0]?.users.fullName}
+                          src={barangID?.users.profileFoto}
+                          alt={barangID?.users.fullName}
                           className="profile-photo"
                         />
                       )}
                     </div>
                     <div className="sller-desk col-lg-9">
-                      <h5>{barangID[0]?.users.fullName}</h5>
-                      {barangID[0]?.users.profileFoto === null ? (
+                      <h5>{barangID?.users.fullName}</h5>
+                      {barangID?.users.profileFoto === null ? (
                         <p>Kota</p>
                       ) : (
-                        <p>{barangID[0]?.users.kota}</p>
+                        <p>{barangID?.users.kota}</p>
                       )}
                     </div>
                   </div>
@@ -177,7 +181,7 @@ function ProductSeller(props) {
               <div className="card rounded-16px shadow-sm w-100 ms-lg-5 mt-4">
                 <div className="card-body p-4">
                   <h5 className="card-title mb-3">Deskripsi</h5>
-                  <p className="card-text">{barangID[0]?.deskripsiProduct}</p>
+                  <p className="card-text">{barangID?.deskripsiProduct}</p>
                 </div>
               </div>
             </div>

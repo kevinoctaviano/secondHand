@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux';
 
-const isDevelopment = true;
+const isDevelopment = false;
 let composedEnhancer;
 
 isDevelopment

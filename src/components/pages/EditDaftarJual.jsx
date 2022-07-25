@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { updateDataProduct } from '../../actions/user';
+import {
+  getDataProductByKategori,
+  updateDataProduct,
+} from '../../actions/user';
 import Form from 'react-validation/build/form';
 import propic from '../assets/svg/product-picture.svg';
 import { connect } from 'react-redux';
@@ -12,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css/bundle';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const mapStateToProps = (state) => {
   return {
@@ -30,6 +34,10 @@ function EditDaftarJual(props) {
   const barangID = props.barangKategori.filter(
     (barang) => String(barang.idProduct) === params.id
   );
+
+  useEffect(() => {
+    dispatch(getDataProductByKategori);
+  }, [dispatch, props]);
 
   const {
     register,
@@ -183,6 +191,7 @@ function EditDaftarJual(props) {
                 } p-2 custom-font-1 rounded-16px`}
                 placeholder="Nama Produk"
                 {...register('namaProduct', { required: true })}
+                defaultValue={barangID[0]?.namaProduct}
               />
               {errors.namaProduct && (
                 <p className="error-message">*Nama product is required.</p>
@@ -203,6 +212,7 @@ function EditDaftarJual(props) {
                 } p-2 custom-font-1 rounded-16px`}
                 placeholder="Rp 0,00"
                 {...register('hargaProduct', { required: true })}
+                defaultValue={barangID[0]?.hargaProduct}
               />
               {errors.hargaProduct && (
                 <p className="error-message">*Harga product is required.</p>
@@ -222,8 +232,11 @@ function EditDaftarJual(props) {
                 } text-muted w-100 px-1 py-2 border rounded-16px`}
                 aria-label="Default select example"
                 {...register('idKategori', { required: true })}
+                defaultValue={barangID[0]?.kategori?.idKategori}
               >
-                <option defaultValue={{ value: null }}>Pilih Kategori</option>
+                <option defaultValue={barangID[0]?.kategori?.idKategori}>
+                  Pilih Kategori
+                </option>
                 {props.kategori.map((item, index = 1) => (
                   <option value={item.idKategori} key={index}>
                     {item.namaKategori}
@@ -250,6 +263,7 @@ function EditDaftarJual(props) {
                 cols="3"
                 placeholder="Deskripsi..."
                 {...register('deskripsi', { required: true })}
+                defaultValue={barangID[0]?.deskripsiProduct}
               ></textarea>
               {errors.deskripsi && (
                 <p className="error-message">*Deskripsi is required.</p>
@@ -278,7 +292,20 @@ function EditDaftarJual(props) {
                     </label>
                   </div>
                 </div>
-                {renderPhotos(preview)}
+                {barangID[0]?.imageProduct?.urlImage
+                  ? barangID[0]?.imageProduct?.map((item) => (
+                      <div
+                        className="col-lg-2"
+                        key={item?.imageProduct?.idImage}
+                      >
+                        <img
+                          className="img-fluid img-mini-preview"
+                          src={item?.imageProduct?.urlImage}
+                          alt={item?.imageProduct?.idImage}
+                        />
+                      </div>
+                    ))
+                  : renderPhotos(preview)}
               </div>
               {errors.image && (
                 <p className="error-message">*Foto product is required.</p>

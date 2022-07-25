@@ -1,5 +1,6 @@
 import {
   GET_ALL_KATEGORI,
+  GET_PRODUCT_USER_BY_ID,
   GET_ALL_KATEGORI_USER,
   GET_KATEGORI_NULL,
   GET_WISHLIST_NULL,
@@ -148,13 +149,24 @@ export const getProductUser = () => (dispatch) => {
     });
   });
 };
+export const getProductUserbyID = (id) => (dispatch) => {
+  return UserService.getProductUser().then((response) => {
+    dispatch({
+      type: GET_PRODUCT_USER_BY_ID,
+      payload: {
+        data: response.data.data,
+        id,
+      },
+    });
+  });
+};
 export const deleteProduct = (idProduct) => (dispatch) => {
   return UserService.deleteProduct(idProduct).then((response) => {
     dispatch({
       type: DELETE_PRODUCT,
       payload: {
-        id: idProduct
-      }
+        id: idProduct,
+      },
     });
   });
 };
@@ -249,8 +261,8 @@ export const deleteWishlist = (id) => (dispatch) => {
     dispatch({
       type: DELETE_WISHLIST,
       payload: {
-        id: id
-      }
+        id: id,
+      },
     });
   });
 };

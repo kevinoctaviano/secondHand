@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import {
   GET_DATA_NULL,
   ADD_PRODUCT,
@@ -6,6 +7,7 @@ import {
   GET_DATA_BY_KATEGORI,
   GET_DATA_BY_SEARCH,
   GET_ALL_KATEGORI_USER,
+  GET_PRODUCT_USER_BY_ID,
   DELETE_PRODUCT,
 } from '../actions/types';
 const initialState = {
@@ -32,6 +34,15 @@ const barang = (state = initialState, action) => {
         ...state,
         isNull: false,
         barangUser: payload.data,
+        message: null,
+      };
+    case GET_PRODUCT_USER_BY_ID:
+      return {
+        ...state,
+        isNull: false,
+        barangUser: payload.data.filter(
+          (item) => item.idProduct === payload.id
+        ),
         message: null,
       };
     case GET_DATA_NULL:
@@ -71,7 +82,9 @@ const barang = (state = initialState, action) => {
       return {
         ...state,
         isNull: false,
-        barangUser: state.barangUser.filter((item) => item.idProduct !== payload.id),
+        barangUser: state.barangUser.filter(
+          (item) => item.idProduct !== payload.id
+        ),
         message: 'Berhasil hapus data product',
       };
     default:
