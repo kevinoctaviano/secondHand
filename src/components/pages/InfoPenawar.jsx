@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postStatusTawaran, getTawaranSeller } from '../../actions/user';
 import { useEffect } from 'react';
-import { updateStatusProduct } from '../../services/product.services'
+import { updateStatusProduct } from '../../services/product.services';
 import userPhoto from '../assets/svg/user-photo.svg';
 
 const mapStateToProps = (state) => {
@@ -24,6 +24,8 @@ const mapStateToProps = (state) => {
 function InfoPenawar(props) {
   const params = useParams();
   const dispatch = useDispatch();
+
+  const history = useHistory();
   const { isLoggedIn } = useSelector((state) => state.auth);
   useEffect(() => {
     if (isLoggedIn) {
@@ -43,8 +45,8 @@ function InfoPenawar(props) {
   const handleShow = (idTawaran, idProduct) => {
     const tawaranStatus = 'ACCEPTED';
     let formData = new FormData();
-    formData.append('statusProduct', 'TERJUAL')
-    updateStatusProduct(idProduct, formData)
+    formData.append('statusProduct', 'TERJUAL');
+    updateStatusProduct(idProduct, formData);
 
     const status = dispatch(postStatusTawaran(idTawaran, tawaranStatus));
     toast.promise(status, {
@@ -52,13 +54,15 @@ function InfoPenawar(props) {
       success: `Berhasil deal dengan buyer!`,
       error: 'Promise rejected 🤯',
     });
-    status.then(() => setShow(true));
+    status.then(() => {
+      setShow(true);
+    });
   };
   const handleTolak = (idTawaran, idProduct) => {
     const tawaranStatus = 'REJECTED';
     let formData = new FormData();
-    formData.append('statusProduct', 'PUBLISH')
-    updateStatusProduct(idProduct, formData)
+    formData.append('statusProduct', 'PUBLISH');
+    updateStatusProduct(idProduct, formData);
     const status = dispatch(postStatusTawaran(idTawaran, tawaranStatus));
     toast.promise(status, {
       pending: 'Sedang mengubah status...',
@@ -66,16 +70,22 @@ function InfoPenawar(props) {
       error: 'Promise rejected 🤯',
     });
     status.then(() => {
-      return <Redirect to={'/daftar-penawar'} />;
+      history.push('/terjual');
+      dispatch(getTawaranSeller);
     });
   };
 
-  const handleWhatsapp = () => {
-    window.open('https://wa.me/085156896874', '_blank');
-    return <Redirect to={'/terjual'} />;
+  const handleWhatsapp = async () => {
+    const openWindow = await window.open(
+      'https://wa.me/085156896874',
+      '_blank'
+    );
+    openWindow.then(() => {
+      history.push('/terjual');
+      dispatch(getTawaranSeller);
+    });
   };
 
-  const history = useHistory();
   const handleGoBack = () => {
     history.goBack();
   };
@@ -209,14 +219,18 @@ function InfoPenawar(props) {
                       marginRight: '16px',
                       marginTop: '16px',
                     }}
-                    onClick={() => handleTolak(item.idTawaran, item.product.idProduct)}
+                    onClick={() =>
+                      handleTolak(item.idTawaran, item.product.idProduct)
+                    }
                   >
                     Tolak
                   </button>
                   <button
                     className="mt-3 form-group fw-bold text-white border-light custom-border-auth custom-button-auth custom-font-1"
                     style={{ width: '158px', height: '36px' }}
-                    onClick={() => handleShow(item.idTawaran, item.product.idProduct)}
+                    onClick={() =>
+                      handleShow(item.idTawaran, item.product.idProduct)
+                    }
                   >
                     Terima
                   </button>

@@ -59,11 +59,10 @@ const DaftarTerjual = (props) => {
                           <img
                             src={item.product.imageProduct[0]?.urlImage}
                             className="card-home"
-                            style={{ height: '100px' }}
                             alt={item.product.namaProduct}
                           />
                         </div>
-                        <h5 className="mt-1 text-sm font-normal">
+                        <h5 className="mt-4 text-sm font-normal">
                           {item.product.namaProduct}
                         </h5>
                         <h5 className="mt-1 text-10px font-normal text-muted">
@@ -72,12 +71,12 @@ const DaftarTerjual = (props) => {
                         <h5 className="mt-1 text-sm font-normal">
                           {formatter.format(item.hargaTawar)}
                         </h5>
-                        <button className="btn btn-success">
+                        <h5 className="btn btn-success">
                           {item.statusTawaran}{' '}
                           <span>
                             <FontAwesomeIcon icon={faCheck} fixedWidth />
                           </span>
-                        </button>
+                        </h5>
                       </div>
                     </div>
                   ) : (
@@ -90,11 +89,10 @@ const DaftarTerjual = (props) => {
                           <img
                             src={item.product.imageProduct[0]?.urlImage}
                             className="card-home"
-                            style={{ height: '100px' }}
                             alt={item.product.namaProduct}
                           />
                         </div>
-                        <h5 className="mt-1 text-sm font-normal">
+                        <h5 className="mt-4 text-sm font-normal">
                           {item.product.namaProduct}
                         </h5>
                         <h5 className="mt-1 text-10px font-normal text-muted">
@@ -103,12 +101,12 @@ const DaftarTerjual = (props) => {
                         <h5 className="mt-1 text-sm font-normal">
                           {formatter.format(item.hargaTawar)}
                         </h5>
-                        <button className="btn btn-danger">
+                        <h5 className="btn btn-danger">
                           {item.statusTawaran}{' '}
                           <span>
                             <FontAwesomeIcon icon={faTimes} fixedWidth />
                           </span>
-                        </button>
+                        </h5>
                       </div>
                     </div>
                   )

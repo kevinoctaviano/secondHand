@@ -80,6 +80,9 @@ const ProductBuyer = (props) => {
       success: `Berhasil menambahkan data tawaran!`,
       error: 'Promise rejected 🤯',
     });
+    postTawar.then(() => {
+      setShow(false);
+    });
   };
 
   return (

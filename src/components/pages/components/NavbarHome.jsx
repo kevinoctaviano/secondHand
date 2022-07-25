@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import { Badge } from 'react-bootstrap';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Navbar, Container, Nav, Form, NavDropdown } from 'react-bootstrap';
@@ -41,6 +42,10 @@ function NavbarHome(props) {
   const [search, setSearch] = useState('');
   const [kategori, setKategori] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNotifikasi);
+  }, [dispatch, props]);
 
   const notifLimit = props.notifikasi
     .filter((notif) => notif.tawaran.statusTawaran === 'WAITING')
@@ -158,13 +163,28 @@ function NavbarHome(props) {
             </Nav>
           ) : (
             <Nav className="ms-auto my-2 my-lg-0">
-              <Nav.Link >
-                <Link to={"/daftar-jual"}>
+              <Nav.Link>
+                <Link to={'/daftar-jual'}>
                   <img src={fi_list} alt="List" />
                 </Link>
               </Nav.Link>
               <NavDropdown
-                title={<img src={fi_bell} alt="Bell" />}
+                title={
+                  <>
+                    {notifLimit.length === 0 ? (
+                      <img src={fi_bell} alt="Bell" />
+                    ) : (
+                      <>
+                        <img src={fi_bell} alt="Bell" />
+                        <div className="notif">
+                          <Badge pill bg="danger">
+                            {notifLimit.length}
+                          </Badge>
+                        </div>
+                      </>
+                    )}
+                  </>
+                }
                 id="basic-nav-dropdown"
                 align="end"
               >
@@ -194,7 +214,7 @@ function NavbarHome(props) {
                           </div>
                           <div className="col-lg-7">
                             <p className="text-muted m-0 label-10px">
-                              Penawaran Produk
+                              {item.title}
                             </p>
                             <h6>{item.tawaran.product.namaProduct}</h6>
                             <h6>

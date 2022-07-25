@@ -66,7 +66,6 @@ const DashboardDaftarJual = (props) => {
                   />
                 </>
               ) : (
-
                 props.barang.map((item, index = 1) => (
                   <div
                     className="col-lg-4 d-flex justify-content-center"
@@ -80,11 +79,10 @@ const DashboardDaftarJual = (props) => {
                         <img
                           src={item.imageProduct[0]?.urlImage}
                           className="card-home"
-                          style={{ height: '100px' }}
                           alt={item.namaProduct}
                         />
                       </div>
-                      <h5 className="mt-1 text-sm font-normal">
+                      <h5 className="mt-4 text-sm font-normal">
                         {item.namaProduct}
                       </h5>
                       <h5 className="mt-1 text-10px font-normal text-muted">

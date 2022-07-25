@@ -202,53 +202,63 @@ const Home = (props) => {
           {props.isNull ? (
             <>
               <h1 className="text-dark display-6 text-center">
-                {props.message}
+                Belum ada data barang
               </h1>
             </>
           ) : isLoggedIn ? (
-            productPublishUser.map((item, index = 1) => (
-              <div className="col-lg-2" key={index}>
-                <div
-                  className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
-                  style={{ height: '270px' }}
-                >
-
-
-                  <Link
-                    className="card-home-product"
-                    to={`/product-buyer/${item.idProduct}`}
+            productPublishUser.length === 0 ? (
+              <>
+                <h1 className="text-dark display-6 text-center">
+                  Belum ada data barang dari penjual lain
+                </h1>
+              </>
+            ) : (
+              productPublishUser.map((item, index = 1) => (
+                <div className="col-lg-2" key={index}>
+                  <div
+                    className="card mb-3 shadow-md px-2 pt-2 pb-4 card-product"
+                    style={{ height: '270px' }}
                   >
-                    <div className="d-flex justify-content-center">
-                      <img
-                        src={item.imageProduct[0]?.urlImage}
-                        className="card-home"
-                        style={{ height: '99.9px' }}
-                        alt={item.namaProduct}
-                      />
-                    </div>
-                    <h5 className="mt-2 text-sm text-dark font-normal">
-                      {item.namaProduct}
-                    </h5>
-                    <h5 className="mt-1 text-10px font-normal text-muted">
-                      {item.kategori.namaKategori}
-                    </h5>
-                    <h5 className="mt-2 text-sm text-dark font-normal">
-                      {formatter.format(item.hargaProduct)}
-                    </h5>
-                  </Link>
-                  <button
-                    className="btn-pink"
-                    onClick={handleAddProduct(item.idProduct)}
-                  >
-                    Add to Wishlist{' '}
-                    <span>
-                      <FontAwesomeIcon icon={faHeart} fixedWidth />
-                    </span>
-                  </button>
+                    <Link
+                      className="card-home-product"
+                      to={`/product-buyer/${item.idProduct}`}
+                    >
+                      <div className="d-flex justify-content-center">
+                        <img
+                          src={item.imageProduct[0]?.urlImage}
+                          className="card-home"
+                          alt={item.namaProduct}
+                        />
+                      </div>
+                      <h5 className="mt-4 text-sm text-dark font-normal">
+                        {item.namaProduct}
+                      </h5>
+                      <h5 className="mt-1 text-10px font-normal text-muted">
+                        {item.kategori.namaKategori}
+                      </h5>
+                      <h5 className="mt-2 text-sm text-dark font-normal">
+                        {formatter.format(item.hargaProduct)}
+                      </h5>
+                    </Link>
+                    <button
+                      className="btn-pink"
+                      onClick={handleAddProduct(item.idProduct)}
+                    >
+                      Add to Wishlist{' '}
+                      <span>
+                        <FontAwesomeIcon icon={faHeart} fixedWidth />
+                      </span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))
-
+              ))
+            )
+          ) : productPublish.length === 0 ? (
+            <>
+              <h1 className="text-dark display-6 text-center">
+                Belum ada data barang
+              </h1>
+            </>
           ) : (
             productPublish.map((item, index = 1) => (
               <div className="col-lg-2" key={index}>
@@ -264,11 +274,10 @@ const Home = (props) => {
                       <img
                         src={item.imageProduct[0]?.urlImage}
                         className="card-home"
-                        style={{ height: '99.9px' }}
                         alt={item.namaProduct}
                       />
                     </div>
-                    <h5 className="mt-2 text-sm text-dark font-normal">
+                    <h5 className="mt-4 text-sm text-dark font-normal">
                       {item.namaProduct}
                     </h5>
                     <h5 className="mt-1 text-10px font-normal text-muted">
