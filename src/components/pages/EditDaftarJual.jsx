@@ -26,17 +26,18 @@ function EditDaftarJual(props) {
   const params = useParams();
   const [preview, setPreview] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+
   const barangID = props.barangKategori.filter(
     (barang) => String(barang.idProduct) === params.id
   );
-  console.log(barangID);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmitPublish = async (data) => {
     let formData = new FormData();
     for (const image of selectedFiles) {
       formData.append('imageProduct', image);
@@ -48,15 +49,63 @@ function EditDaftarJual(props) {
     formData.append('statusProduct', 'PUBLISH');
 
     const idProduct = barangID[0].idProduct;
-    const postData = dispatch(updateDataProduct(idProduct, formData)).then(
-      () => {
+    const updateData = dispatch(updateDataProduct(idProduct, formData))
+      .then(() => {
         setSelectedFiles([]);
-      }
-    );
-    toast.promise(postData, {
+        toast.success(`Berhasil mengubah data!`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual'),
+        });
+      })
+      .catch((error) => {
+        history.push('/daftar-jual');
+        toast.error(`${error.message}`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual'),
+        });
+      })
+      .finally(() => {
+        history.push('/daftar-jual');
+      });
+
+    toast.promise(updateData, {
       pending: 'Sedang mengubah data...',
-      success: `Berhasil mengubah data!`,
-      error: 'Promise rejected 🤯',
+    });
+  };
+
+  const onSubmitBuat = async (data) => {
+    let formData = new FormData();
+    for (const image of selectedFiles) {
+      formData.append('imageProduct', image);
+    }
+    formData.append('namaProduct', data.namaProduct);
+    formData.append('hargaProduct', data.hargaProduct);
+    formData.append('idKategori', data.idKategori);
+    formData.append('deskripsiProduct', data.deskripsi);
+    formData.append('statusProduct', 'DIBUAT');
+
+    const idProduct = barangID[0].idProduct;
+    const updateData = dispatch(updateDataProduct(idProduct, formData))
+      .then(() => {
+        setSelectedFiles([]);
+        toast.success(`Berhasil mengubah data!`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual'),
+        });
+      })
+      .catch((error) => {
+        history.push('/daftar-jual');
+        toast.error(`${error.message}`, {
+          autoClose: 5000,
+          onClose: () => history.push('/daftar-jual'),
+        });
+      })
+      .finally(() => {
+        history.push('/daftar-jual');
+      });
+
+    toast.promise(updateData, {
+      pending: 'Sedang mengubah data...',
     });
   };
 
@@ -118,7 +167,8 @@ function EditDaftarJual(props) {
           />
         </div>
         <div className="col-lg-8 d-flex justify-content-center">
-          <Form className="w-75" onSubmit={handleSubmit(onSubmit)}>
+          {/* <Form className="w-75" onSubmit={handleSubmit(onSubmit)}> */}
+          <Form className="w-75">
             <div className="form-group mb-3">
               <label
                 htmlFor="namaproduk"
@@ -236,14 +286,18 @@ function EditDaftarJual(props) {
             </div>
 
             <div className="mt-2">
-              <button className="mt-3 form-group font-weight-bold py-2 w-50 custom-border-auth custom-font-1">
-                Preview
+              <button
+                onClick={handleSubmit(onSubmitPublish)}
+                className="mt-3 form-group font-weight-bold py-2 w-50 custom-border-auth custom-font-1"
+              >
+                Terbitkan Produk
               </button>
               <button
+                onClick={handleSubmit(onSubmitBuat)}
                 type="submit"
                 className="mt-3 form-group font-weight-bold text-white border-light py-2 w-50 custom-border-auth custom-button-auth custom-font-1"
               >
-                Terbitkan
+                Buat Produk
               </button>
             </div>
           </Form>
