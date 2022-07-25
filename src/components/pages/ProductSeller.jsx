@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 };
 
 function ProductSeller(props) {
-  const navigate = useHistory()
+  const navigate = useHistory();
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ function ProductSeller(props) {
 
   useEffect(() => {
     dispatch(getProductUser);
-  });
+  }, [dispatch]);
 
   // Mengubah format currency menjadi format rupiah
   let formatter = new Intl.NumberFormat('id-ID', {
@@ -57,12 +57,13 @@ function ProductSeller(props) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteProduct(idProduct)).then(() => {
-          Swal.fire('Product', 'Berhasil menghapus data product', 'success');
-        }).finally(() => {
-
-          navigate.goBack()
-        })
+        dispatch(deleteProduct(idProduct))
+          .then(() => {
+            Swal.fire('Product', 'Berhasil menghapus data product', 'success');
+          })
+          .finally(() => {
+            navigate.goBack();
+          });
       }
     });
   };
@@ -100,7 +101,9 @@ function ProductSeller(props) {
                 style={{ width: '336px', height: '266px' }}
               >
                 <div className="card-body ps-4 pt-4">
-                  <h5 className="card-title mb-3">{barangID[0]?.namaProduct}</h5>
+                  <h5 className="card-title mb-3">
+                    {barangID[0]?.namaProduct}
+                  </h5>
                   <h6 className="card-subtitle text-muted mb-3">
                     {barangID[0]?.kategori.namaKategori}
                   </h6>
